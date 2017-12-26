@@ -5,7 +5,8 @@ import java.awt.event.MouseEvent;
 
 import drawingFrame.DrawingFrame;
 import mvc.model.DrawingModel;
-import shapes.Point;
+import shapes.point.CommandAddPoint;
+import shapes.point.Point;
 
 
 public class DrawingController {
@@ -18,6 +19,8 @@ public class DrawingController {
 	}
 	
 	public void onPointAdded(MouseEvent e) {
-		model.addShape(new Point(e.getX(), e.getY(), Color.BLACK));
+		CommandAddPoint add = new CommandAddPoint(model, new Point(e.getX(), e.getY(), Color.black));
+		add.execute();
+		model.getUndoStack().offerLast(add);
 	}
 }

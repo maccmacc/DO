@@ -1,7 +1,10 @@
-package shapes;
+package shapes.point;
 
 import java.awt.Color;
 import java.awt.Graphics;
+
+import shapes.Moveable;
+import shapes.Shape;
 
 public class Point extends Shape implements Moveable{
 	private int x;
