@@ -30,6 +30,7 @@ public class DrawingFrame extends JFrame{
 		drawingView.setBackground(Color.WHITE);
 		drawingView.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
+				if (!buttonView.getTglbtnSelect().isSelected())
 				drawingController.onPointAdded(e);
 			}
 		});
@@ -42,6 +43,19 @@ public class DrawingFrame extends JFrame{
 			public void mousePressed(MouseEvent e) {
 				buttonController.onRedoButtonClicked(e);
 			}
+		});
+		buttonView.getTglbtnSelect().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if(buttonView.getTglbtnSelect().isSelected())
+					buttonController.unselectShapes();
+				drawingView.addMouseListener(new MouseAdapter() {
+					public void mousePressed(MouseEvent me) {
+							buttonController.onSelectButtonClicked(me);
+					}
+					
+				});
+			}
+			
 		});
 		
 	}

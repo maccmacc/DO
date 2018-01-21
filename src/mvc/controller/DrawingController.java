@@ -19,6 +19,7 @@ public class DrawingController {
 	}
 	
 	public void onPointAdded(MouseEvent e) {
+		
 		CommandAddPoint add = new CommandAddPoint(model, new Point(e.getX(), e.getY(), Color.black));
 		add.execute();
 		model.getUndoStack().offerLast(add);
