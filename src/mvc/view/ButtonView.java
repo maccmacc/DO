@@ -17,6 +17,7 @@ public class ButtonView extends JPanel{
 	private JToggleButton tglbtnSelect;
 	private JComboBox cmbShapes;
 	private JButton btnDelete;
+	private JButton btnUpdate;
 	
 	public ButtonView() {
 		gridBagLayout = new GridBagLayout();
@@ -63,6 +64,13 @@ public class ButtonView extends JPanel{
 		gbc_btnDelete.gridy = 1;
 		add(btnDelete, gbc_btnDelete);
 		
+		btnUpdate = new JButton("Update");
+		GridBagConstraints gbc_btnUpdate = new GridBagConstraints();
+		gbc_btnUpdate.insets = new Insets(0, 0, 0, 5);
+		gbc_btnUpdate.gridx = 1;
+		gbc_btnUpdate.gridy = 1;
+		add(btnUpdate, gbc_btnUpdate);
+		
 	}
 
 	public GridBagLayout getGridBagLayout() {
@@ -87,6 +95,10 @@ public class ButtonView extends JPanel{
 
 	public JButton getBtnDelete() {
 		return btnDelete;
+	}
+
+	public JButton getBtnUpdate() {
+		return btnUpdate;
 	}
 
 }

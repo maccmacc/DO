@@ -58,6 +58,11 @@ public class DrawingFrame extends JFrame{
 				buttonController.deleteButtonClickedHandler();
 			}
 		});
+		buttonView.getBtnUpdate().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				
+			}
+		});
 	}
 	
 	
