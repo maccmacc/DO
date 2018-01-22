@@ -11,6 +11,7 @@ import mvc.controller.ButtonController;
 import mvc.controller.DrawingController;
 import mvc.view.ButtonView;
 import mvc.view.DrawingView;
+import javax.swing.JButton;
 
 
 public class DrawingFrame extends JFrame{
@@ -31,7 +32,9 @@ public class DrawingFrame extends JFrame{
 		drawingView.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (!buttonView.getTglbtnSelect().isSelected())
-				drawingController.onPointAdded(e);
+					drawingController.onPointAdded(e);
+				else
+					buttonController.onSelectButtonClicked(e);
 			}
 		});
 		buttonView.getBtnUndo().addMouseListener(new MouseAdapter() {
@@ -48,16 +51,13 @@ public class DrawingFrame extends JFrame{
 			public void mousePressed(MouseEvent e) {
 				if(buttonView.getTglbtnSelect().isSelected())
 					buttonController.unselectShapes();
-				drawingView.addMouseListener(new MouseAdapter() {
-					public void mousePressed(MouseEvent me) {
-							buttonController.onSelectButtonClicked(me);
-					}
-					
-				});
 			}
-			
 		});
-		
+		buttonView.getBtnDelete().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				buttonController.deleteButtonClickedHandler();
+			}
+		});
 	}
 	
 	
