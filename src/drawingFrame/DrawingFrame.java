@@ -60,7 +60,7 @@ public class DrawingFrame extends JFrame{
 		});
 		buttonView.getBtnUpdate().addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				
+				buttonController.modifyShape();
 			}
 		});
 	}

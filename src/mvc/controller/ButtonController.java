@@ -10,8 +10,10 @@ import mvc.model.DrawingModel;
 import shapes.Command;
 import shapes.Shape;
 import shapes.point.CommandRemovePoint;
+import shapes.point.CommandUpdatePoint;
 import shapes.point.Point;
 import utility.DialogMethods;
+import utility.ModifyShapesDialogs;
 
 public class ButtonController {
 	private DrawingModel model;
@@ -62,27 +64,29 @@ public class ButtonController {
 		return false;
 	}
 
-	public void deleteButtonClickedHandler() {
+	public int countSelectedShapes() {
 		selectedShapeList = new ArrayList<>();
-		boolean tmp = false;
+		for (Shape shape : model.getShapeList()) {
+			if (shape.isSelected())
+				selectedShapeList.add(shape);
+		}
+		return selectedShapeList.size();
+	}
+
+	public void deleteButtonClickedHandler() {
+		countSelectedShapes();
 		if (!model.getShapeList().isEmpty()) {
-			for (int i = model.getShapeList().size() - 1; i >= 0; i--) {
-				if (model.getShapeList().get(i).isSelected()) {
-					selectedShapeList.add(model.getShapeList().get(i));
-					tmp = true;
-				}
-			}
 			if (selectedShapeList.size() == 1) {
 				deleteShape();
 			} else if (selectedShapeList.size() > 1) {
 				deleteMultipleShapes();
 			}
-			if (!tmp)
+			else if (selectedShapeList.size() == 0)
 				JOptionPane.showMessageDialog(null, "You have to select shape", "Error!", JOptionPane.ERROR_MESSAGE);
 		} else
 			JOptionPane.showMessageDialog(null, "Shape list is empty!", "Error!", JOptionPane.ERROR_MESSAGE);
 	}
-	
+
 	public void deleteShape() {
 		if (DialogMethods.askUserToConfirm("Are you sure that you want to delete this shape?")) {
 			Command remove = new CommandRemovePoint(model, (Point) selectedShapeList.get(0));
@@ -90,14 +94,28 @@ public class ButtonController {
 			model.getUndoStack().offerLast(remove);
 		}
 	}
-	
+
 	public void deleteMultipleShapes() {
 		if (DialogMethods.askUserToConfirm("Are you sure that you want to delete multiple shapes?")) {
-			for (int i = 0; i <= selectedShapeList.size() -1; i++) {
+			for (int i = 0; i <= selectedShapeList.size() - 1; i++) {
 				Command remove = new CommandRemovePoint(model, (Point) selectedShapeList.get(i));
 				remove.execute();
 				model.getUndoStack().offerLast(remove);
 			}
+		}
+	}
+
+	public void modifyShape() {
+		countSelectedShapes();
+		if (selectedShapeList.size() == 1) {
+			Point newPoint = ModifyShapesDialogs.modifyPointDialog((Point)selectedShapeList.get(0));
+			if (newPoint != null) {
+				CommandUpdatePoint updatePoint = new CommandUpdatePoint((Point)selectedShapeList.get(0), newPoint);
+				updatePoint.execute();
+				model.getUndoStack().offerLast(updatePoint);
+			}
+		} else {
+			DialogMethods.showErrorMessage("You can modify only 1 shape!");
 		}
 	}
 

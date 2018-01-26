@@ -13,4 +13,9 @@ public class DialogMethods {
 			return false;
 		}
 	}
+	
+	public static void showErrorMessage(String error) {
+		JOptionPane.showMessageDialog(null, error, "Error!", JOptionPane.ERROR_MESSAGE);
+	}
+	
 }
