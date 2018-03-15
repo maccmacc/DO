@@ -18,10 +18,21 @@ public class DrawingController {
 		this.frame = frame;
 	}
 	
+	public void checkShape(MouseEvent e) {
+		String selectedShape = frame.getButtonView().getCmbShapes().getSelectedItem().toString();
+		if (selectedShape.equals("point"))
+			onPointAdded(e);
+		else if (selectedShape.equals("square"))
+			System.out.println("hiii");
+	}
 	public void onPointAdded(MouseEvent e) {
 		
 		CommandAddPoint add = new CommandAddPoint(model, new Point(e.getX(), e.getY(), Color.black));
 		add.execute();
 		model.getUndoStack().offerLast(add);
+	}
+	
+	public void onSquareAdded(MouseEvent e) {
+		//CommandAddSquare add = new CommandAddSquare(model, )
 	}
 }

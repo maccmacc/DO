@@ -55,7 +55,7 @@ public class ButtonView extends JPanel{
 		gbc_comboBox.gridx = 3;
 		gbc_comboBox.gridy = 0;
 		add(cmbShapes, gbc_comboBox);
-		cmbShapes.setModel(new DefaultComboBoxModel(new String[] {"point", "line"}));
+		cmbShapes.setModel(new DefaultComboBoxModel(new String[] {"point", "line", "square"}));
 		
 		btnDelete = new JButton("Delete");
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();

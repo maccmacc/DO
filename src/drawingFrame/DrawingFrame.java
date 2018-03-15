@@ -63,6 +63,11 @@ public class DrawingFrame extends JFrame{
 				buttonController.modifyShape();
 			}
 		});
+		buttonView.getCmbShapes().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+					drawingController.checkShape(e);
+			}
+		});
 	}
 	
 	
@@ -75,6 +80,11 @@ public class DrawingFrame extends JFrame{
 
 	public void setButtonController(ButtonController buttonController) {
 		this.buttonController = buttonController;
+	}
+
+
+	public ButtonView getButtonView() {
+		return buttonView;
 	}
 	
 }
