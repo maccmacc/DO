@@ -2,6 +2,10 @@ package drawingFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -63,9 +67,9 @@ public class DrawingFrame extends JFrame{
 				buttonController.modifyShape();
 			}
 		});
-		buttonView.getCmbShapes().addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-					drawingController.checkShape(e);
+		buttonView.getCmbShapes().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { //probala sam sa ovim listenerom msm da bi on trebao da radi
+				drawingController.checkShape(); // ovde bi trebalo da prosledim e da bi posle u toj metodi prosledjivala drugim metodama
 			}
 		});
 	}
