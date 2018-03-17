@@ -5,6 +5,8 @@ import java.awt.GridBagLayout;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JToggleButton;
@@ -18,6 +20,8 @@ public class ButtonView extends JPanel{
 	private JComboBox cmbShapes;
 	private JButton btnDelete;
 	private JButton btnUpdate;
+	private JButton btnOuterColor;
+	private JButton btnInnerColor;
 	
 	public ButtonView() {
 		gridBagLayout = new GridBagLayout();
@@ -71,6 +75,23 @@ public class ButtonView extends JPanel{
 		gbc_btnUpdate.gridy = 1;
 		add(btnUpdate, gbc_btnUpdate);
 		
+		btnOuterColor = new JButton("Outer color");
+		GridBagConstraints gbc_btnOuterColor = new GridBagConstraints();
+		gbc_btnOuterColor.insets = new Insets(0, 0, 0, 5);
+		gbc_btnOuterColor.gridx = 2;
+		gbc_btnOuterColor.gridy = 1;
+		btnOuterColor.setBackground(Color.black);
+		btnOuterColor.setForeground(Color.white);
+		add(btnOuterColor, gbc_btnOuterColor);
+		
+		btnInnerColor = new JButton("Inner color");
+		GridBagConstraints gbc_btnInnerColor = new GridBagConstraints();
+		gbc_btnInnerColor.gridx = 3;
+		gbc_btnInnerColor.gridy = 1;
+		btnInnerColor.setBackground(Color.white);
+		btnInnerColor.setForeground(Color.black);
+		add(btnInnerColor, gbc_btnInnerColor);
+		
 	}
 
 	public GridBagLayout getGridBagLayout() {
@@ -99,6 +120,14 @@ public class ButtonView extends JPanel{
 
 	public JButton getBtnUpdate() {
 		return btnUpdate;
+	}
+
+	public JButton getBtnOuterColor() {
+		return btnOuterColor;
+	}
+
+	public JButton getBtnInnerColor() {
+		return btnInnerColor;
 	}
 
 }

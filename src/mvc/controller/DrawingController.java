@@ -47,7 +47,7 @@ public class DrawingController {
 			onLineAdded(e);
 	}
 	public void onPointAdded(MouseEvent e) {
-		CommandAddPoint add = new CommandAddPoint(model, new Point(e.getX(), e.getY(), Color.black));
+		CommandAddPoint add = new CommandAddPoint(model, new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground()));
 		add.execute();
 		model.getUndoStack().offerLast(add);
 	}
@@ -55,7 +55,7 @@ public class DrawingController {
 	public void onSquareAdded(MouseEvent e) {
 		Point upperLeftPoint = new Point(e.getX(), e.getY(), Color.black);
 		int sideLength = AddShapesDialogs.addSquareDialog();
-		Square square = new Square(upperLeftPoint, sideLength, Color.black);
+		Square square = new Square(upperLeftPoint, sideLength, frame.getButtonView().getBtnOuterColor().getBackground());
 		CommandAddSquare add = new CommandAddSquare(model, square);
 		add.execute();
 		model.getUndoStack().offerLast(add);
@@ -64,7 +64,7 @@ public class DrawingController {
 	public void onCircleAdded(MouseEvent e) {
 		Point center = new Point(e.getX(), e.getY(), Color.BLACK);
 		int r = AddShapesDialogs.addCircleDialog();
-		Circle circle = new Circle(center, r, Color.black);
+		Circle circle = new Circle(center, r, frame.getButtonView().getBtnOuterColor().getBackground());
 		CommandAddCircle add = new CommandAddCircle(model, circle);
 		add.execute();
 		model.getUndoStack().offerLast(add);
@@ -73,7 +73,7 @@ public class DrawingController {
 	public void onRectangleAdded(MouseEvent e) {
 		Point upperLeftPoint = new Point(e.getX(), e.getY(), Color.black);
 		int[] sides = AddShapesDialogs.addRectangleDialog();
-		Rectangle rectangle = new Rectangle(upperLeftPoint, sides[0], sides[1], Color.black);
+		Rectangle rectangle = new Rectangle(upperLeftPoint, sides[0], sides[1], frame.getButtonView().getBtnOuterColor().getBackground());
 		CommandAddRectangle add = new CommandAddRectangle(model, rectangle);
 		add.execute();
 		model.getUndoStack().offerLast(add);
@@ -87,7 +87,7 @@ public class DrawingController {
 		else if (numberOfClicks == 1) {
 			tmpLine.getEndPoint().setX(e.getX());
 			tmpLine.getEndPoint().setY(e.getY());
-			tmpLine.setColor(Color.black);
+			tmpLine.setColor(frame.getButtonView().getBtnOuterColor().getBackground());
 			CommandAddLine add = new CommandAddLine(model, tmpLine);
 			add.execute();
 			model.getUndoStack().offerLast(add);

@@ -67,6 +67,16 @@ public class DrawingFrame extends JFrame{
 				buttonController.modifyShape();
 			}
 		});
+		buttonView.getBtnOuterColor().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				buttonController.chooseOuterColor(buttonView.getBtnOuterColor().getBackground());
+			}
+		});
+		buttonView.getBtnInnerColor().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				buttonController.chooseInnerColor(buttonView.getBtnInnerColor().getBackground());
+			}
+		});
 	}
 	
 	

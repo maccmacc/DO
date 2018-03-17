@@ -1,8 +1,10 @@
 package mvc.controller;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -197,6 +199,26 @@ public class ButtonController {
 		} else {
 			DialogMethods.showErrorMessage("You can modify only 1 shape!");
 		}
+	}
+	
+	public Color chooseOuterColor(Color previousColor) {
+		Color tmpColor = JColorChooser.showDialog(null, "Choose color", Color.RED);
+		if (tmpColor != null) {
+			frame.getButtonView().getBtnOuterColor().setBackground(tmpColor);
+			return tmpColor;
+		}
+		else
+			return previousColor;
+	}
+	
+	public Color chooseInnerColor(Color previousColor) {
+		Color tmpColor = JColorChooser.showDialog(null, "Choose color", Color.RED);
+		if (tmpColor != null) {
+			frame.getButtonView().getBtnInnerColor().setBackground(tmpColor);
+			return tmpColor;
+		}
+		else
+			return previousColor;
 	}
 	
 	
