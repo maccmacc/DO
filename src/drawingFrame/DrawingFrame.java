@@ -36,7 +36,7 @@ public class DrawingFrame extends JFrame{
 		drawingView.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (!buttonView.getTglbtnSelect().isSelected())
-					drawingController.onPointAdded(e);
+					drawingController.checkShape(e);
 				else
 					buttonController.onSelectButtonClicked(e);
 			}
@@ -65,11 +65,6 @@ public class DrawingFrame extends JFrame{
 		buttonView.getBtnUpdate().addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				buttonController.modifyShape();
-			}
-		});
-		buttonView.getCmbShapes().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) { //probala sam sa ovim listenerom msm da bi on trebao da radi
-				drawingController.checkShape(); // ovde bi trebalo da prosledim e da bi posle u toj metodi prosledjivala drugim metodama
 			}
 		});
 	}

@@ -67,13 +67,13 @@ public class Rectangle extends Square{
 		new Line(new Point(getUpperLeftPoint().getX()+sideLength, getUpperLeftPoint().getY()), diagonal().getEndPoint()).selected(g);
 		new Line(new Point(getUpperLeftPoint().getX(), getUpperLeftPoint().getY()+width), diagonal().getEndPoint()).selected(g);
 	}
-	public void crtajSe(Graphics g){
+	public void draw(Graphics g){
 		g.setColor(getColor());
 		g.drawRect(upperLeftPoint.getX(), upperLeftPoint.getY(), sideLength, width);
 		if(isSelected())
 			selected(g);
 	}
-	public void popuni(Graphics g){
+	public void fill(Graphics g){
 		g.setColor(getSurfaceColor());
 		g.fillRect(upperLeftPoint.getX()+1, upperLeftPoint.getY()+1, sideLength-1, width-1);
 		

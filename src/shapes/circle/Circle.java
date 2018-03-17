@@ -10,46 +10,46 @@ import shapes.point.Point;
 
 
 public class Circle extends SurfaceShape implements Moveable{
-	private Point centre;
+	private Point center;
 	private int r;
 	
 	public Circle(){
 
 	}
-	public Circle(Point centre, int r){
-		this.centre = centre;
+	public Circle(Point center, int r){
+		this.center = center;
 		this.r = r;
 	}
-	public Circle(Point centre, int r, Color color){
-		this(centre, r);
+	public Circle(Point center, int r, Color color){
+		this(center, r);
 		setColor(color);
 	}
 	
 	public String toString(){
-		return "centre " + centre + ", radius=" + r;
+		return "center " + center + ", radius=" + r;
 	}
 	public void draw(Graphics g){
 		g.setColor(getColor());
-		g.drawOval(centre.getX()-r, centre.getY()-r, 2*r, r*2);
+		g.drawOval(center.getX()-r, center.getY()-r, 2*r, r*2);
 		if(isSelected())
 			selected(g);
 	}
 	public boolean contains(int x, int y){
 		Point clickPoint = new Point(x, y);
-		if(clickPoint.distance(centre)<=r)
+		if(clickPoint.distance(center)<=r)
 			return true;
 		else
 			return false;
 	}
 	public void selected(Graphics g) {
 		// TODO Auto-generated method stub
-		new Line(new Point(centre.getX(), centre.getY()-r), new Point(centre.getX(), centre.getY() + r)).selected(g);
-		new Line(new Point(centre.getX()-r, centre.getY()), new Point(centre.getX()+r, centre.getY())).selected(g);
+		new Line(new Point(center.getX(), center.getY()-r), new Point(center.getX(), center.getY() + r)).selected(g);
+		new Line(new Point(center.getX()-r, center.getY()), new Point(center.getX()+r, center.getY())).selected(g);
 	
 	}
 	public void fill(Graphics g){
 		g.setColor(getSurfaceColor());
-		g.fillOval(centre.getX()-r+1, centre.getY()-r+1, 2*r-2, r*2-2);
+		g.fillOval(center.getX()-r+1, center.getY()-r+1, 2*r-2, r*2-2);
 		
 	}
 	
@@ -57,7 +57,7 @@ public class Circle extends SurfaceShape implements Moveable{
 		if (obj instanceof Circle)
 		{
 			Circle tmp=(Circle)obj;
-			if(this.centre.equals(tmp.centre) && this.r==tmp.r)
+			if(this.center.equals(tmp.center) && this.r==tmp.r)
 				return true;
 			else
 				return false;
@@ -68,12 +68,12 @@ public class Circle extends SurfaceShape implements Moveable{
 	
 
 	public void moveTo(int x, int y){
-		centre.setX(x);
-		centre.setY(y);
+		center.setX(x);
+		center.setY(y);
 	}
 	public void moveFor(int x, int y){
-		centre.setX(centre.getX()+x);
-		centre.setY(centre.getY()+y);
+		center.setX(center.getX()+x);
+		center.setY(center.getY()+y);
 	}
 	public double surface(){
 		return r * r * Math.PI;
@@ -89,11 +89,11 @@ public class Circle extends SurfaceShape implements Moveable{
 		else
 			return 0;
 	}
-	public Point getCentre() {
-		return centre;
+	public Point getCenter() {
+		return center;
 	}
-	public void setCentre(Point centre) {
-		this.centre = centre;
+	public void setCenter(Point center) {
+		this.center = center;
 	}
 	public int getR() {
 		return r;
