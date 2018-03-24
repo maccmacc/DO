@@ -26,6 +26,12 @@ public class Square extends SurfaceShape implements Moveable{
 		this(upperLeftPoint, sideLength);
 		setColor(color);
 	}
+	
+	public Square(Point upperLeftPoint, int sideLength, Color colorOuter, Color colorInner) {
+		this(upperLeftPoint, sideLength, colorOuter);
+		setSurfaceColor(colorInner);
+	}
+	 
 	public Line diagonal(){
 		return new Line(upperLeftPoint, new Point(upperLeftPoint.getX() + sideLength,upperLeftPoint.getY() + sideLength));
 	}
@@ -34,7 +40,8 @@ public class Square extends SurfaceShape implements Moveable{
 		return diagonal().middlePointOfLine();
 	}
 	public String toString() {
-		return "upper left point=(" + upperLeftPoint.getX() + "," + upperLeftPoint.getY() + "), side=" + sideLength;
+		return "upper left point=(" + upperLeftPoint.getX() + "," + upperLeftPoint.getY() + "), side=" + sideLength + ", colors: "
+				+ getColor() +", " + getSurfaceColor()	;
 	}
 
 	public boolean equals(Object obj) {
@@ -86,6 +93,7 @@ public class Square extends SurfaceShape implements Moveable{
 	public void draw(Graphics g){
 		g.setColor(getColor());
 		g.drawRect(upperLeftPoint.getX(), upperLeftPoint.getY(), sideLength, sideLength);
+		fill(g);
 		if(isSelected())
 			selected(g);
 	}

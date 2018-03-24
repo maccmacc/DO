@@ -24,6 +24,10 @@ public class Circle extends SurfaceShape implements Moveable{
 		this(center, r);
 		setColor(color);
 	}
+	public Circle(Point center, int r, Color colorOuter, Color colorInner) {
+		this(center, r, colorOuter);
+		setSurfaceColor(colorInner);
+	}
 	
 	public String toString(){
 		return "center " + center + ", radius=" + r;
@@ -31,6 +35,7 @@ public class Circle extends SurfaceShape implements Moveable{
 	public void draw(Graphics g){
 		g.setColor(getColor());
 		g.drawOval(center.getX()-r, center.getY()-r, 2*r, r*2);
+		fill(g);
 		if(isSelected())
 			selected(g);
 	}

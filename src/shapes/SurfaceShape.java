@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class SurfaceShape extends Shape{
-	private Color surfaceColor = Color.WHITE;
+	private Color surfaceColor = Color.white;
 	
 	public abstract void fill(Graphics g);
 

@@ -18,6 +18,7 @@ public class CommandUpdateSquare implements Command{
 		original.setUpperLeftPoint(newState.getUpperLeftPoint());
 		original.setSideLength(newState.getSideLength());
 		original.setColor(newState.getColor());
+		original.setSurfaceColor(newState.getSurfaceColor());
 	}
 
 	@Override
@@ -25,7 +26,7 @@ public class CommandUpdateSquare implements Command{
 		original.setUpperLeftPoint(tmp.getUpperLeftPoint());
 		original.setSideLength(tmp.getSideLength());
 		original.setColor(tmp.getColor());
-		
+		original.setSurfaceColor(newState.getSurfaceColor());
 	}
 
 }

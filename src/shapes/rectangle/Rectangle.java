@@ -22,6 +22,11 @@ public class Rectangle extends Square{
 		this(upperLeftPoint, height, width);
 		setColor(color);
 	}
+	
+	public Rectangle(Point upperLeftPoint, int height, int width, Color colorOuter, Color colorInner){
+		this(upperLeftPoint, height, width, colorOuter);
+		setSurfaceColor(colorInner);
+	}
 	public Line diagonal(){
 		return new Line(upperLeftPoint, new Point(upperLeftPoint.getX() + getSideLength(),upperLeftPoint.getY() + width));
 	}
@@ -70,6 +75,7 @@ public class Rectangle extends Square{
 	public void draw(Graphics g){
 		g.setColor(getColor());
 		g.drawRect(upperLeftPoint.getX(), upperLeftPoint.getY(), sideLength, width);
+		fill(g);
 		if(isSelected())
 			selected(g);
 	}

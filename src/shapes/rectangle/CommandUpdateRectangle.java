@@ -19,6 +19,7 @@ public class CommandUpdateRectangle implements Command{
 		original.setSideLength(newState.getSideLength());
 		original.setWidth(newState.getWidth());
 		original.setColor(newState.getColor());
+		original.setSurfaceColor(newState.getSurfaceColor());
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class CommandUpdateRectangle implements Command{
 		original.setSideLength(tmp.getSideLength());
 		original.setWidth(tmp.getWidth());
 		original.setColor(tmp.getColor());
-		
+		original.setSurfaceColor(newState.getSurfaceColor());
 	}
 
 }

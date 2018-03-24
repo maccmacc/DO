@@ -28,6 +28,7 @@ import shapes.rectangle.Rectangle;
 import shapes.square.CommandRemoveSquare;
 import shapes.square.CommandUpdateSquare;
 import shapes.square.Square;
+import utility.CommonHelpers;
 import utility.DialogMethods;
 import utility.ModifyShapesDialogs;
 
@@ -201,24 +202,16 @@ public class ButtonController {
 		}
 	}
 	
-	public Color chooseOuterColor(Color previousColor) {
-		Color tmpColor = JColorChooser.showDialog(null, "Choose color", Color.RED);
-		if (tmpColor != null) {
-			frame.getButtonView().getBtnOuterColor().setBackground(tmpColor);
-			return tmpColor;
-		}
-		else
-			return previousColor;
+	public void chooseOuterColor(Color previousColor) {
+		frame.getButtonView()
+		.getBtnOuterColor()
+		.setBackground(CommonHelpers.chooseColor(previousColor));
 	}
 	
-	public Color chooseInnerColor(Color previousColor) {
-		Color tmpColor = JColorChooser.showDialog(null, "Choose color", Color.RED);
-		if (tmpColor != null) {
-			frame.getButtonView().getBtnInnerColor().setBackground(tmpColor);
-			return tmpColor;
-		}
-		else
-			return previousColor;
+	public void chooseInnerColor(Color previousColor) {
+		frame.getButtonView()
+		.getBtnInnerColor()
+		.setBackground(CommonHelpers.chooseColor(previousColor));
 	}
 	
 	

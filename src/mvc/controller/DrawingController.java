@@ -53,27 +53,30 @@ public class DrawingController {
 	}
 	
 	public void onSquareAdded(MouseEvent e) {
-		Point upperLeftPoint = new Point(e.getX(), e.getY(), Color.black);
+		Point upperLeftPoint = new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground());
 		int sideLength = AddShapesDialogs.addSquareDialog();
 		Square square = new Square(upperLeftPoint, sideLength, frame.getButtonView().getBtnOuterColor().getBackground());
+		square.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
 		CommandAddSquare add = new CommandAddSquare(model, square);
 		add.execute();
 		model.getUndoStack().offerLast(add);
 	}
 	
 	public void onCircleAdded(MouseEvent e) {
-		Point center = new Point(e.getX(), e.getY(), Color.BLACK);
+		Point center = new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground());
 		int r = AddShapesDialogs.addCircleDialog();
 		Circle circle = new Circle(center, r, frame.getButtonView().getBtnOuterColor().getBackground());
+		circle.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
 		CommandAddCircle add = new CommandAddCircle(model, circle);
 		add.execute();
 		model.getUndoStack().offerLast(add);
 	}
 	
 	public void onRectangleAdded(MouseEvent e) {
-		Point upperLeftPoint = new Point(e.getX(), e.getY(), Color.black);
+		Point upperLeftPoint = new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground());
 		int[] sides = AddShapesDialogs.addRectangleDialog();
 		Rectangle rectangle = new Rectangle(upperLeftPoint, sides[0], sides[1], frame.getButtonView().getBtnOuterColor().getBackground());
+		rectangle.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
 		CommandAddRectangle add = new CommandAddRectangle(model, rectangle);
 		add.execute();
 		model.getUndoStack().offerLast(add);

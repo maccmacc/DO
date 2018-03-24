@@ -15,6 +15,8 @@ import mvc.controller.ButtonController;
 import mvc.controller.DrawingController;
 import mvc.view.ButtonView;
 import mvc.view.DrawingView;
+import utility.ModifyShapesDialogs;
+
 import javax.swing.JButton;
 
 

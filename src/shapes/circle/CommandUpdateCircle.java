@@ -19,6 +19,7 @@ public class CommandUpdateCircle implements Command{
 		original.setCenter(newState.getCenter());
 		original.setR(newState.getR());
 		original.setColor(newState.getColor());
+		original.setSurfaceColor(newState.getSurfaceColor());
 	}
 
 	@Override
@@ -26,7 +27,7 @@ public class CommandUpdateCircle implements Command{
 		original.setCenter(tmp.getCenter());
 		original.setR(tmp.getR());
 		original.setColor(tmp.getColor());
-		
+		original.setSurfaceColor(newState.getSurfaceColor());
 	}
 
 }
