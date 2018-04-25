@@ -79,5 +79,27 @@ public class AddShapesDialogs {
 		}
 		return new int[] {0, 0};
 	}
+	
+	public static int addHexagonDialog() {
+		JTextField r = new JTextField();
+		final JComponent[] components = new JComponent[] { new JLabel("Enter perimeter"), r};
+		if (JOptionPane.showConfirmDialog(null, components, "Add hexagon",
+				JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
+			if (!r.getText().isEmpty()) {
+				try {
+					int tmpR = Integer.parseInt(r.getText());
+					if (tmpR > 0)
+						return tmpR;
+					else
+						DialogMethods.showErrorMessage("Length of perimeter must be greater than 0!");
+				} catch (NumberFormatException e) {
+					DialogMethods.showErrorMessage("Lenght of perimeter side must be a number!");
+				}
+			} else {
+				DialogMethods.showErrorMessage("Length of perimeter side must not be empty!");
+			}
+		}
+		return 0;
+	}
 
 }

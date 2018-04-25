@@ -6,9 +6,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 
 import drawingFrame.DrawingFrame;
+import hexagon.Hexagon;
 import mvc.model.DrawingModel;
 import shapes.circle.Circle;
 import shapes.circle.CommandAddCircle;
+import shapes.hexagon.CommandAddHexagonAdapter;
+import shapes.hexagon.HexagonAdapter;
 import shapes.line.CommandAddLine;
 import shapes.line.Line;
 import shapes.point.CommandAddPoint;
@@ -45,6 +48,8 @@ public class DrawingController {
 			onRectangleAdded(e);
 		else if (selectedShape.equals("line"))
 			onLineAdded(e);
+		else if (selectedShape.equals("hexagon"))
+			onHexagonAdded(e);
 	}
 	public void onPointAdded(MouseEvent e) {
 		CommandAddPoint add = new CommandAddPoint(model, new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground()));
@@ -78,6 +83,19 @@ public class DrawingController {
 		Rectangle rectangle = new Rectangle(upperLeftPoint, sides[0], sides[1], frame.getButtonView().getBtnOuterColor().getBackground());
 		rectangle.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
 		CommandAddRectangle add = new CommandAddRectangle(model, rectangle);
+		add.execute();
+		model.getUndoStack().offerLast(add);
+	}
+	
+	public void onHexagonAdded(MouseEvent e) {
+		Point center = new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground());
+		int r = AddShapesDialogs.addHexagonDialog();
+		Hexagon hexagon = new Hexagon(center.getX(), center.getY(), r);
+		hexagon.setBorderColor(frame.getButtonView().getBtnOuterColor().getBackground());
+		hexagon.setAreaColor(frame.getButtonView().getBtnInnerColor().getBackground());
+		HexagonAdapter hexagonAdapter = new HexagonAdapter(hexagon);
+		hexagonAdapter.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
+		CommandAddHexagonAdapter add = new CommandAddHexagonAdapter(model, hexagonAdapter);
 		add.execute();
 		model.getUndoStack().offerLast(add);
 	}

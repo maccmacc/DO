@@ -16,6 +16,9 @@ import shapes.Shape;
 import shapes.circle.Circle;
 import shapes.circle.CommandRemoveCircle;
 import shapes.circle.CommandUpdateCircle;
+import shapes.hexagon.CommandRemoveHexagonAdapter;
+import shapes.hexagon.CommandUpdateHexagonAdapter;
+import shapes.hexagon.HexagonAdapter;
 import shapes.line.CommandRemoveLine;
 import shapes.line.CommandUpdateLine;
 import shapes.line.Line;
@@ -126,6 +129,10 @@ public class ButtonController {
 				Command remove = new CommandRemoveSquare(model, (Square) selectedShapeList.get(0));
 				remove.execute();
 				model.getUndoStack().offerLast(remove);
+			} else if (selectedShapeList.get(0) instanceof HexagonAdapter) {
+				Command remove = new CommandRemoveHexagonAdapter(model, (HexagonAdapter) selectedShapeList.get(0));
+				remove.execute();
+				model.getUndoStack().offerLast(remove);
 			}
 		}
 	}
@@ -151,6 +158,10 @@ public class ButtonController {
 					model.getUndoStack().offerLast(remove);
 				} else if (selectedShapeList.get(i) instanceof Square) {
 					CommandRemoveSquare remove = new CommandRemoveSquare(model, (Square) selectedShapeList.get(i));
+					remove.execute();
+					model.getUndoStack().offerLast(remove);
+				} else if (selectedShapeList.get(0) instanceof HexagonAdapter) {
+					Command remove = new CommandRemoveHexagonAdapter(model, (HexagonAdapter) selectedShapeList.get(0));
 					remove.execute();
 					model.getUndoStack().offerLast(remove);
 				}
@@ -196,7 +207,15 @@ public class ButtonController {
 					updateLine.execute();
 					model.getUndoStack().offerLast(updateLine);
 				}
-			} 
+			} else if (selectedShapeList.get(0) instanceof HexagonAdapter) {
+				HexagonAdapter newHexagonAdapter = ModifyShapesDialogs.modifyHexagonAdapterDialog((HexagonAdapter)selectedShapeList.get(0));
+				if (newHexagonAdapter != null) {
+					CommandUpdateHexagonAdapter updateHexagonAdapter = 
+							new CommandUpdateHexagonAdapter((HexagonAdapter)selectedShapeList.get(0), newHexagonAdapter);
+					updateHexagonAdapter.execute();
+					model.getUndoStack().offerLast(updateHexagonAdapter);
+				}
+			}
 		} else {
 			DialogMethods.showErrorMessage("You can modify only 1 shape!");
 		}

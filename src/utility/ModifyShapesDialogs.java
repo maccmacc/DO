@@ -11,8 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import hexagon.Hexagon;
 import mvc.controller.ButtonController;
 import shapes.circle.Circle;
+import shapes.hexagon.HexagonAdapter;
 import shapes.line.Line;
 import shapes.point.Point;
 import shapes.rectangle.Rectangle;
@@ -229,6 +231,55 @@ public class ModifyShapesDialogs {
 				}
 			} else {
 				DialogMethods.showErrorMessage("Coordinates must not be empty!");
+			}
+		}
+		return null;
+	}
+	
+	public static HexagonAdapter modifyHexagonAdapterDialog(HexagonAdapter hexagonAdapter) {
+		JTextField xCoordinateCenter = new JTextField();
+		JTextField yCoordinateCenter = new JTextField();
+		JTextField r = new JTextField();
+		JButton btnNewColorOuter = new JButton();
+		JButton btnNewColorInner = new JButton();
+		xCoordinateCenter.setText(Integer.toString(hexagonAdapter.getHexagon().getX()));
+		yCoordinateCenter.setText(Integer.toString(hexagonAdapter.getHexagon().getY()));
+		r.setText(Integer.toString(hexagonAdapter.getHexagon().getR()));
+		btnNewColorOuter.setBackground(hexagonAdapter.getColor());
+		btnNewColorOuter.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				btnNewColorOuter.setBackground(CommonHelpers.chooseColor(btnNewColorOuter.getBackground()));
+			}
+		});
+		btnNewColorInner.setBackground(hexagonAdapter.getHexagon().getAreaColor());
+		btnNewColorInner.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				btnNewColorInner.setBackground(CommonHelpers.chooseColor(btnNewColorInner.getBackground()));
+			}
+		});
+		final JComponent[] components = new JComponent[] { new JLabel("Enter new x coordinate:"), xCoordinateCenter,
+				new JLabel("Enter new y coordinate:"), yCoordinateCenter, new JLabel("Enter new perimeter:"), r,
+				new JLabel("Choose new outer color:"), btnNewColorOuter,
+				new JLabel("Choose new inner color:"), btnNewColorInner};
+		if (JOptionPane.showConfirmDialog(null, components, "Modify hexagon",
+				JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
+			if (!xCoordinateCenter.getText().isEmpty() || !yCoordinateCenter.getText().isEmpty() || !r.getText().isEmpty()) {
+				try {
+					int tmpX = Integer.parseInt(xCoordinateCenter.getText());
+					int tmpY = Integer.parseInt(yCoordinateCenter.getText());
+					int tmpR = Integer.parseInt(r.getText());
+					if (tmpX > 0 && tmpY > 0 && tmpR > 0) {
+						Hexagon hexagon = new Hexagon(tmpX, tmpY, tmpR);
+						hexagon.setBorderColor(btnNewColorOuter.getBackground());
+						hexagon.setAreaColor(btnNewColorInner.getBackground());
+						return new HexagonAdapter(hexagon);
+					} else
+						DialogMethods.showErrorMessage("Coordinates and perimeter must be greater than 0!");
+				} catch (NumberFormatException e) {
+					DialogMethods.showErrorMessage("Coordinates and perimeter must be numbers!");
+				}
+			} else {
+				DialogMethods.showErrorMessage("Coordinates and perimeter must not be empty!");
 			}
 		}
 		return null;
