@@ -22,6 +22,8 @@ import shapes.hexagon.HexagonAdapter;
 import shapes.line.CommandRemoveLine;
 import shapes.line.CommandUpdateLine;
 import shapes.line.Line;
+import shapes.observer.Observer;
+import shapes.observer.Subject;
 import shapes.point.CommandRemovePoint;
 import shapes.point.CommandUpdatePoint;
 import shapes.point.Point;
@@ -35,10 +37,11 @@ import utility.CommonHelpers;
 import utility.DialogMethods;
 import utility.ModifyShapesDialogs;
 
-public class ButtonController {
+public class ButtonController implements Subject{
 	private DrawingModel model;
 	private DrawingFrame frame;
 	private ArrayList<Shape> selectedShapeList;
+	private ArrayList<Observer> observerList = new ArrayList<>();
 
 	public ButtonController(DrawingModel model, DrawingFrame frame) {
 		this.model = model;
@@ -231,6 +234,29 @@ public class ButtonController {
 		frame.getButtonView()
 		.getBtnInnerColor()
 		.setBackground(CommonHelpers.chooseColor(previousColor));
+	}
+
+	@Override
+	public void addObserver(Observer ob) {
+		observerList.add(ob);
+		System.out.println("observer list: "  + observerList.size());
+	}
+
+	@Override
+	public void deleteObserver(Observer ob) {
+		observerList.remove(ob);
+	}
+
+	@Override
+	public void notifyAllObservers() {
+		for (Observer observer : observerList) {
+			observer.update(countSelectedShapes());
+		}
+	}
+
+	public void setSelectedShapeList(ArrayList<Shape> selectedShapeList) {
+		this.selectedShapeList = selectedShapeList;
+		notifyAllObservers();
 	}
 	
 	

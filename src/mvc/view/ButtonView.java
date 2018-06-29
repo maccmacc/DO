@@ -67,6 +67,7 @@ public class ButtonView extends JPanel{
 		gbc_btnDelete.gridx = 0;
 		gbc_btnDelete.gridy = 1;
 		add(btnDelete, gbc_btnDelete);
+		btnDelete.setEnabled(false);
 		
 		btnUpdate = new JButton("Update");
 		GridBagConstraints gbc_btnUpdate = new GridBagConstraints();
@@ -74,6 +75,7 @@ public class ButtonView extends JPanel{
 		gbc_btnUpdate.gridx = 1;
 		gbc_btnUpdate.gridy = 1;
 		add(btnUpdate, gbc_btnUpdate);
+		btnUpdate.setEnabled(false);
 		
 		btnOuterColor = new JButton("Outer color");
 		GridBagConstraints gbc_btnOuterColor = new GridBagConstraints();

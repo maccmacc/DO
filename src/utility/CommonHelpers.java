@@ -9,4 +9,6 @@ public class CommonHelpers {
 		Color tmpColor = JColorChooser.showDialog(null, "Choose color", previousColor);
 		return (tmpColor != null) ? tmpColor : previousColor;
 	}
+	
+	
 }
