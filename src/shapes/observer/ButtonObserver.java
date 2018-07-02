@@ -2,7 +2,7 @@ package shapes.observer;
 
 import mvc.view.ButtonView;
 
-public class ButtonObserver implements Observer{
+public class ButtonObserver implements Observer {
 
 	ButtonView view;
 	
@@ -17,6 +17,10 @@ public class ButtonObserver implements Observer{
 			view.getBtnDelete().setEnabled(true);
 		}
 		else if (numberOfSelectedShapes > 1) {
+			view.getBtnUpdate().setEnabled(false);
+		}
+		else if (numberOfSelectedShapes == 0) {
+			view.getBtnDelete().setEnabled(false);
 			view.getBtnUpdate().setEnabled(false);
 		}
 	}

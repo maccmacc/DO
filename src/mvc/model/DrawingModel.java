@@ -6,12 +6,17 @@ import java.util.LinkedList;
 
 import shapes.Command;
 import shapes.Shape;
+import shapes.observer.ButtonObserver;
+import shapes.observer.Observer;
+import shapes.observer.Subject;
 
 
-public class DrawingModel {
+public class DrawingModel implements Subject{
 	private ArrayList<Shape> shapeList = new ArrayList<>();
 	private Deque<Command> undoStack = new LinkedList<>();
 	private Deque<Command> redoStack = new LinkedList<>();
+	private ArrayList<Shape> selectedShapeList = new ArrayList<>();
+	private ArrayList<Observer> observerList = new ArrayList<>();
 	
 	public void addShape(Shape s) {
 		shapeList.add(s);
@@ -20,6 +25,31 @@ public class DrawingModel {
 	public void removeShape(Shape s) {
 		shapeList.remove(s);
 	}
+	
+	
+	@Override
+	public void addObserver(Observer ob) {
+		observerList.add(ob);
+		System.out.println("observer list: "  + observerList.size());
+	}
+
+	@Override
+	public void deleteObserver(Observer ob) {
+		observerList.remove(ob);
+	}
+
+	@Override
+	public void notifyAllObservers() {
+		System.out.println("hiiiiiii " + this.selectedShapeList.size());
+		for (Observer observer : observerList) {
+			observer.update(this.selectedShapeList.size());
+		}
+	}
+
+	public void setSelectedShapeList(ArrayList<Shape> selectedShapeList) {
+		this.selectedShapeList = selectedShapeList;
+	}
+	
 	
 	public Shape getShape(int i) {
 		return shapeList.get(i);
@@ -35,6 +65,11 @@ public class DrawingModel {
 
 	public Deque<Command> getRedoStack() {
 		return redoStack;
+	}
+
+	public ArrayList<Shape> getSelectedShapeList() {
+		System.out.println("br selektovanih oblika" + this.selectedShapeList.size());
+		return selectedShapeList;
 	}
 
 }
