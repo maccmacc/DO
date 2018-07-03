@@ -13,6 +13,7 @@ public class DrawingApp {
 		DrawingModel model = new DrawingModel();
 		DrawingFrame frame = new DrawingFrame();
 		LogView logView = new LogView();
+		frame.setLogView(logView);
 		DrawingController drawingController = new DrawingController(model, frame, logView);
 		frame.setDrawingController(drawingController);
 		frame.getView().setModel(model);

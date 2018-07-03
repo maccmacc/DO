@@ -26,18 +26,15 @@ public class DrawingFrame extends JFrame{
 	private DrawingController drawingController;
 	private ButtonView buttonView = new ButtonView();
 	private ButtonController buttonController;
-	private LogView logView = new LogView();
-	
-	
+	private LogView logView;
+
 	public DrawingFrame() {
 		setSize(640, 480);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
-		
 		getContentPane().add(buttonView, BorderLayout.NORTH);
 		getContentPane().add(drawingView, BorderLayout.CENTER);
-		getContentPane().add(logView, BorderLayout.SOUTH);
 		drawingView.setBackground(Color.WHITE);
 		drawingView.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -98,9 +95,13 @@ public class DrawingFrame extends JFrame{
 		this.buttonController = buttonController;
 	}
 
-
 	public ButtonView getButtonView() {
 		return buttonView;
+	}
+
+	public void setLogView(LogView logView) {
+		this.logView = logView;
+		getContentPane().add(logView, BorderLayout.SOUTH);
 	}
 	
 }
