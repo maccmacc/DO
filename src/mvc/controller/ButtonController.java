@@ -225,7 +225,6 @@ public class ButtonController {
 					model.getUndoStack().offerLast(updateHexagonAdapter);
 				}
 			}
-			unselectShapes();
 		} else {
 			DialogMethods.showErrorMessage("You can modify only 1 shape!");
 		}

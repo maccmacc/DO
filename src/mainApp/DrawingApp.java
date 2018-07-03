@@ -4,6 +4,7 @@ import mvc.controller.ButtonController;
 import mvc.controller.DrawingController;
 import mvc.model.DrawingModel;
 import mvc.view.ButtonView;
+import mvc.view.LogView;
 import shapes.observer.ButtonObserver;
 
 public class DrawingApp {
@@ -11,7 +12,8 @@ public class DrawingApp {
 	public static void main(String[] args) {
 		DrawingModel model = new DrawingModel();
 		DrawingFrame frame = new DrawingFrame();
-		DrawingController drawingController = new DrawingController(model, frame);
+		LogView logView = new LogView();
+		DrawingController drawingController = new DrawingController(model, frame, logView);
 		frame.setDrawingController(drawingController);
 		frame.getView().setModel(model);
 		ButtonController buttonController = new ButtonController(model, frame);

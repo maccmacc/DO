@@ -2,9 +2,8 @@ package shapes.circle;
 
 import mvc.model.DrawingModel;
 import shapes.Command;
-import shapes.square.Square;
 
-public class CommandAddCircle implements Command{
+public class CommandAddCircle implements Command {
 	private DrawingModel model;
 	private Circle circle;
 	public CommandAddCircle(DrawingModel model, Circle circle) {
@@ -15,7 +14,6 @@ public class CommandAddCircle implements Command{
 	@Override
 	public void execute() {
 		model.addShape(circle);
-		
 	}
 
 	@Override

@@ -30,7 +30,8 @@ public class Circle extends SurfaceShape implements Moveable{
 	}
 	
 	public String toString(){
-		return "center " + center + ", radius=" + r;
+		return "Circle:(" + center.getX() + "," + center.getY() + "), r=" + r + ", outer color=" + getColor().getRGB() 
+				+ ", inner color=" + getSurfaceColor().getRGB();
 	}
 	public void draw(Graphics g){
 		g.setColor(getColor());

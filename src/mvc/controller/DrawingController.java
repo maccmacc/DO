@@ -5,9 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 
+import javax.swing.DefaultListModel;
+
 import drawingFrame.DrawingFrame;
 import hexagon.Hexagon;
 import mvc.model.DrawingModel;
+import mvc.view.LogView;
 import shapes.circle.Circle;
 import shapes.circle.CommandAddCircle;
 import shapes.hexagon.CommandAddHexagonAdapter;
@@ -27,13 +30,14 @@ import utility.ModifyShapesDialogs;
 public class DrawingController {
 	private DrawingModel model;
 	private DrawingFrame frame;
+	private LogView logView;
 	private Line tmpLine;
 	private int numberOfClicks;
 	
-	
-	public DrawingController (DrawingModel model, DrawingFrame frame) {
+	public DrawingController (DrawingModel model, DrawingFrame frame, LogView logView) {
 		this.model = model;
 		this.frame = frame;
+		this.logView = logView;
 	}
 	
 	public void checkShape(MouseEvent e) {
@@ -65,6 +69,7 @@ public class DrawingController {
 		CommandAddSquare add = new CommandAddSquare(model, square);
 		add.execute();
 		model.getUndoStack().offerLast(add);
+		
 	}
 	
 	public void onCircleAdded(MouseEvent e) {
@@ -75,6 +80,12 @@ public class DrawingController {
 		CommandAddCircle add = new CommandAddCircle(model, circle);
 		add.execute();
 		model.getUndoStack().offerLast(add);
+		logView.getDlm().addElement(circle.toString());
+		for (int i = 0; i < logView.getDlm().size(); i++){
+			System.out.println(logView.getDlm().getElementAt(i));
+		}
+	
+		
 	}
 	
 	public void onRectangleAdded(MouseEvent e) {

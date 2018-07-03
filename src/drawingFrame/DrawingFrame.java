@@ -15,6 +15,7 @@ import mvc.controller.ButtonController;
 import mvc.controller.DrawingController;
 import mvc.view.ButtonView;
 import mvc.view.DrawingView;
+import mvc.view.LogView;
 import utility.ModifyShapesDialogs;
 
 import javax.swing.JButton;
@@ -25,6 +26,8 @@ public class DrawingFrame extends JFrame{
 	private DrawingController drawingController;
 	private ButtonView buttonView = new ButtonView();
 	private ButtonController buttonController;
+	private LogView logView = new LogView();
+	
 	
 	public DrawingFrame() {
 		setSize(640, 480);
@@ -34,6 +37,7 @@ public class DrawingFrame extends JFrame{
 		
 		getContentPane().add(buttonView, BorderLayout.NORTH);
 		getContentPane().add(drawingView, BorderLayout.CENTER);
+		getContentPane().add(logView, BorderLayout.SOUTH);
 		drawingView.setBackground(Color.WHITE);
 		drawingView.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
