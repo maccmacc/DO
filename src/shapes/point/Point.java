@@ -24,7 +24,7 @@ public class Point extends Shape implements Moveable{
 	}	
 
 	public String toString(){
-		return "(" + this.x + ","+this.y+")";			
+		return "Point:(" + this.x + ","+this.y+"), " + getColor().getRGB();			
 	}
 
 	public boolean equals(Object obj){

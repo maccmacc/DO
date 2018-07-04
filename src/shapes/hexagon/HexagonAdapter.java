@@ -26,7 +26,8 @@ public class HexagonAdapter extends SurfaceShape implements Moveable{
 	}
 	
 	public String toString() {
-		return "Center of the hexagon=(" + hexagon.getX() + "," + hexagon.getY() + "), radius=" + hexagon.getR();
+		return "Hexagon:(" + hexagon.getX() + "," + hexagon.getY() + "), r=" + hexagon.getR() + ", outer color=" + getColor().getRGB() 
+				+ ", inner color=" + getSurfaceColor().getRGB();
 	}
 
 	public boolean equals(Object obj) {

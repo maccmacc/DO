@@ -30,7 +30,8 @@ public class Line extends Shape{
 		return new Point(middleX, middleY);
 	}
 	public String toString(){
-		return "("+startPoint.getX()+"," +startPoint.getY()+") --> (" + endPoint.getX()+","+ endPoint.getY() + ")";
+		return "Line:("+startPoint.getX()+"," +startPoint.getY()+"),(" + endPoint.getX()+","+ endPoint.getY() + "), color=" +
+				getColor().getRGB();
 	}
 
 	public boolean equals(Object obj){

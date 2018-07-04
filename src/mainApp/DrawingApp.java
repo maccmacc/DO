@@ -3,7 +3,6 @@ import drawingFrame.DrawingFrame;
 import mvc.controller.ButtonController;
 import mvc.controller.DrawingController;
 import mvc.model.DrawingModel;
-import mvc.view.ButtonView;
 import mvc.view.LogView;
 import shapes.observer.ButtonObserver;
 
