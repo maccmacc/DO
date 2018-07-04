@@ -19,13 +19,13 @@ public class CommandAddPoint implements Command {
 	@Override
 	public void execute() {
 		model.addShape(point);
-		logView.getDlm().addElement(point.toString());
+		logView.getDlm().addElement("Add " + point.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.removeShape(point);
-		
+		logView.getDlm().addElement("Undo " + point.toString());
 	}
 
 }

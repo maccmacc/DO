@@ -16,7 +16,7 @@ public class DrawingApp {
 		DrawingController drawingController = new DrawingController(model, frame, logView);
 		frame.setDrawingController(drawingController);
 		frame.getView().setModel(model);
-		ButtonController buttonController = new ButtonController(model, frame);
+		ButtonController buttonController = new ButtonController(model, frame, logView);
 		frame.setButtonController(buttonController);
 		ButtonObserver buttonObs = new ButtonObserver(frame.getButtonView());
 		model.addObserver(buttonObs);

@@ -1,5 +1,6 @@
 package shapes.circle;
 
+import mvc.view.LogView;
 import shapes.Command;
 import shapes.point.Point;
 
@@ -7,10 +8,12 @@ public class CommandUpdateCircle implements Command{
 	private Circle original;
 	private Circle newState;
 	private Circle tmp;
+	private LogView logView;
 	
-	public CommandUpdateCircle(Circle original, Circle newState) {
+	public CommandUpdateCircle(Circle original, Circle newState, LogView logView) {
 		this.original = original;
 		this.newState = newState;
+		this.logView = logView;
 	}
 	
 	@Override
@@ -20,6 +23,7 @@ public class CommandUpdateCircle implements Command{
 		original.setR(newState.getR());
 		original.setColor(newState.getColor());
 		original.setSurfaceColor(newState.getSurfaceColor());
+		logView.getDlm().addElement("Update " + original.toString());
 	}
 
 	@Override
@@ -28,6 +32,7 @@ public class CommandUpdateCircle implements Command{
 		original.setR(tmp.getR());
 		original.setColor(tmp.getColor());
 		original.setSurfaceColor(newState.getSurfaceColor());
+		logView.getDlm().addElement("Undo update " + original.toString());
 	}
 
 }
