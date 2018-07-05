@@ -2,9 +2,11 @@ package mvc.controller;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -34,6 +36,8 @@ import shapes.rectangle.Rectangle;
 import shapes.square.CommandRemoveSquare;
 import shapes.square.CommandUpdateSquare;
 import shapes.square.Square;
+import strategy.SaveLog;
+import strategy.SaveManager;
 import utility.CommonHelpers;
 import utility.DialogMethods;
 import utility.ModifyShapesDialogs;
@@ -233,6 +237,25 @@ public class ButtonController {
 		}
 	}
 	
+	public void saveLog() {
+		System.out.println("save log");
+		
+		JFileChooser chooser = new JFileChooser();
+		int answer = chooser.showSaveDialog(null);
+		
+		if (answer == JFileChooser.APPROVE_OPTION) {
+			File file = chooser.getSelectedFile();
+			
+			String path = file.getAbsolutePath();
+			SaveManager saveManager = new SaveManager(new SaveLog());
+			saveManager.save(frame, file);
+		}
+	}
+	
+	public void saveDrawing() {
+		System.out.println("save drawing");
+	}
+	
 	public void chooseOuterColor(Color previousColor) {
 		frame.getButtonView()
 		.getBtnOuterColor()
@@ -243,6 +266,10 @@ public class ButtonController {
 		frame.getButtonView()
 		.getBtnInnerColor()
 		.setBackground(CommonHelpers.chooseColor(previousColor));
+	}
+
+	public LogView getLogView() {
+		return logView;
 	}
 	
 }

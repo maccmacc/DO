@@ -81,6 +81,16 @@ public class DrawingFrame extends JFrame{
 				buttonController.chooseInnerColor(buttonView.getBtnInnerColor().getBackground());
 			}
 		});
+		buttonView.getBtnSaveLog().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent arg0) {
+				buttonController.saveLog();
+			}
+		});
+		buttonView.getBtnSaveDrawing().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				buttonController.saveDrawing();
+			}
+		});
 	}
 	
 	
@@ -102,6 +112,10 @@ public class DrawingFrame extends JFrame{
 	public void setLogView(LogView logView) {
 		this.logView = logView;
 		getContentPane().add(logView, BorderLayout.SOUTH);
+	}
+
+	public LogView getLogView() {
+		return logView;
 	}
 	
 }

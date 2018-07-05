@@ -22,13 +22,15 @@ public class ButtonView extends JPanel{
 	private JButton btnUpdate;
 	private JButton btnOuterColor;
 	private JButton btnInnerColor;
+	private JButton btnSaveLog;
+	private JButton btnSaveDrawing;
 	
 	public ButtonView() {
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		btnUndo = new JButton("Undo");
@@ -63,7 +65,7 @@ public class ButtonView extends JPanel{
 		
 		btnDelete = new JButton("Delete");
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
-		gbc_btnDelete.insets = new Insets(0, 0, 0, 5);
+		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
 		gbc_btnDelete.gridx = 0;
 		gbc_btnDelete.gridy = 1;
 		add(btnDelete, gbc_btnDelete);
@@ -71,7 +73,7 @@ public class ButtonView extends JPanel{
 		
 		btnUpdate = new JButton("Update");
 		GridBagConstraints gbc_btnUpdate = new GridBagConstraints();
-		gbc_btnUpdate.insets = new Insets(0, 0, 0, 5);
+		gbc_btnUpdate.insets = new Insets(0, 0, 5, 5);
 		gbc_btnUpdate.gridx = 1;
 		gbc_btnUpdate.gridy = 1;
 		add(btnUpdate, gbc_btnUpdate);
@@ -79,7 +81,7 @@ public class ButtonView extends JPanel{
 		
 		btnOuterColor = new JButton("Outer color");
 		GridBagConstraints gbc_btnOuterColor = new GridBagConstraints();
-		gbc_btnOuterColor.insets = new Insets(0, 0, 0, 5);
+		gbc_btnOuterColor.insets = new Insets(0, 0, 5, 5);
 		gbc_btnOuterColor.gridx = 2;
 		gbc_btnOuterColor.gridy = 1;
 		btnOuterColor.setBackground(Color.black);
@@ -88,11 +90,26 @@ public class ButtonView extends JPanel{
 		
 		btnInnerColor = new JButton("Inner color");
 		GridBagConstraints gbc_btnInnerColor = new GridBagConstraints();
+		gbc_btnInnerColor.insets = new Insets(0, 0, 5, 0);
 		gbc_btnInnerColor.gridx = 3;
 		gbc_btnInnerColor.gridy = 1;
 		btnInnerColor.setBackground(Color.white);
 		btnInnerColor.setForeground(Color.black);
 		add(btnInnerColor, gbc_btnInnerColor);
+		
+		btnSaveLog = new JButton("Save log");
+		GridBagConstraints gbc_btnSaveLog = new GridBagConstraints();
+		gbc_btnSaveLog.insets = new Insets(0, 0, 0, 5);
+		gbc_btnSaveLog.gridx = 0;
+		gbc_btnSaveLog.gridy = 2;
+		add(btnSaveLog, gbc_btnSaveLog);
+		
+		btnSaveDrawing = new JButton("Save drawing");
+		GridBagConstraints gbc_btnSaveDrawing = new GridBagConstraints();
+		gbc_btnSaveDrawing.insets = new Insets(0, 0, 0, 5);
+		gbc_btnSaveDrawing.gridx = 1;
+		gbc_btnSaveDrawing.gridy = 2;
+		add(btnSaveDrawing, gbc_btnSaveDrawing);
 		
 	}
 
@@ -130,6 +147,14 @@ public class ButtonView extends JPanel{
 
 	public JButton getBtnInnerColor() {
 		return btnInnerColor;
+	}
+
+	public JButton getBtnSaveLog() {
+		return btnSaveLog;
+	}
+
+	public JButton getBtnSaveDrawing() {
+		return btnSaveDrawing;
 	}
 
 }
