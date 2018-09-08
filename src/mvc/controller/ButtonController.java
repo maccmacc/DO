@@ -3,6 +3,9 @@ package mvc.controller;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 import javax.swing.JColorChooser;
@@ -36,6 +39,7 @@ import shapes.rectangle.Rectangle;
 import shapes.square.CommandRemoveSquare;
 import shapes.square.CommandUpdateSquare;
 import shapes.square.Square;
+import strategy.SaveDrawing;
 import strategy.SaveLog;
 import strategy.SaveManager;
 import utility.CommonHelpers;
@@ -254,7 +258,47 @@ public class ButtonController {
 	
 	public void saveDrawing() {
 		System.out.println("save drawing");
+		
+		JFileChooser chooser = new JFileChooser();
+		int answer = chooser.showSaveDialog(null);
+		
+		if (answer == JFileChooser.APPROVE_OPTION) {
+			File file = chooser.getSelectedFile();
+			
+			String path = file.getAbsolutePath();
+			SaveManager saveManager = new SaveManager(new SaveDrawing());
+			saveManager.save(frame, file);
+		}
 	}
+	
+	public void openDrawing() throws ClassNotFoundException {
+		System.out.println("open drawing");
+		
+		JFileChooser chooser = new JFileChooser();
+		int answer = chooser.showOpenDialog(null);
+		
+		if (answer == JFileChooser.APPROVE_OPTION) {
+			File file = chooser.getSelectedFile();
+			String fileName = file.getPath(); 
+			
+			try {
+		         FileInputStream fileIn = new FileInputStream(fileName);
+		         ObjectInputStream in = new ObjectInputStream(fileIn);
+		         model.getShapeList().addAll((ArrayList<Shape>)in.readObject());
+		         frame.getView().repaint();
+		         in.close();
+		         fileIn.close();
+		      } catch (IOException i) {
+		         i.printStackTrace();
+		         return;
+		      } catch (ClassNotFoundException c) {
+		          System.out.println("Class not found");
+		          c.printStackTrace();
+		          return;
+		       }
+		}
+	}
+	
 	
 	public void chooseOuterColor(Color previousColor) {
 		frame.getButtonView()

@@ -1,5 +1,6 @@
 package mvc.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -11,7 +12,8 @@ import shapes.observer.Observer;
 import shapes.observer.Subject;
 
 
-public class DrawingModel implements Subject{
+public class DrawingModel implements Subject, Serializable {
+	
 	private ArrayList<Shape> shapeList = new ArrayList<>();
 	private Deque<Command> undoStack = new LinkedList<>();
 	private Deque<Command> redoStack = new LinkedList<>();

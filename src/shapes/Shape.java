@@ -2,8 +2,9 @@ package shapes;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 
-public abstract class Shape implements Comparable{
+public abstract class Shape implements Comparable, Serializable{
 	private Color color = Color.BLACK;
 	private boolean selected;
 	
@@ -13,10 +14,10 @@ public abstract class Shape implements Comparable{
 	public Shape(Color color){
 		this.color = color;
 	}
+	
 	public abstract void draw(Graphics g);
 	public abstract void selected(Graphics g);
 	public abstract boolean contains(int x, int y);
-	
 	
 	public Color getColor() {
 		return color;

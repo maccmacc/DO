@@ -24,6 +24,7 @@ public class ButtonView extends JPanel{
 	private JButton btnInnerColor;
 	private JButton btnSaveLog;
 	private JButton btnSaveDrawing;
+	private JButton btnOpenDrawing;
 	
 	public ButtonView() {
 		gridBagLayout = new GridBagLayout();
@@ -111,6 +112,13 @@ public class ButtonView extends JPanel{
 		gbc_btnSaveDrawing.gridy = 2;
 		add(btnSaveDrawing, gbc_btnSaveDrawing);
 		
+		btnOpenDrawing = new JButton("Open drawing");
+		GridBagConstraints gbc_btnOpenDrawing = new GridBagConstraints();
+		gbc_btnOpenDrawing.insets = new Insets(0, 0, 0, 5);
+		gbc_btnOpenDrawing.gridx = 2;
+		gbc_btnOpenDrawing.gridy = 2;
+		add(btnOpenDrawing, gbc_btnOpenDrawing);
+		
 	}
 
 	public GridBagLayout getGridBagLayout() {
@@ -155,6 +163,10 @@ public class ButtonView extends JPanel{
 
 	public JButton getBtnSaveDrawing() {
 		return btnSaveDrawing;
+	}
+
+	public JButton getBtnOpenDrawing() {
+		return btnOpenDrawing;
 	}
 
 }

@@ -121,4 +121,8 @@ public class DrawingController {
 			numberOfClicks = 0;
 		}
 	}
+
+	public DrawingModel getModel() {
+		return model;
+	}
 }

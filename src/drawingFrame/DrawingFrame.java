@@ -91,12 +91,23 @@ public class DrawingFrame extends JFrame{
 				buttonController.saveDrawing();
 			}
 		});
+		buttonView.getBtnOpenDrawing().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				try {
+					buttonController.openDrawing();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	
 	public DrawingView getView() {
 		return drawingView;
 	}
+	
 	public void setDrawingController(DrawingController controller) {
 		this.drawingController = controller;
 	}
@@ -116,6 +127,11 @@ public class DrawingFrame extends JFrame{
 
 	public LogView getLogView() {
 		return logView;
+	}
+
+
+	public DrawingController getDrawingController() {
+		return drawingController;
 	}
 	
 }
