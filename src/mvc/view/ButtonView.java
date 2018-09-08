@@ -25,13 +25,15 @@ public class ButtonView extends JPanel{
 	private JButton btnSaveLog;
 	private JButton btnSaveDrawing;
 	private JButton btnOpenDrawing;
+	private JButton btnOpenLog;
+	private JButton btnDrawFromLog;
 	
 	public ButtonView() {
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		btnUndo = new JButton("Undo");
@@ -100,24 +102,38 @@ public class ButtonView extends JPanel{
 		
 		btnSaveLog = new JButton("Save log");
 		GridBagConstraints gbc_btnSaveLog = new GridBagConstraints();
-		gbc_btnSaveLog.insets = new Insets(0, 0, 0, 5);
+		gbc_btnSaveLog.insets = new Insets(0, 0, 5, 5);
 		gbc_btnSaveLog.gridx = 0;
 		gbc_btnSaveLog.gridy = 2;
 		add(btnSaveLog, gbc_btnSaveLog);
 		
 		btnSaveDrawing = new JButton("Save drawing");
 		GridBagConstraints gbc_btnSaveDrawing = new GridBagConstraints();
-		gbc_btnSaveDrawing.insets = new Insets(0, 0, 0, 5);
+		gbc_btnSaveDrawing.insets = new Insets(0, 0, 5, 5);
 		gbc_btnSaveDrawing.gridx = 1;
 		gbc_btnSaveDrawing.gridy = 2;
 		add(btnSaveDrawing, gbc_btnSaveDrawing);
 		
 		btnOpenDrawing = new JButton("Open drawing");
 		GridBagConstraints gbc_btnOpenDrawing = new GridBagConstraints();
-		gbc_btnOpenDrawing.insets = new Insets(0, 0, 0, 5);
+		gbc_btnOpenDrawing.insets = new Insets(0, 0, 5, 5);
 		gbc_btnOpenDrawing.gridx = 2;
 		gbc_btnOpenDrawing.gridy = 2;
 		add(btnOpenDrawing, gbc_btnOpenDrawing);
+		
+		btnOpenLog = new JButton("Open log");
+		GridBagConstraints gbc_btnOpenLog = new GridBagConstraints();
+		gbc_btnOpenLog.insets = new Insets(0, 0, 5, 0);
+		gbc_btnOpenLog.gridx = 3;
+		gbc_btnOpenLog.gridy = 2;
+		add(btnOpenLog, gbc_btnOpenLog);
+		
+		btnDrawFromLog = new JButton("Draw from log");
+		GridBagConstraints gbc_btnDrawFromLog = new GridBagConstraints();
+		gbc_btnDrawFromLog.insets = new Insets(0, 0, 0, 5);
+		gbc_btnDrawFromLog.gridx = 0;
+		gbc_btnDrawFromLog.gridy = 3;
+		add(btnDrawFromLog, gbc_btnDrawFromLog);
 		
 	}
 
@@ -167,6 +183,14 @@ public class ButtonView extends JPanel{
 
 	public JButton getBtnOpenDrawing() {
 		return btnOpenDrawing;
+	}
+
+	public JButton getBtnOpenLog() {
+		return btnOpenLog;
+	}
+
+	public JButton getBtnDrawFromLog() {
+		return btnDrawFromLog;
 	}
 
 }

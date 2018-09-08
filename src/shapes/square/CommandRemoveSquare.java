@@ -18,13 +18,13 @@ public class CommandRemoveSquare implements Command{
 	@Override
 	public void execute() {
 		model.removeShape(square);
-		logView.getDlm().addElement("Delete " + square.toString());
+		logView.getDlm().addElement("Delete:" + square.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.addShape(square);
-		logView.getDlm().addElement("Undo delete " + square.toString());
+		logView.getDlm().addElement("Undo delete:" + square.toString());
 	}
 
 }

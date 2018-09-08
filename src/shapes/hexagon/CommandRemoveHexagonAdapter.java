@@ -18,13 +18,13 @@ public class CommandRemoveHexagonAdapter implements Command{
 	@Override
 	public void execute() {
 		model.removeShape(hexagonAdapter);
-		logView.getDlm().addElement("Delete " + hexagonAdapter.toString());
+		logView.getDlm().addElement("Delete:" + hexagonAdapter.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.addShape(hexagonAdapter);
-		logView.getDlm().addElement("Undo delete " + hexagonAdapter.toString());
+		logView.getDlm().addElement("Undo delete:" + hexagonAdapter.toString());
 	}
 
 }

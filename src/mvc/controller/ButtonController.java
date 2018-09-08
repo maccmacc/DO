@@ -2,8 +2,11 @@ package mvc.controller;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -43,6 +46,7 @@ import strategy.SaveDrawing;
 import strategy.SaveLog;
 import strategy.SaveManager;
 import utility.CommonHelpers;
+import utility.DecodeLog;
 import utility.DialogMethods;
 import utility.ModifyShapesDialogs;
 
@@ -81,8 +85,9 @@ public class ButtonController {
 
 	public void unselectShapes() {
 		countSelectedShapes();
-		for (Shape shape : model.getShapeList()) {
+		for (Shape shape : model.getSelectedShapeList()) {
 			shape.setSelected(false);
+			logView.getDlm().addElement("Unselect:" + shape.toString());
 		}
 		model.notifyAllObservers();
 	}
@@ -93,6 +98,7 @@ public class ButtonController {
 				model.getShapeList().get(i).setSelected(true);
 				countSelectedShapes();
 				model.notifyAllObservers();
+				logView.getDlm().addElement("Select:" + model.getShapeList().get(i).toString());
 				return true;
 			}
 		}
@@ -297,6 +303,57 @@ public class ButtonController {
 		          return;
 		       }
 		}
+	}
+	
+	public void openLog() {
+		JFileChooser chooser = new JFileChooser();
+		int answer = chooser.showOpenDialog(null);
+		String line = null;
+		
+		if (answer == JFileChooser.APPROVE_OPTION) {
+			File file = chooser.getSelectedFile(); 
+			
+			try {
+				FileReader reader = new FileReader(file);
+				BufferedReader buffer = new BufferedReader(reader);
+				
+				while ((line = buffer.readLine()) != null) {
+					model.getLogList().add(line);
+				}	
+				
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void drawFromLog() {
+		int countLogLine = 0;
+		String logLine = model.getLogList().get(countLogLine);
+		String[] parts = logLine.split(";");
+		
+		int x = Integer.parseInt(parts[0].substring(parts[0].indexOf("(")+1, parts[0].indexOf(",")));
+		int y = Integer.parseInt(parts[0].substring(parts[0].indexOf(",")+1, parts[0].indexOf(")")));
+		
+		if (logLine.contains("Point")) {
+			String color = parts[1];
+			Point point = new Point(x, y);
+			point.setColor(Color.decode(color));
+			DecodeLog.decodePoint(point, parts[0], frame, model, logView);
+		} else if (logLine.contains("Circle")) {
+			String outerColor = parts[2];
+			String innerColor = parts[3];
+			Circle circle = new Circle(new Point(x,y), Integer.parseInt(parts[1]), Color.decode(outerColor), Color.decode(innerColor));
+			DecodeLog.decodeCircle(circle, parts[0], frame, model, logView);
+		} else if (logLine.contains("Square")) {
+			String outerColor = parts[2];
+			String innerColor = parts[3];
+			Square square = new Square(new Point(x,y), Integer.parseInt(parts[1]), Color.decode(outerColor), Color.decode(innerColor));
+			DecodeLog.decodeSquare(square, parts[0], frame, model, logView);
+		}
+		
 	}
 	
 	

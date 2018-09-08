@@ -19,6 +19,7 @@ public class DrawingModel implements Subject, Serializable {
 	private Deque<Command> redoStack = new LinkedList<>();
 	private ArrayList<Shape> selectedShapeList = new ArrayList<>();
 	private ArrayList<Observer> observerList = new ArrayList<>();
+	private ArrayList<String> logList = new ArrayList<>();
 	
 	public void addShape(Shape s) {
 		shapeList.add(s);
@@ -72,6 +73,10 @@ public class DrawingModel implements Subject, Serializable {
 	public ArrayList<Shape> getSelectedShapeList() {
 		System.out.println("br selektovanih oblika" + this.selectedShapeList.size());
 		return selectedShapeList;
+	}
+
+	public ArrayList<String> getLogList() {
+		return logList;
 	}
 
 }

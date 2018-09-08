@@ -23,7 +23,7 @@ public class CommandUpdateCircle implements Command{
 		original.setR(newState.getR());
 		original.setColor(newState.getColor());
 		original.setSurfaceColor(newState.getSurfaceColor());
-		logView.getDlm().addElement("Update " + original.toString());
+		logView.getDlm().addElement("Update:" + original.toString());
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class CommandUpdateCircle implements Command{
 		original.setR(tmp.getR());
 		original.setColor(tmp.getColor());
 		original.setSurfaceColor(newState.getSurfaceColor());
-		logView.getDlm().addElement("Undo update " + original.toString());
+		logView.getDlm().addElement("Undo update:" + original.toString());
 	}
 
 }

@@ -19,12 +19,12 @@ public class CommandRemoveCircle implements Command{
 	@Override
 	public void execute() {
 		model.removeShape(circle);
-		logView.getDlm().addElement("Delete " + circle.toString());
+		logView.getDlm().addElement("Delete:" + circle.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.addShape(circle);
-		logView.getDlm().addElement("Undo delete " + circle.toString());
+		logView.getDlm().addElement("Undo delete:" + circle.toString());
 	}
 }

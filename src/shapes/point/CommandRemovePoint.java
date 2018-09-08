@@ -19,13 +19,13 @@ public class CommandRemovePoint implements Command {
 	@Override
 	public void execute() {
 		model.removeShape(point);
-		logView.getDlm().addElement("Delete " + point.toString());
+		logView.getDlm().addElement("Delete:" + point.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.addShape(point);
-		logView.getDlm().addElement("Undo delete " + point.toString());
+		logView.getDlm().addElement("Undo delete:" + point.toString());
 	}
 
 }

@@ -19,13 +19,13 @@ public class CommandRemoveRectangle implements Command{
 	@Override
 	public void execute() {
 		model.removeShape(rectangle);
-		logView.getDlm().addElement("Delete " + rectangle.toString());
+		logView.getDlm().addElement("Delete:" + rectangle.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.addShape(rectangle);
-		logView.getDlm().addElement("Undo delete " + rectangle.toString());
+		logView.getDlm().addElement("Undo delete:" + rectangle.toString());
 	}
 	
 }

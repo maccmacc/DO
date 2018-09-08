@@ -19,13 +19,13 @@ public class CommandAddRectangle implements Command{
 	@Override
 	public void execute() {
 		model.addShape(rectangle);
-		logView.getDlm().addElement("Add " + rectangle.toString());
+		logView.getDlm().addElement("Add:" + rectangle.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.removeShape(rectangle);
-		logView.getDlm().addElement("Undo " + rectangle.toString());
+		logView.getDlm().addElement("Undo:" + rectangle.toString());
 	}
 
 }

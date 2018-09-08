@@ -18,13 +18,13 @@ public class CommandAddLine implements Command{
 	@Override
 	public void execute() {
 		model.addShape(line);
-		logView.getDlm().addElement("Add " + line.toString());
+		logView.getDlm().addElement("Add:" + line.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.removeShape(line);
-		logView.getDlm().addElement("Undo " + line.toString());
+		logView.getDlm().addElement("Undo:" + line.toString());
 	}
 
 }

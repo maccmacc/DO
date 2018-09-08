@@ -46,9 +46,9 @@ public class Rectangle extends Square{
 	}
 
 	public String toString(){
-		return "Rectangle:("+upperLeftPoint.getX() + "," + upperLeftPoint.getY() + "),height=" + width + 
-				 ", width="+getSideLength() + ", outer color=" + getColor().getRGB() 
-					+ ", inner color=" + getSurfaceColor().getRGB();
+		return "Rectangle:("+upperLeftPoint.getX() + ";" + upperLeftPoint.getY() + ");height=" + width + 
+				 ";width="+getSideLength() + ";outer color=" + getColor().getRGB() 
+					+ ";inner color=" + getSurfaceColor().getRGB();
 	}
 
 	public int perimeter(){

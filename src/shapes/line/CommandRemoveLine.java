@@ -19,12 +19,12 @@ public class CommandRemoveLine implements Command{
 	@Override
 	public void execute() {
 		model.removeShape(line);
-		logView.getDlm().addElement("Delete " + line.toString());
+		logView.getDlm().addElement("Delete:" + line.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.addShape(line);
-		logView.getDlm().addElement("Undo delete " + line.toString());
+		logView.getDlm().addElement("Undo delete:" + line.toString());
 	}
 }

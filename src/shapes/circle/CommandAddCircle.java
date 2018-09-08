@@ -17,13 +17,13 @@ public class CommandAddCircle implements Command {
 	@Override
 	public void execute() {
 		model.addShape(circle);
-		logView.getDlm().addElement("Add " + circle.toString());
+		logView.getDlm().addElement("Add:" + circle.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.removeShape(circle);
-		logView.getDlm().addElement("Undo add " + circle.toString());
+		logView.getDlm().addElement("Undo add:" + circle.toString());
 	}
 
 }

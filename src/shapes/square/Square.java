@@ -40,8 +40,8 @@ public class Square extends SurfaceShape implements Moveable{
 		return diagonal().middlePointOfLine();
 	}
 	public String toString() {
-		return "Square:(" + upperLeftPoint.getX() + "," + upperLeftPoint.getY() + "), side=" + sideLength + 
-				 ", outer color=" + getColor().getRGB() + ", inner color=" + getSurfaceColor().getRGB();
+		return "Square:(" + upperLeftPoint.getX() + ";" + upperLeftPoint.getY() + ");side=" + sideLength + 
+				 ";outer color=" + getColor().getRGB() + ";inner color=" + getSurfaceColor().getRGB();
 	}
 
 	public boolean equals(Object obj) {

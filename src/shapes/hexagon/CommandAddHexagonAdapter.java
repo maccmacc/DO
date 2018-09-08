@@ -17,13 +17,13 @@ public class CommandAddHexagonAdapter implements Command{
 	@Override
 	public void execute() {
 		model.addShape(hexagonAdapter);
-		logView.getDlm().addElement("Add " + hexagonAdapter.toString());
+		logView.getDlm().addElement("Add:" + hexagonAdapter.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.removeShape(hexagonAdapter);
-		logView.getDlm().addElement("Undo " + hexagonAdapter.toString());
+		logView.getDlm().addElement("Undo:" + hexagonAdapter.toString());
 	}
 
 }

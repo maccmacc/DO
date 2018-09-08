@@ -21,7 +21,7 @@ public class CommandUpdatePoint implements Command {
 		original.setX(newState.getX());
 		original.setY(newState.getY());
 		original.setColor(newState.getColor());
-		logView.getDlm().addElement("Update " + original.toString());
+		logView.getDlm().addElement("Update:" + original.toString());
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class CommandUpdatePoint implements Command {
 		original.setX(tmp.getX());
 		original.setY(tmp.getY());
 		original.setColor(tmp.getColor());
-		logView.getDlm().addElement("Undo update " + original.toString());
+		logView.getDlm().addElement("Undo update:" + original.toString());
 	}
 
 }

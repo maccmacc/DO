@@ -19,13 +19,13 @@ public class CommandAddSquare implements Command{
 	@Override
 	public void execute() {
 		model.addShape(square);
-		logView.getDlm().addElement("Add " + square.toString());
+		logView.getDlm().addElement("Add:" + square.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.removeShape(square);
-		logView.getDlm().addElement("Undo " + square.toString());
+		logView.getDlm().addElement("Undo:" + square.toString());
 	}
 
 }

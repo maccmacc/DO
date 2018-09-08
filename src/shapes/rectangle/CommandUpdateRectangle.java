@@ -23,7 +23,7 @@ public class CommandUpdateRectangle implements Command{
 		original.setWidth(newState.getWidth());
 		original.setColor(newState.getColor());
 		original.setSurfaceColor(newState.getSurfaceColor());
-		logView.getDlm().addElement("Update " + original.toString());
+		logView.getDlm().addElement("Update:" + original.toString());
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class CommandUpdateRectangle implements Command{
 		original.setWidth(tmp.getWidth());
 		original.setColor(tmp.getColor());
 		original.setSurfaceColor(newState.getSurfaceColor());
-		logView.getDlm().addElement("Undo update " + original.toString());
+		logView.getDlm().addElement("Undo update:" + original.toString());
 	}
 
 }

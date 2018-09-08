@@ -82,7 +82,7 @@ public class DrawingFrame extends JFrame{
 			}
 		});
 		buttonView.getBtnSaveLog().addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent arg0) {
+			public void mousePressed(MouseEvent e) {
 				buttonController.saveLog();
 			}
 		});
@@ -96,9 +96,18 @@ public class DrawingFrame extends JFrame{
 				try {
 					buttonController.openDrawing();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			}
+		});
+		buttonView.getBtnOpenLog().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				buttonController.openLog();
+			}
+		});
+		buttonView.getBtnDrawFromLog().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				buttonController.drawFromLog();
 			}
 		});
 	}
@@ -132,6 +141,11 @@ public class DrawingFrame extends JFrame{
 
 	public DrawingController getDrawingController() {
 		return drawingController;
+	}
+
+
+	public ButtonController getButtonController() {
+		return buttonController;
 	}
 	
 }

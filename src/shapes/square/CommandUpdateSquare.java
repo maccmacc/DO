@@ -22,7 +22,7 @@ public class CommandUpdateSquare implements Command{
 		original.setSideLength(newState.getSideLength());
 		original.setColor(newState.getColor());
 		original.setSurfaceColor(newState.getSurfaceColor());
-		logView.getDlm().addElement("Update " + original.toString());
+		logView.getDlm().addElement("Update:" + original.toString());
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class CommandUpdateSquare implements Command{
 		original.setSideLength(tmp.getSideLength());
 		original.setColor(tmp.getColor());
 		original.setSurfaceColor(newState.getSurfaceColor());
-		logView.getDlm().addElement("Update " + original.toString());
+		logView.getDlm().addElement("Update:" + original.toString());
 	}
 
 }

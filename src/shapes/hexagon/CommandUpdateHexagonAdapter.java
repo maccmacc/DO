@@ -22,7 +22,7 @@ public class CommandUpdateHexagonAdapter implements Command {
 		original.getHexagon().setR(newState.getHexagon().getR());
 		original.getHexagon().setBorderColor(newState.getHexagon().getBorderColor());
 		original.getHexagon().setAreaColor(newState.getHexagon().getAreaColor());
-		logView.getDlm().addElement("Update " + original.toString());
+		logView.getDlm().addElement("Update:" + original.toString());
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class CommandUpdateHexagonAdapter implements Command {
 		original.getHexagon().setR(tmp.getHexagon().getR());
 		original.getHexagon().setBorderColor(tmp.getHexagon().getBorderColor());
 		original.getHexagon().setAreaColor(tmp.getHexagon().getAreaColor());
-		logView.getDlm().addElement("Undo update " + original.toString());
+		logView.getDlm().addElement("Undo update:" + original.toString());
 	}
 
 
