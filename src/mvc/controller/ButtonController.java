@@ -15,9 +15,8 @@ import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
-
 import drawingFrame.DrawingFrame;
+import hexagon.Hexagon;
 import mvc.model.DrawingModel;
 import mvc.view.LogView;
 import shapes.Command;
@@ -54,6 +53,7 @@ public class ButtonController {
 	private DrawingModel model;
 	private DrawingFrame frame;
 	private LogView logView;
+	private int countLogLine = 0;
 
 	public ButtonController(DrawingModel model, DrawingFrame frame, LogView logView) {
 		this.model = model;
@@ -61,7 +61,7 @@ public class ButtonController {
 		this.logView = logView;
 	}
 
-	public void onUndoButtonClicked(MouseEvent e) {
+	public void onUndoButtonClicked() {
 		if (!model.getUndoStack().isEmpty()) {
 			Command previous = model.getUndoStack().pollLast();
 			model.getRedoStack().offerLast(previous);
@@ -69,7 +69,7 @@ public class ButtonController {
 		}
 	}
 
-	public void onRedoButtonClicked(MouseEvent e) {
+	public void onRedoButtonClicked() {
 		if (!model.getRedoStack().isEmpty()) {
 			Command previous = model.getRedoStack().pollLast();
 			model.getUndoStack().offerLast(previous);
@@ -320,6 +320,8 @@ public class ButtonController {
 				while ((line = buffer.readLine()) != null) {
 					model.getLogList().add(line);
 				}	
+				System.out.println(model.getLogList());
+				buffer.close();
 				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -330,7 +332,9 @@ public class ButtonController {
 	}
 	
 	public void drawFromLog() {
-		int countLogLine = 0;
+		if (countLogLine < model.getLogList().size()) {
+			countLogLine++;
+		}
 		String logLine = model.getLogList().get(countLogLine);
 		String[] parts = logLine.split(";");
 		
@@ -338,20 +342,42 @@ public class ButtonController {
 		int y = Integer.parseInt(parts[0].substring(parts[0].indexOf(",")+1, parts[0].indexOf(")")));
 		
 		if (logLine.contains("Point")) {
-			String color = parts[1];
+			String[] color = parts[1].split("=");
 			Point point = new Point(x, y);
-			point.setColor(Color.decode(color));
+			point.setColor(Color.decode(color[1]));
 			DecodeLog.decodePoint(point, parts[0], frame, model, logView);
 		} else if (logLine.contains("Circle")) {
-			String outerColor = parts[2];
-			String innerColor = parts[3];
-			Circle circle = new Circle(new Point(x,y), Integer.parseInt(parts[1]), Color.decode(outerColor), Color.decode(innerColor));
+			String[] r = parts[1].split("=");
+			String[] outerColor = parts[2].split("=");
+			String[] innerColor = parts[3].split("=");
+			Circle circle = new Circle(new Point(x,y), Integer.parseInt(r[1]), Color.decode(outerColor[1]), Color.decode(innerColor[1]));
 			DecodeLog.decodeCircle(circle, parts[0], frame, model, logView);
 		} else if (logLine.contains("Square")) {
-			String outerColor = parts[2];
-			String innerColor = parts[3];
-			Square square = new Square(new Point(x,y), Integer.parseInt(parts[1]), Color.decode(outerColor), Color.decode(innerColor));
+			String[] outerColor = parts[2].split("=");
+			String[] innerColor = parts[3].split("=");
+			String[] side = parts[1].split("=");
+			Square square = new Square(new Point(x,y), Integer.parseInt(side[1]), Color.decode(outerColor[1]), Color.decode(innerColor[1]));
 			DecodeLog.decodeSquare(square, parts[0], frame, model, logView);
+		} else if (logLine.contains("Rectangle")) {
+			String[] outerColor = parts[3].split("=");
+			String[] innerColor = parts[4].split("=");
+			String[] height = parts[1].split("=");
+			String[] width = parts[2].split("=");
+			Rectangle rectangle = new Rectangle(new Point(x,y), Integer.parseInt(height[1]), Integer.parseInt(width[1]), Color.decode(outerColor[1]), Color.decode(innerColor[1]));
+			DecodeLog.decodeRectangle(rectangle, parts[0], frame, model, logView);
+		} else if (logLine.contains("Hexagon")) {
+			String[] outerColor = parts[2].split("=");
+			String[] innerColor = parts[3].split("=");
+			String[] r = parts[1].split("=");
+			Hexagon hexagon = new Hexagon(x, y, Integer.parseInt(r[1]));
+			HexagonAdapter hexagonAdapter = new HexagonAdapter(hexagon, Color.decode(outerColor[1]), Color.decode(innerColor[1]));
+			DecodeLog.decodeHexagon(hexagonAdapter, parts[0], frame, model, logView);
+		} else if (logLine.contains("Line")) {
+			int endPointX = Integer.parseInt(parts[1].substring(parts[1].indexOf("(")+1, parts[1].indexOf(",")));
+			int endPointY = Integer.parseInt(parts[1].substring(parts[1].indexOf(",")+1, parts[1].indexOf(")")));
+			String[] color = parts[2].split("=");
+			Line line = new Line(new Point(x, y), new Point(endPointX, endPointY), Color.decode(color[1]));
+			DecodeLog.decodeLine(line, parts[0], frame, model, logView);
 		}
 		
 	}
