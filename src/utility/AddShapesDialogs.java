@@ -20,13 +20,17 @@ public class AddShapesDialogs {
 					int tmpSide = Integer.parseInt(sideLength.getText());
 					if (tmpSide > 0)
 						return tmpSide;
-					else
+					else {
 						DialogMethods.showErrorMessage("Length of square side must be greater than 0!");
+						return -1;
+					}
 				} catch (NumberFormatException e) {
 					DialogMethods.showErrorMessage("Lenght of square side must be a number!");
+					return -1;
 				}
 			} else {
 				DialogMethods.showErrorMessage("Length of square side must not be empty!");
+				return -1;
 			}
 		}
 		return 0;
@@ -42,8 +46,9 @@ public class AddShapesDialogs {
 					int tmpR = Integer.parseInt(r.getText());
 					if (tmpR > 0)
 						return tmpR;
-					else
+					else {
 						DialogMethods.showErrorMessage("Length of perimeter side must be greater than 0!");
+					}
 				} catch (NumberFormatException e) {
 					DialogMethods.showErrorMessage("Lenght of perimeter must be a number!");
 				}

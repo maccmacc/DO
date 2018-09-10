@@ -41,62 +41,80 @@ public class DrawingController {
 	}
 	
 	public void checkShape(MouseEvent e) {
-		frame.getButtonView().getBtnUndo().setEnabled(true);
+		boolean done = false;
 		String selectedShape = frame.getButtonView().getCmbShapes().getSelectedItem().toString();
 		if (selectedShape.equals("point"))
-			onPointAdded(e); 
+			done = onPointAdded(e);  
 		else if (selectedShape.equals("square"))
-			onSquareAdded(e);
+			done = onSquareAdded(e);
 		else if (selectedShape.equals("circle"))
-			onCircleAdded(e);
+			done = onCircleAdded(e);
 		else if (selectedShape.equals("rectangle"))
-			onRectangleAdded(e);
+			done = onRectangleAdded(e);
 		else if (selectedShape.equals("line"))
-			onLineAdded(e);
+			done = onLineAdded(e);
 		else if (selectedShape.equals("hexagon"))
-			onHexagonAdded(e);
+			done = onHexagonAdded(e);
+		
+		if (done) frame.getButtonView().getBtnUndo().setEnabled(true);
 	}
-	public void onPointAdded(MouseEvent e) {
+	public boolean onPointAdded(MouseEvent e) {
 		Point point = new Point(e.getX(), e.getY(), 
 				frame.getButtonView().getBtnOuterColor().getBackground());
 		CommandAddPoint add = new CommandAddPoint(model, point, logView);
 		add.execute();
 		model.getUndoStack().offerLast(add);
+		return true;
 	}
 	
-	public void onSquareAdded(MouseEvent e) {
+	public boolean onSquareAdded(MouseEvent e) {
 		Point upperLeftPoint = new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground());
 		int sideLength = AddShapesDialogs.addSquareDialog();
+		if (sideLength <= 0) {
+			return false;
+		}
 		Square square = new Square(upperLeftPoint, sideLength, frame.getButtonView().getBtnOuterColor().getBackground());
 		square.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
 		CommandAddSquare add = new CommandAddSquare(model, square, logView);
 		add.execute();
 		model.getUndoStack().offerLast(add);
+		return true;
 	}
 	
-	public void onCircleAdded(MouseEvent e) {
+	public boolean onCircleAdded(MouseEvent e) {
 		Point center = new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground());
 		int r = AddShapesDialogs.addCircleDialog();
+		if (r <= 0) {
+			return false;
+		}
 		Circle circle = new Circle(center, r, frame.getButtonView().getBtnOuterColor().getBackground());
 		circle.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
 		CommandAddCircle add = new CommandAddCircle(model, circle, logView);
 		add.execute();
 		model.getUndoStack().offerLast(add);
+		return true;
 	}
 	
-	public void onRectangleAdded(MouseEvent e) {
+	public boolean onRectangleAdded(MouseEvent e) {
 		Point upperLeftPoint = new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground());
 		int[] sides = AddShapesDialogs.addRectangleDialog();
+		if (sides[0] <= 0 || sides[1] <= 0) {
+			return false;
+		}
 		Rectangle rectangle = new Rectangle(upperLeftPoint, sides[0], sides[1], frame.getButtonView().getBtnOuterColor().getBackground());
 		rectangle.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
 		CommandAddRectangle add = new CommandAddRectangle(model, rectangle, logView);
 		add.execute();
 		model.getUndoStack().offerLast(add);
+		return true;
 	}
 	
-	public void onHexagonAdded(MouseEvent e) {
+	public boolean onHexagonAdded(MouseEvent e) {
 		Point center = new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground());
 		int r = AddShapesDialogs.addHexagonDialog();
+		if (r <= 0) {
+			return false;
+		}
 		Hexagon hexagon = new Hexagon(center.getX(), center.getY(), r);
 		hexagon.setBorderColor(frame.getButtonView().getBtnOuterColor().getBackground());
 		hexagon.setAreaColor(frame.getButtonView().getBtnInnerColor().getBackground());
@@ -105,9 +123,10 @@ public class DrawingController {
 		CommandAddHexagonAdapter add = new CommandAddHexagonAdapter(model, hexagonAdapter, logView);
 		add.execute();
 		model.getUndoStack().offerLast(add);
+		return true;
 	}
 	
-	public void onLineAdded(MouseEvent e) {
+	public boolean onLineAdded(MouseEvent e) {
 		if (numberOfClicks == 0) {
 			tmpLine = new Line (new Point(e.getX(), e.getY()), new Point(0,0));
 			numberOfClicks++;
@@ -121,6 +140,8 @@ public class DrawingController {
 			model.getUndoStack().offerLast(add);
 			numberOfClicks = 0;
 		}
+		
+		return true;
 	}
 
 	public DrawingModel getModel() {
