@@ -27,6 +27,12 @@ public class ButtonView extends JPanel{
 	private JButton btnOpenDrawing;
 	private JButton btnOpenLog;
 	private JButton btnDrawFromLog;
+
+
+	private JButton btnToFront = new JButton("To front");
+	private JButton btnToBack = new JButton("To back");
+	private JButton btnBringToFront = new JButton("Bring to front");
+	private JButton btnBringToBack = new JButton("Bring to back");
 	
 	public ButtonView() {
 		gridBagLayout = new GridBagLayout();
@@ -149,6 +155,29 @@ public class ButtonView extends JPanel{
 		gbc_btnDrawFromLog.gridy = 3;
 		add(btnDrawFromLog, gbc_btnDrawFromLog);
 		
+		GridBagConstraints gbc_btnToFront = new GridBagConstraints();
+		gbc_btnToFront.insets = new Insets(0, 0, 0, 5);
+		gbc_btnToFront.gridx = 0;
+		gbc_btnToFront.gridy = 4;
+		add(btnToFront, gbc_btnToFront);
+		
+		GridBagConstraints gbc_btnToBack = new GridBagConstraints();
+		gbc_btnToBack.insets = new Insets(0, 0, 0, 5);
+		gbc_btnToBack.gridx = 1;
+		gbc_btnToBack.gridy = 4;
+		add(btnToBack, gbc_btnToBack);
+		
+		GridBagConstraints gbc_btnBringToFront = new GridBagConstraints();
+		gbc_btnBringToFront.insets = new Insets(0, 0, 0, 5);
+		gbc_btnBringToFront.gridx = 2;
+		gbc_btnBringToFront.gridy = 4;
+		add(btnBringToFront, gbc_btnBringToFront);
+		
+		GridBagConstraints gbc_btnBringToBack = new GridBagConstraints();
+		gbc_btnBringToBack.gridx = 3;
+		gbc_btnBringToBack.gridy = 4;
+		add(btnBringToBack, gbc_btnBringToBack);
+		
 	}
 
 	public GridBagLayout getGridBagLayout() {
@@ -205,6 +234,21 @@ public class ButtonView extends JPanel{
 
 	public JButton getBtnDrawFromLog() {
 		return btnDrawFromLog;
+	}
+	public JButton getBtnToFront() {
+		return btnToFront;
+	}
+
+	public JButton getBtnToBack() {
+		return btnToBack;
+	}
+
+	public JButton getBtnBringToFront() {
+		return btnBringToFront;
+	}
+
+	public JButton getBtnBringToBack() {
+		return btnBringToBack;
 	}
 
 }

@@ -48,6 +48,10 @@ import utility.CommonHelpers;
 import utility.DecodeLog;
 import utility.DialogMethods;
 import utility.ModifyShapesDialogs;
+import zAxis.BringToBack;
+import zAxis.BringToFront;
+import zAxis.ToBack;
+import zAxis.ToFront;
 
 public class ButtonController {
 	private DrawingModel model;
@@ -397,6 +401,54 @@ public class ButtonController {
 			DecodeLog.decodeLine(line, parts[0], frame, model, logView);
 		}
 		
+	}
+	
+	public void bringToFront() {
+		if(countSelectedShapes() == 0) {
+			return;
+		}
+		Shape selectedShape = model.getSelectedShapeList().get(0);
+		BringToFront bringToFront = new BringToFront(model, frame, selectedShape);
+		model.getUndoStack().offerLast(bringToFront);
+		bringToFront.execute();
+	}
+	
+	public void bringToBack() {
+		if(countSelectedShapes() == 0) {
+			return;
+		}
+		Shape selectedShape = model.getSelectedShapeList().get(0);
+		BringToBack bringToBack = new BringToBack(model, frame, selectedShape);
+		model.getUndoStack().offerLast(bringToBack);
+		bringToBack.execute();
+	}
+	
+	public void toFront() {
+		if(countSelectedShapes() == 0) {
+			return;
+		}
+		
+		Shape selectedShape = model.getSelectedShapeList().get(0);
+		if (model.getShapeList().indexOf(selectedShape) == model.getShapeList().size() - 1) {
+			return;
+		}
+	
+		ToFront toFront= new ToFront(model, frame, selectedShape);
+		model.getUndoStack().offerLast(toFront);
+		toFront.execute();
+	}
+	
+	public void toBack() {
+		if(countSelectedShapes() == 0) {
+			return;
+		}
+		Shape selectedShape = model.getSelectedShapeList().get(0);
+		if (model.getShapeList().indexOf(selectedShape) == 0) {
+			return;
+		}
+		ToBack toBack = new ToBack(model, frame, selectedShape);
+		model.getUndoStack().offerLast(toBack);
+		toBack.execute();
 	}
 	
 	public void makeNewDrawing() {

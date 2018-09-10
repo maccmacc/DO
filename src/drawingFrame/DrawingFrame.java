@@ -22,6 +22,8 @@ import utility.ModifyShapesDialogs;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 
 public class DrawingFrame extends JFrame{
@@ -41,6 +43,8 @@ public class DrawingFrame extends JFrame{
 		getContentPane().add(buttonViewLeft, BorderLayout.WEST);
 		getContentPane().add(buttonViewRight, BorderLayout.EAST);
 		getContentPane().add(buttonView, BorderLayout.NORTH);
+		
+		
 		getContentPane().add(drawingView, BorderLayout.CENTER);
 		drawingView.setBackground(Color.WHITE);
 		drawingView.addMouseListener(new MouseAdapter() {
@@ -115,6 +119,26 @@ public class DrawingFrame extends JFrame{
 		buttonView.getBtnDrawFromLog().addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				buttonController.drawFromLog();
+			}
+		});
+		buttonView.getBtnBringToFront().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				buttonController.bringToFront();
+			}
+		});
+		buttonView.getBtnBringToBack().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				buttonController.bringToBack();
+			}
+		});
+		buttonView.getBtnToFront().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				buttonController.toFront();
+			}
+		});
+		buttonView.getBtnToBack().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				buttonController.toBack();
 			}
 		});
 	}
