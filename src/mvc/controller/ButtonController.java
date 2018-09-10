@@ -407,7 +407,7 @@ public class ButtonController {
 	}
 	
 	public void bringToFront() {
-		if(countSelectedShapes() == 0) {
+		if(countSelectedShapes() != 1) {
 			return;
 		}
 		Shape selectedShape = model.getSelectedShapeList().get(0);
@@ -417,7 +417,7 @@ public class ButtonController {
 	}
 	
 	public void bringToBack() {
-		if(countSelectedShapes() == 0) {
+		if(countSelectedShapes() != 1) {
 			return;
 		}
 		Shape selectedShape = model.getSelectedShapeList().get(0);
@@ -427,7 +427,7 @@ public class ButtonController {
 	}
 	
 	public void toFront() {
-		if(countSelectedShapes() == 0) {
+		if(countSelectedShapes() != 1) {
 			return;
 		}
 		
@@ -442,7 +442,7 @@ public class ButtonController {
 	}
 	
 	public void toBack() {
-		if(countSelectedShapes() == 0) {
+		if(countSelectedShapes() != 1) {
 			return;
 		}
 		Shape selectedShape = model.getSelectedShapeList().get(0);
@@ -474,6 +474,7 @@ public class ButtonController {
 		.getBtnInnerColor()
 		.setBackground(CommonHelpers.chooseColor(previousColor));
 	}
+	
 
 	public LogView getLogView() {
 		return logView;
