@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import drawingFrame.DrawingFrame;
 import hexagon.Hexagon;
@@ -292,6 +293,7 @@ public class ButtonController {
 		if(DialogMethods.askUserToConfirm("Are you sure that you want do load a drawing? Your current drawing will be lost.")) {
 			makeNewDrawing();
 			JFileChooser chooser = new JFileChooser();
+			chooser.setFileFilter(new FileNameExtensionFilter("*.bin", "bin"));
 			int answer = chooser.showOpenDialog(null);
 			
 			if (answer == JFileChooser.APPROVE_OPTION) {
@@ -321,6 +323,7 @@ public class ButtonController {
 		if (DialogMethods.askUserToConfirm("Are you sure that you want do load log? Your current drawing will be lost.")) {
 			makeNewDrawing();
 			JFileChooser chooser = new JFileChooser();
+			chooser.setFileFilter(new FileNameExtensionFilter("*.txt", "txt"));
 			int answer = chooser.showOpenDialog(null);
 			String line = null;
 			
