@@ -205,14 +205,24 @@ public class ModifyShapesDialogs {
 		JTextField yCoordinateStartPoint = new JTextField();
 		JTextField xCoordinateEndPoint = new JTextField();
 		JTextField yCoordinateEndPoint = new JTextField();
+		JButton btnNewColor = new JButton();
+		btnNewColor.setBackground(line.getColor());
+		btnNewColor.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				btnNewColor.setBackground(CommonHelpers.chooseColor(btnNewColor.getBackground()));
+			}
+		});
 		xCoordinateStartPoint.setText(Integer.toString(line.getStartPoint().getX()));
 		yCoordinateStartPoint.setText(Integer.toString(line.getStartPoint().getY()));
 		xCoordinateEndPoint.setText(Integer.toString(line.getEndPoint().getX()));
 		yCoordinateEndPoint.setText(Integer.toString(line.getEndPoint().getY()));
+		
 		final JComponent[] components = new JComponent[] { new JLabel("Enter new x coordinate of start point:"), xCoordinateStartPoint,
 				new JLabel("Enter new y coordinate of start point:"), yCoordinateStartPoint,
 				new JLabel("Enter new x coordinate of end point:"), xCoordinateEndPoint, 
-				new JLabel("Enter new y coordinate of end point:"), yCoordinateEndPoint};
+				new JLabel("Enter new y coordinate of end point:"), yCoordinateEndPoint,
+				new JLabel("Choose new color:"), btnNewColor};
+				
 		if (JOptionPane.showConfirmDialog(null, components, "Modify line",
 				JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
 			if (!xCoordinateStartPoint.getText().isEmpty() || !yCoordinateStartPoint.getText().isEmpty() || 
@@ -223,7 +233,7 @@ public class ModifyShapesDialogs {
 					int tmpEndX = Integer.parseInt(xCoordinateEndPoint.getText());
 					int tmpEndY = Integer.parseInt(yCoordinateEndPoint.getText());
 					if (tmpStartX > 0 && tmpStartY > 0 && tmpEndX > 0 && tmpEndY > 0)
-						return new Line(new Point(tmpStartX, tmpStartY), new Point(tmpEndX, tmpEndY),  Color.BLACK);
+						return new Line(new Point(tmpStartX, tmpStartY), new Point(tmpEndX, tmpEndY),  btnNewColor.getBackground());
 					else
 						DialogMethods.showErrorMessage("Coordinates must be greater than 0!");
 				} catch (NumberFormatException e) {
