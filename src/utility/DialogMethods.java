@@ -18,4 +18,8 @@ public class DialogMethods {
 		JOptionPane.showMessageDialog(null, error, "Error!", JOptionPane.ERROR_MESSAGE);
 	}
 	
+	public static void showNotificationMessage(String notification) {
+		JOptionPane.showMessageDialog(null, notification, "Notification!", JOptionPane.WARNING_MESSAGE);
+	}
+	
 }

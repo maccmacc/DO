@@ -26,8 +26,8 @@ public class HexagonAdapter extends SurfaceShape implements Moveable{
 	}
 	
 	public String toString() {
-		return "Hexagon:(" + hexagon.getX() + "," + hexagon.getY() + ");r=" + hexagon.getR() + ";outer color=" + getColor().getRGB() 
-				+ ";inner color=" + getSurfaceColor().getRGB();
+		return "Hexagon:(" + hexagon.getX() + "," + hexagon.getY() + ");r=" + hexagon.getR() + ";outer color=" + this.hexagon.getBorderColor().getRGB() 
+				+ ";inner color=" + this.hexagon.getAreaColor().getRGB();
 	}
 
 	public boolean equals(Object obj) {
@@ -94,6 +94,16 @@ public class HexagonAdapter extends SurfaceShape implements Moveable{
 	}
 	public void setSelected(boolean selected) {
 		hexagon.setSelected(selected); 
+	}
+	
+	@Override
+	public void setColor(Color color) {
+		this.hexagon.setBorderColor(color);
+	}
+	
+	@Override
+	public void setSurfaceColor(Color surfaceColor) {
+		this.hexagon.setAreaColor(surfaceColor);
 	}
 
 }

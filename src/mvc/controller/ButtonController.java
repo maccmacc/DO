@@ -332,10 +332,15 @@ public class ButtonController {
 	}
 	
 	public void drawFromLog() {
+		if (countLogLine >= model.getLogList().size()) {
+			System.out.println("end of log");
+			DialogMethods.showNotificationMessage("Drawing is complete!");
+			return;
+		}
+		String logLine = model.getLogList().get(countLogLine);
 		if (countLogLine < model.getLogList().size()) {
 			countLogLine++;
 		}
-		String logLine = model.getLogList().get(countLogLine);
 		String[] parts = logLine.split(";");
 		
 		int x = Integer.parseInt(parts[0].substring(parts[0].indexOf("(")+1, parts[0].indexOf(",")));
