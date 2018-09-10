@@ -59,7 +59,7 @@ public class Line extends Shape{
 	}
 	public boolean contains(int x, int y){
 		Point clickSpot = new Point(x, y);
-		if(clickSpot.distance(clickSpot)+clickSpot.distance(endPoint)-this.length()<=0.5)
+		if(clickSpot.distance(startPoint)+clickSpot.distance(endPoint)-this.length()<=0.5)
 			return true;
 		 else 
 			return false;		
