@@ -41,6 +41,7 @@ public class DrawingController {
 	}
 	
 	public void checkShape(MouseEvent e) {
+		frame.getButtonView().getBtnUndo().setEnabled(true);
 		String selectedShape = frame.getButtonView().getCmbShapes().getSelectedItem().toString();
 		if (selectedShape.equals("point"))
 			onPointAdded(e); 
@@ -56,8 +57,9 @@ public class DrawingController {
 			onHexagonAdded(e);
 	}
 	public void onPointAdded(MouseEvent e) {
-		CommandAddPoint add = new CommandAddPoint(model, new Point(e.getX(), e.getY(), 
-				frame.getButtonView().getBtnOuterColor().getBackground()), logView);
+		Point point = new Point(e.getX(), e.getY(), 
+				frame.getButtonView().getBtnOuterColor().getBackground());
+		CommandAddPoint add = new CommandAddPoint(model, point, logView);
 		add.execute();
 		model.getUndoStack().offerLast(add);
 	}
@@ -70,7 +72,6 @@ public class DrawingController {
 		CommandAddSquare add = new CommandAddSquare(model, square, logView);
 		add.execute();
 		model.getUndoStack().offerLast(add);
-		
 	}
 	
 	public void onCircleAdded(MouseEvent e) {

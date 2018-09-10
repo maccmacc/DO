@@ -29,7 +29,6 @@ public class DrawingModel implements Subject, Serializable {
 		shapeList.remove(s);
 	}
 	
-	
 	@Override
 	public void addObserver(Observer ob) {
 		observerList.add(ob);
@@ -43,7 +42,6 @@ public class DrawingModel implements Subject, Serializable {
 
 	@Override
 	public void notifyAllObservers() {
-		System.out.println("hiiiiiii " + this.selectedShapeList.size());
 		for (Observer observer : observerList) {
 			observer.update(this.selectedShapeList.size());
 		}

@@ -19,6 +19,7 @@ import mvc.view.LogView;
 import utility.ModifyShapesDialogs;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 
 public class DrawingFrame extends JFrame{
@@ -146,6 +147,11 @@ public class DrawingFrame extends JFrame{
 
 	public ButtonController getButtonController() {
 		return buttonController;
+	}
+
+
+	public DrawingView getDrawingView() {
+		return drawingView;
 	}
 	
 }

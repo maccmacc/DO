@@ -63,9 +63,12 @@ public class ButtonController {
 
 	public void onUndoButtonClicked() {
 		if (!model.getUndoStack().isEmpty()) {
+			frame.getButtonView().getBtnRedo().setEnabled(true);
 			Command previous = model.getUndoStack().pollLast();
 			model.getRedoStack().offerLast(previous);
 			previous.unexecute();
+		} else {
+			frame.getButtonView().getBtnUndo().setEnabled(false);
 		}
 	}
 
@@ -74,6 +77,8 @@ public class ButtonController {
 			Command previous = model.getRedoStack().pollLast();
 			model.getUndoStack().offerLast(previous);
 			previous.execute();
+		} else {
+			frame.getButtonView().getBtnRedo().setEnabled(false);
 		}
 	}
 
@@ -280,53 +285,60 @@ public class ButtonController {
 	public void openDrawing() throws ClassNotFoundException {
 		System.out.println("open drawing");
 		
-		JFileChooser chooser = new JFileChooser();
-		int answer = chooser.showOpenDialog(null);
-		
-		if (answer == JFileChooser.APPROVE_OPTION) {
-			File file = chooser.getSelectedFile();
-			String fileName = file.getPath(); 
+		if(DialogMethods.askUserToConfirm("Are you sure that you want do load a drawing? Your current drawing will be lost.")) {
+			makeNewDrawing();
+			JFileChooser chooser = new JFileChooser();
+			int answer = chooser.showOpenDialog(null);
 			
-			try {
-		         FileInputStream fileIn = new FileInputStream(fileName);
-		         ObjectInputStream in = new ObjectInputStream(fileIn);
-		         model.getShapeList().addAll((ArrayList<Shape>)in.readObject());
-		         frame.getView().repaint();
-		         in.close();
-		         fileIn.close();
-		      } catch (IOException i) {
-		         i.printStackTrace();
-		         return;
-		      } catch (ClassNotFoundException c) {
-		          System.out.println("Class not found");
-		          c.printStackTrace();
-		          return;
-		       }
+			if (answer == JFileChooser.APPROVE_OPTION) {
+				File file = chooser.getSelectedFile();
+				String fileName = file.getPath(); 
+				
+				try {
+			         FileInputStream fileIn = new FileInputStream(fileName);
+			         ObjectInputStream in = new ObjectInputStream(fileIn);
+			         model.getShapeList().addAll((ArrayList<Shape>)in.readObject());
+			         frame.getView().repaint();
+			         in.close();
+			         fileIn.close();
+			      } catch (IOException i) {
+			         i.printStackTrace();
+			         return;
+			      } catch (ClassNotFoundException c) {
+			          System.out.println("Class not found");
+			          c.printStackTrace();
+			          return;
+			       }
+			}
 		}
 	}
 	
 	public void openLog() {
-		JFileChooser chooser = new JFileChooser();
-		int answer = chooser.showOpenDialog(null);
-		String line = null;
-		
-		if (answer == JFileChooser.APPROVE_OPTION) {
-			File file = chooser.getSelectedFile(); 
+		if (DialogMethods.askUserToConfirm("Are you sure that you want do load log? Your current drawing will be lost.")) {
+			makeNewDrawing();
+			JFileChooser chooser = new JFileChooser();
+			int answer = chooser.showOpenDialog(null);
+			String line = null;
 			
-			try {
-				FileReader reader = new FileReader(file);
-				BufferedReader buffer = new BufferedReader(reader);
+			if (answer == JFileChooser.APPROVE_OPTION) {
+				File file = chooser.getSelectedFile(); 
 				
-				while ((line = buffer.readLine()) != null) {
-					model.getLogList().add(line);
-				}	
-				System.out.println(model.getLogList());
-				buffer.close();
-				
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+				try {
+					FileReader reader = new FileReader(file);
+					BufferedReader buffer = new BufferedReader(reader);
+					
+					while ((line = buffer.readLine()) != null) {
+						model.getLogList().add(line);
+					}	
+					System.out.println(model.getLogList());
+					logView.getDlm().addElement("Log is imported!");
+					buffer.close();
+					
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -385,6 +397,14 @@ public class ButtonController {
 			DecodeLog.decodeLine(line, parts[0], frame, model, logView);
 		}
 		
+	}
+	
+	public void makeNewDrawing() {
+		model.getShapeList().clear();
+		model.getUndoStack().clear();
+		model.getRedoStack().clear();
+		frame.getDrawingView().repaint();
+		frame.getLogView().getDlm().clear();
 	}
 	
 	

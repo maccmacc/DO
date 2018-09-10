@@ -30,28 +30,33 @@ public class ButtonView extends JPanel{
 	
 	public ButtonView() {
 		gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0, 133, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		btnUndo = new JButton("Undo");
 		GridBagConstraints gbc_btnUndo = new GridBagConstraints();
+		gbc_btnUndo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnUndo.insets = new Insets(0, 0, 5, 5);
 		gbc_btnUndo.gridx = 0;
 		gbc_btnUndo.gridy = 0;
 		add(btnUndo, gbc_btnUndo);
+		btnUndo.setEnabled(false);
 		
 		btnRedo = new JButton("Redo");
 		GridBagConstraints gbc_btnRedo = new GridBagConstraints();
+		gbc_btnRedo.fill = GridBagConstraints.BOTH;
 		gbc_btnRedo.insets = new Insets(0, 0, 5, 5);
 		gbc_btnRedo.gridx = 1;
 		gbc_btnRedo.gridy = 0;
 		add(btnRedo, gbc_btnRedo);
+		btnRedo.setEnabled(false);
 		
 		tglbtnSelect = new JToggleButton("Select");
 		GridBagConstraints gbc_tglbtnSelect = new GridBagConstraints();
+		gbc_tglbtnSelect.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tglbtnSelect.insets = new Insets(0, 0, 5, 5);
 		gbc_tglbtnSelect.gridx = 2;
 		gbc_tglbtnSelect.gridy = 0;
@@ -68,6 +73,7 @@ public class ButtonView extends JPanel{
 		
 		btnDelete = new JButton("Delete");
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
+		gbc_btnDelete.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
 		gbc_btnDelete.gridx = 0;
 		gbc_btnDelete.gridy = 1;
@@ -76,46 +82,52 @@ public class ButtonView extends JPanel{
 		
 		btnUpdate = new JButton("Update");
 		GridBagConstraints gbc_btnUpdate = new GridBagConstraints();
+		gbc_btnUpdate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnUpdate.insets = new Insets(0, 0, 5, 5);
 		gbc_btnUpdate.gridx = 1;
 		gbc_btnUpdate.gridy = 1;
 		add(btnUpdate, gbc_btnUpdate);
 		btnUpdate.setEnabled(false);
 		
+		btnSaveDrawing = new JButton("Save drawing");
+		GridBagConstraints gbc_btnSaveDrawing = new GridBagConstraints();
+		gbc_btnSaveDrawing.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnSaveDrawing.insets = new Insets(0, 0, 5, 5);
+		gbc_btnSaveDrawing.gridx = 2;
+		gbc_btnSaveDrawing.gridy = 1;
+		add(btnSaveDrawing, gbc_btnSaveDrawing);
+		
+		btnSaveLog = new JButton("Save log");
+		GridBagConstraints gbc_btnSaveLog = new GridBagConstraints();
+		gbc_btnSaveLog.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnSaveLog.insets = new Insets(0, 0, 5, 0);
+		gbc_btnSaveLog.gridx = 3;
+		gbc_btnSaveLog.gridy = 1;
+		add(btnSaveLog, gbc_btnSaveLog);
+		
 		btnOuterColor = new JButton("Outer color");
 		GridBagConstraints gbc_btnOuterColor = new GridBagConstraints();
+		gbc_btnOuterColor.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnOuterColor.insets = new Insets(0, 0, 5, 5);
-		gbc_btnOuterColor.gridx = 2;
-		gbc_btnOuterColor.gridy = 1;
+		gbc_btnOuterColor.gridx = 0;
+		gbc_btnOuterColor.gridy = 2;
 		btnOuterColor.setBackground(Color.black);
 		btnOuterColor.setForeground(Color.white);
 		add(btnOuterColor, gbc_btnOuterColor);
 		
 		btnInnerColor = new JButton("Inner color");
 		GridBagConstraints gbc_btnInnerColor = new GridBagConstraints();
-		gbc_btnInnerColor.insets = new Insets(0, 0, 5, 0);
-		gbc_btnInnerColor.gridx = 3;
-		gbc_btnInnerColor.gridy = 1;
+		gbc_btnInnerColor.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnInnerColor.insets = new Insets(0, 0, 5, 5);
+		gbc_btnInnerColor.gridx = 1;
+		gbc_btnInnerColor.gridy = 2;
 		btnInnerColor.setBackground(Color.white);
 		btnInnerColor.setForeground(Color.black);
 		add(btnInnerColor, gbc_btnInnerColor);
 		
-		btnSaveLog = new JButton("Save log");
-		GridBagConstraints gbc_btnSaveLog = new GridBagConstraints();
-		gbc_btnSaveLog.insets = new Insets(0, 0, 5, 5);
-		gbc_btnSaveLog.gridx = 0;
-		gbc_btnSaveLog.gridy = 2;
-		add(btnSaveLog, gbc_btnSaveLog);
-		
-		btnSaveDrawing = new JButton("Save drawing");
-		GridBagConstraints gbc_btnSaveDrawing = new GridBagConstraints();
-		gbc_btnSaveDrawing.insets = new Insets(0, 0, 5, 5);
-		gbc_btnSaveDrawing.gridx = 1;
-		gbc_btnSaveDrawing.gridy = 2;
-		add(btnSaveDrawing, gbc_btnSaveDrawing);
-		
 		btnOpenDrawing = new JButton("Open drawing");
 		GridBagConstraints gbc_btnOpenDrawing = new GridBagConstraints();
+		gbc_btnOpenDrawing.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnOpenDrawing.insets = new Insets(0, 0, 5, 5);
 		gbc_btnOpenDrawing.gridx = 2;
 		gbc_btnOpenDrawing.gridy = 2;
@@ -123,6 +135,7 @@ public class ButtonView extends JPanel{
 		
 		btnOpenLog = new JButton("Open log");
 		GridBagConstraints gbc_btnOpenLog = new GridBagConstraints();
+		gbc_btnOpenLog.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnOpenLog.insets = new Insets(0, 0, 5, 0);
 		gbc_btnOpenLog.gridx = 3;
 		gbc_btnOpenLog.gridy = 2;
@@ -130,8 +143,9 @@ public class ButtonView extends JPanel{
 		
 		btnDrawFromLog = new JButton("Draw from log");
 		GridBagConstraints gbc_btnDrawFromLog = new GridBagConstraints();
-		gbc_btnDrawFromLog.insets = new Insets(0, 0, 0, 5);
-		gbc_btnDrawFromLog.gridx = 0;
+		gbc_btnDrawFromLog.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnDrawFromLog.insets = new Insets(0, 0, 5, 0);
+		gbc_btnDrawFromLog.gridx = 3;
 		gbc_btnDrawFromLog.gridy = 3;
 		add(btnDrawFromLog, gbc_btnDrawFromLog);
 		
