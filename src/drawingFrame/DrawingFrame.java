@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import mvc.controller.ButtonController;
 import mvc.controller.DrawingController;
 import mvc.view.ButtonView;
+import mvc.view.ButtonViewLeft;
+import mvc.view.ButtonViewRight;
 import mvc.view.DrawingView;
 import mvc.view.LogView;
 import utility.ModifyShapesDialogs;
@@ -26,6 +28,8 @@ public class DrawingFrame extends JFrame{
 	private DrawingView drawingView = new DrawingView();
 	private DrawingController drawingController;
 	private ButtonView buttonView = new ButtonView();
+	private ButtonViewLeft buttonViewLeft = new ButtonViewLeft();
+	private ButtonViewRight buttonViewRight = new ButtonViewRight();
 	private ButtonController buttonController;
 	private LogView logView;
 
@@ -34,6 +38,8 @@ public class DrawingFrame extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
+		getContentPane().add(buttonViewLeft, BorderLayout.WEST);
+		getContentPane().add(buttonViewRight, BorderLayout.EAST);
 		getContentPane().add(buttonView, BorderLayout.NORTH);
 		getContentPane().add(drawingView, BorderLayout.CENTER);
 		drawingView.setBackground(Color.WHITE);
