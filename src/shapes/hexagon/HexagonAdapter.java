@@ -105,5 +105,13 @@ public class HexagonAdapter extends SurfaceShape implements Moveable{
 	public void setSurfaceColor(Color surfaceColor) {
 		this.hexagon.setAreaColor(surfaceColor);
 	}
+	
+	public Color getColor() {
+		return this.hexagon.getBorderColor();
+	}
+	
+	public Color getSurfaceColor() {
+		return this.hexagon.getAreaColor();
+	}
 
 }
