@@ -14,6 +14,8 @@ import shapes.observer.Subject;
 
 public class DrawingModel implements Subject, Serializable {
 	
+	static final long serialVersionUID = 1L;
+	
 	private ArrayList<Shape> shapeList = new ArrayList<>();
 	private Deque<Command> undoStack = new LinkedList<>();
 	private Deque<Command> redoStack = new LinkedList<>();

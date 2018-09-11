@@ -255,7 +255,7 @@ public class ModifyShapesDialogs {
 		xCoordinateCenter.setText(Integer.toString(hexagonAdapter.getHexagon().getX()));
 		yCoordinateCenter.setText(Integer.toString(hexagonAdapter.getHexagon().getY()));
 		r.setText(Integer.toString(hexagonAdapter.getHexagon().getR()));
-		btnNewColorOuter.setBackground(hexagonAdapter.getColor());
+		btnNewColorOuter.setBackground(hexagonAdapter.getHexagon().getBorderColor());
 		btnNewColorOuter.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				btnNewColorOuter.setBackground(CommonHelpers.chooseColor(btnNewColorOuter.getBackground()));

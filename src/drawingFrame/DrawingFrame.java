@@ -47,6 +47,14 @@ public class DrawingFrame extends JFrame {
     getContentPane().setLayout(new BorderLayout(0, 0));
     buttonView.setAlignmentY(0.0f);
     getContentPane().add(buttonView, BorderLayout.NORTH);
+    GridBagLayout gridBagLayout = (GridBagLayout) buttonViewLeft.getLayout();
+    gridBagLayout.rowHeights = new int[] {0, 0, 0, 0};
+    gridBagLayout.columnWidths = new int[] {200};
+    buttonViewLeft.setMinimumSize(new Dimension(344, 50));
+    getContentPane().add(buttonViewLeft, BorderLayout.WEST);
+    getContentPane().add(buttonViewRight, BorderLayout.EAST);
+    getContentPane().add(drawingView, BorderLayout.CENTER);
+    drawingView.setBackground(Color.WHITE);
     buttonView.getBtnUndo().addMouseListener(new MouseAdapter() {
       public void mousePressed(MouseEvent e) {
         buttonController.onUndoButtonClicked();
@@ -105,14 +113,6 @@ public class DrawingFrame extends JFrame {
             buttonController.toBack();
           }
         });
-    GridBagLayout gridBagLayout = (GridBagLayout) buttonViewLeft.getLayout();
-    gridBagLayout.rowHeights = new int[] {0, 0, 0, 0};
-    gridBagLayout.columnWidths = new int[] {200};
-    buttonViewLeft.setMinimumSize(new Dimension(344, 50));
-    getContentPane().add(buttonViewLeft, BorderLayout.WEST);
-    getContentPane().add(buttonViewRight, BorderLayout.EAST);
-    getContentPane().add(drawingView, BorderLayout.CENTER);
-    drawingView.setBackground(Color.WHITE);
     drawingView.addMouseListener(new MouseAdapter() {
       public void mousePressed(MouseEvent e) {
         if (!buttonView.getTglbtnSelect().isSelected())
@@ -189,5 +189,9 @@ public class DrawingFrame extends JFrame {
   public DrawingView getDrawingView() {
     return drawingView;
   }
+
+public ButtonViewRight getButtonViewRight() {
+	return buttonViewRight;
+}
 
 }

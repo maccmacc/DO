@@ -28,6 +28,7 @@ public class ButtonViewRight extends JPanel{
 		gbc_btnBringToFront.gridx = 0;
 		gbc_btnBringToFront.gridy = 0;
 		add(btnBringToFront, gbc_btnBringToFront);
+		btnBringToFront.setEnabled(false);
 		
 		GridBagConstraints gbc_btnBringToBack = new GridBagConstraints();
 		gbc_btnBringToBack.fill = GridBagConstraints.HORIZONTAL;
@@ -35,6 +36,7 @@ public class ButtonViewRight extends JPanel{
 		gbc_btnBringToBack.gridx = 0;
 		gbc_btnBringToBack.gridy = 1;
 		add(btnBringToBack, gbc_btnBringToBack);
+		btnBringToBack.setEnabled(false);
 		
 		GridBagConstraints gbc_btnToFront = new GridBagConstraints();
 		gbc_btnToFront.fill = GridBagConstraints.BOTH;
@@ -42,12 +44,14 @@ public class ButtonViewRight extends JPanel{
 		gbc_btnToFront.gridx = 0;
 		gbc_btnToFront.gridy = 2;
 		add(btnToFront, gbc_btnToFront);
+		btnToFront.setEnabled(false);
 		
 		GridBagConstraints gbc_btnToBack = new GridBagConstraints();
 		gbc_btnToBack.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnToBack.gridx = 0;
 		gbc_btnToBack.gridy = 3;
 		add(btnToBack, gbc_btnToBack);
+		btnToBack.setEnabled(false);
 	}
 	
 	public JButton getBtnToFront() {
