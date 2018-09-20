@@ -42,11 +42,11 @@ import shapes.rectangle.Rectangle;
 import shapes.square.CommandRemoveSquare;
 import shapes.square.CommandUpdateSquare;
 import shapes.square.Square;
+import strategy.DecodeLog;
 import strategy.SaveDrawing;
 import strategy.SaveLog;
 import strategy.SaveManager;
 import utility.CommonHelpers;
-import utility.DecodeLog;
 import utility.DialogMethods;
 import utility.ModifyShapesDialogs;
 import zAxis.BringToBack;
@@ -99,18 +99,25 @@ public class ButtonController {
 			shape.setSelected(false);
 			logView.getDlm().addElement("Unselect:" + shape.toString());
 		}
+		countSelectedShapes();
 		model.notifyAllObservers();
 	}
 
 	public boolean goThroughShapesList(int x, int y) {
 		for (int i = model.getShapeList().size() - 1; i >= 0; i--) {
-			if (model.getShapeList().get(i).contains(x, y)) {
+			if (model.getShapeList().get(i).contains(x, y) && !model.getShapeList().get(i).isSelected()) {
 				model.getShapeList().get(i).setSelected(true);
 				countSelectedShapes();
 				model.notifyAllObservers();
 				logView.getDlm().addElement("Select:" + model.getShapeList().get(i).toString() + ";click=(" + x + "," + y + ")");
 				return true;
-			}
+			} else if (model.getShapeList().get(i).contains(x, y) && model.getShapeList().get(i).isSelected()) {
+				model.getShapeList().get(i).setSelected(false);
+				countSelectedShapes();
+				model.notifyAllObservers();
+				logView.getDlm().addElement("Unselect:" + model.getShapeList().get(i).toString());
+				return true;
+			} 
 		}
 		unselectShapes();
 		return false;
@@ -131,9 +138,11 @@ public class ButtonController {
 		countSelectedShapes();
 		if (!model.getShapeList().isEmpty()) {
 			if (model.getSelectedShapeList().size() == 1) {
-				deleteShape(model.getSelectedShapeList());
+				if (DialogMethods.askUserToConfirm("Are you sure that you want to delete this shape?"))
+					deleteShapes();
 			} else if (model.getSelectedShapeList().size() > 1) {
-				deleteMultipleShapes();
+				if (DialogMethods.askUserToConfirm("Are you sure that you want to delete multiple shapes?"))
+					deleteShapes();
 			}
 			else if (model.getSelectedShapeList().size() == 0)
 				JOptionPane.showMessageDialog(null, "You have to select shape", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -141,69 +150,42 @@ public class ButtonController {
 			JOptionPane.showMessageDialog(null, "Shape list is empty!", "Error!", JOptionPane.ERROR_MESSAGE);
 	}
 
-	public void deleteShape(ArrayList selectedShapeList) {
-		if (DialogMethods.askUserToConfirm("Are you sure that you want to delete this shape?")) {
-			if (selectedShapeList.get(0) instanceof Point) {
-				Command remove = new CommandRemovePoint(model, (Point) selectedShapeList.get(0), logView);
-				remove.execute();
-				model.getUndoStack().offerLast(remove);
-			} else if (selectedShapeList.get(0) instanceof Line) {
-				Command remove = new CommandRemoveLine(model, (Line) selectedShapeList.get(0), logView);
-				remove.execute();
-				model.getUndoStack().offerLast(remove);
-			} else if (selectedShapeList.get(0) instanceof Circle) {
-				Command remove = new CommandRemoveCircle(model, (Circle) selectedShapeList.get(0), logView);
-				remove.execute();
-				model.getUndoStack().offerLast(remove);
-			} else if (selectedShapeList.get(0) instanceof Rectangle) {
-				Command remove = new CommandRemoveRectangle(model, (Rectangle) selectedShapeList.get(0), logView);
-				remove.execute();
-				model.getUndoStack().offerLast(remove);
-			} else if (selectedShapeList.get(0) instanceof Square) {
-				Command remove = new CommandRemoveSquare(model, (Square) selectedShapeList.get(0), logView);
-				remove.execute();
-				model.getUndoStack().offerLast(remove);
-			} else if (selectedShapeList.get(0) instanceof HexagonAdapter) {
-				Command remove = new CommandRemoveHexagonAdapter(model, (HexagonAdapter) selectedShapeList.get(0), logView);
-				remove.execute();
-				model.getUndoStack().offerLast(remove);
-			}
-			unselectShapes();
-		}
-	}
-
-	public void deleteMultipleShapes() {
-		if (DialogMethods.askUserToConfirm("Are you sure that you want to delete multiple shapes?")) {
+	public void deleteShapes() {
 			for (int i = 0; i <= model.getSelectedShapeList().size() - 1; i++) {
 				if (model.getSelectedShapeList().get(i) instanceof Point) {
-					CommandRemovePoint remove = new CommandRemovePoint(model, (Point) model.getSelectedShapeList().get(i), logView);
+					CommandRemovePoint remove = new CommandRemovePoint(model, (Point) model.getSelectedShapeList().get(i));
 					remove.execute();
 					model.getUndoStack().offerLast(remove);
+					logView.getDlm().addElement("Delete:" + model.getSelectedShapeList().get(i).toString());
 				} else if (model.getSelectedShapeList().get(i) instanceof Line) {
-					CommandRemoveLine remove = new CommandRemoveLine(model, (Line) model.getSelectedShapeList().get(i), logView);
+					CommandRemoveLine remove = new CommandRemoveLine(model, (Line) model.getSelectedShapeList().get(i));
 					remove.execute();
 					model.getUndoStack().offerLast(remove);
+					logView.getDlm().addElement("Delete:" + model.getSelectedShapeList().get(i).toString());
 				} else if (model.getSelectedShapeList().get(i) instanceof Circle) {
-					CommandRemoveCircle remove = new CommandRemoveCircle(model, (Circle) model.getSelectedShapeList().get(i), logView);
+					CommandRemoveCircle remove = new CommandRemoveCircle(model, (Circle) model.getSelectedShapeList().get(i));
 					remove.execute();
 					model.getUndoStack().offerLast(remove);
+					logView.getDlm().addElement("Delete:" + model.getSelectedShapeList().get(i).toString());
 				} else if (model.getSelectedShapeList().get(i) instanceof Rectangle) {
-					CommandRemoveRectangle remove = new CommandRemoveRectangle(model, (Rectangle) model.getSelectedShapeList().get(i), logView);
+					CommandRemoveRectangle remove = new CommandRemoveRectangle(model, (Rectangle) model.getSelectedShapeList().get(i));
 					remove.execute();
 					model.getUndoStack().offerLast(remove);
+					logView.getDlm().addElement("Delete:" + model.getSelectedShapeList().get(i).toString());
 				} else if (model.getSelectedShapeList().get(i) instanceof Square) {
-					CommandRemoveSquare remove = new CommandRemoveSquare(model, (Square) model.getSelectedShapeList().get(i), logView);
+					CommandRemoveSquare remove = new CommandRemoveSquare(model, (Square) model.getSelectedShapeList().get(i));
 					remove.execute();
 					model.getUndoStack().offerLast(remove);
+					logView.getDlm().addElement("Delete:" + model.getSelectedShapeList().get(i).toString());
 				} else if (model.getSelectedShapeList().get(0) instanceof HexagonAdapter) {
-					Command remove = new CommandRemoveHexagonAdapter(model, (HexagonAdapter) model.getSelectedShapeList().get(0), logView);
+					Command remove = new CommandRemoveHexagonAdapter(model, (HexagonAdapter) model.getSelectedShapeList().get(0));
 					remove.execute();
 					model.getUndoStack().offerLast(remove);
+					logView.getDlm().addElement("Delete:" + model.getSelectedShapeList().get(i).toString());
 				}
 			}
 			unselectShapes();
 		}
-	}
 
 	public void modifyShape() {
 		countSelectedShapes();
@@ -211,45 +193,51 @@ public class ButtonController {
 			if (model.getSelectedShapeList().get(0) instanceof Point) {
 				Point newPoint = ModifyShapesDialogs.modifyPointDialog((Point)model.getSelectedShapeList().get(0));
 					if (newPoint != null) {
-						CommandUpdatePoint updatePoint = new CommandUpdatePoint((Point)model.getSelectedShapeList().get(0), newPoint, logView);
+						CommandUpdatePoint updatePoint = new CommandUpdatePoint((Point)model.getSelectedShapeList().get(0), newPoint);
 						updatePoint.execute();
 						model.getUndoStack().offerLast(updatePoint);
+						logView.getDlm().addElement("Update:" + newPoint.toString());
 					}
 			} else if (model.getSelectedShapeList().get(0) instanceof Circle) {
 				Circle newCircle = ModifyShapesDialogs.modifyCircleDialog((Circle) model.getSelectedShapeList().get(0));
 					if (newCircle != null) {
-						CommandUpdateCircle updateCircle = new CommandUpdateCircle((Circle)model.getSelectedShapeList().get(0), newCircle, logView);
+						CommandUpdateCircle updateCircle = new CommandUpdateCircle((Circle)model.getSelectedShapeList().get(0), newCircle);
 						updateCircle.execute();
 						model.getUndoStack().offerLast(updateCircle);
+						logView.getDlm().addElement("Update:" + newCircle.toString());
 					}
 			} else if (model.getSelectedShapeList().get(0) instanceof Rectangle) {
 				Rectangle newRectangle = ModifyShapesDialogs.modifyRectangleDialog((Rectangle) model.getSelectedShapeList().get(0));
 				if (newRectangle != null) {
-					CommandUpdateRectangle updateRectangle = new CommandUpdateRectangle((Rectangle)model.getSelectedShapeList().get(0), newRectangle, logView);
+					CommandUpdateRectangle updateRectangle = new CommandUpdateRectangle((Rectangle)model.getSelectedShapeList().get(0), newRectangle);
 					updateRectangle.execute();
 					model.getUndoStack().offerLast(updateRectangle);
+					logView.getDlm().addElement("Update:" + newRectangle.toString());
 				}
 			} else if (model.getSelectedShapeList().get(0) instanceof Square) {
 				Square newSquare = ModifyShapesDialogs.modifySquareDialog((Square) model.getSelectedShapeList().get(0));
 				if (newSquare != null) {
-					CommandUpdateSquare updateSquare = new CommandUpdateSquare((Square)model.getSelectedShapeList().get(0), newSquare, logView);
+					CommandUpdateSquare updateSquare = new CommandUpdateSquare((Square)model.getSelectedShapeList().get(0), newSquare);
 					updateSquare.execute();
 					model.getUndoStack().offerLast(updateSquare);
+					logView.getDlm().addElement("Update:" + newSquare.toString());
 				}
 			} else if (model.getSelectedShapeList().get(0) instanceof Line) {
 				Line newLine = ModifyShapesDialogs.modifyLineDialog((Line) model.getSelectedShapeList().get(0));
 				if (newLine != null) {
-					CommandUpdateLine updateLine = new CommandUpdateLine((Line)model.getSelectedShapeList().get(0), newLine, logView);
+					CommandUpdateLine updateLine = new CommandUpdateLine((Line)model.getSelectedShapeList().get(0), newLine);
 					updateLine.execute();
 					model.getUndoStack().offerLast(updateLine);
+					logView.getDlm().addElement("Update:" + newLine.toString());
 				}
 			} else if (model.getSelectedShapeList().get(0) instanceof HexagonAdapter) {
 				HexagonAdapter newHexagonAdapter = ModifyShapesDialogs.modifyHexagonAdapterDialog((HexagonAdapter)model.getSelectedShapeList().get(0));
 				if (newHexagonAdapter != null) {
 					CommandUpdateHexagonAdapter updateHexagonAdapter = 
-							new CommandUpdateHexagonAdapter((HexagonAdapter)model.getSelectedShapeList().get(0), newHexagonAdapter, logView);
+							new CommandUpdateHexagonAdapter((HexagonAdapter)model.getSelectedShapeList().get(0), newHexagonAdapter);
 					updateHexagonAdapter.execute();
 					model.getUndoStack().offerLast(updateHexagonAdapter);
+					logView.getDlm().addElement("Update:" + newHexagonAdapter.toString());
 				}
 			}
 		} else {
@@ -258,38 +246,28 @@ public class ButtonController {
 	}
 	
 	public void saveLog() {
-		System.out.println("save log");
-		
 		JFileChooser chooser = new JFileChooser();
 		int answer = chooser.showSaveDialog(null);
 		
 		if (answer == JFileChooser.APPROVE_OPTION) {
 			File file = chooser.getSelectedFile();
-			
-			String path = file.getAbsolutePath();
 			SaveManager saveManager = new SaveManager(new SaveLog());
 			saveManager.save(frame, file);
 		}
 	}
 	
 	public void saveDrawing() {
-		System.out.println("save drawing");
-		
 		JFileChooser chooser = new JFileChooser();
 		int answer = chooser.showSaveDialog(null);
 		
 		if (answer == JFileChooser.APPROVE_OPTION) {
 			File file = chooser.getSelectedFile();
-			
-			String path = file.getAbsolutePath();
 			SaveManager saveManager = new SaveManager(new SaveDrawing());
 			saveManager.save(frame, file);
 		}
 	}
 	
 	public void openDrawing() throws ClassNotFoundException {
-		System.out.println("open drawing");
-		
 		if(DialogMethods.askUserToConfirm("Are you sure that you want do load a drawing? Your current drawing will be lost.")) {
 			makeNewDrawing();
 			JFileChooser chooser = new JFileChooser();
@@ -337,7 +315,6 @@ public class ButtonController {
 					while ((line = buffer.readLine()) != null) {
 						model.getLogList().add(line);
 					}	
-					System.out.println(model.getLogList());
 					logView.getDlm().addElement("Log is imported!");
 					buffer.close();
 					
@@ -352,7 +329,6 @@ public class ButtonController {
 	
 	public void drawFromLog() {
 		if (countLogLine >= model.getLogList().size()) {
-			System.out.println("end of log");
 			DialogMethods.showNotificationMessage("Drawing is complete!");
 			return;
 		}
@@ -403,7 +379,6 @@ public class ButtonController {
 			Line line = new Line(new Point(x, y), new Point(endPointX, endPointY), Color.decode(color[1]));
 			DecodeLog.decodeLine(line, parts, frame, model, logView);
 		}
-		
 	}
 	
 	public void bringToFront() {

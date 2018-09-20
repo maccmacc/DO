@@ -7,24 +7,20 @@ import shapes.Command;
 public class CommandAddLine implements Command{
 	private DrawingModel model;
 	private Line line;
-	private LogView logView;
 	
-	public CommandAddLine(DrawingModel model, Line line, LogView logView) {
+	public CommandAddLine(DrawingModel model, Line line) {
 		this.model = model;
 		this.line = line;
-		this.logView = logView;
 	}
 
 	@Override
 	public void execute() {
 		model.addShape(line);
-		logView.getDlm().addElement("Add:" + line.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.removeShape(line);
-		logView.getDlm().addElement("Undo:" + line.toString());
 	}
 
 }

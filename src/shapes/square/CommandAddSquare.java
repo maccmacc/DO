@@ -8,24 +8,20 @@ import shapes.point.Point;
 public class CommandAddSquare implements Command{
 	private DrawingModel model;
 	private Square square;
-	private LogView logView;
 	
-	public CommandAddSquare(DrawingModel model, Square square, LogView logView) {
+	public CommandAddSquare(DrawingModel model, Square square) {
 		this.model = model;
 		this.square = square;
-		this.logView = logView;
 	}
 
 	@Override
 	public void execute() {
 		model.addShape(square);
-		logView.getDlm().addElement("Add:" + square.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.removeShape(square);
-		logView.getDlm().addElement("Undo:" + square.toString());
 	}
 
 }

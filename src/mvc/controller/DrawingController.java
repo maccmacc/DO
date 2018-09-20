@@ -61,9 +61,10 @@ public class DrawingController {
 	public boolean onPointAdded(MouseEvent e) {
 		Point point = new Point(e.getX(), e.getY(), 
 				frame.getButtonView().getBtnOuterColor().getBackground());
-		CommandAddPoint add = new CommandAddPoint(model, point, logView);
+		CommandAddPoint add = new CommandAddPoint(model, point);
 		add.execute();
 		model.getUndoStack().offerLast(add);
+		logView.getDlm().addElement("Add:" + point.toString());
 		return true;
 	}
 	
@@ -75,9 +76,10 @@ public class DrawingController {
 		}
 		Square square = new Square(upperLeftPoint, sideLength, frame.getButtonView().getBtnOuterColor().getBackground());
 		square.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
-		CommandAddSquare add = new CommandAddSquare(model, square, logView);
+		CommandAddSquare add = new CommandAddSquare(model, square);
 		add.execute();
 		model.getUndoStack().offerLast(add);
+		logView.getDlm().addElement("Add:" + square.toString());
 		return true;
 	}
 	
@@ -89,9 +91,10 @@ public class DrawingController {
 		}
 		Circle circle = new Circle(center, r, frame.getButtonView().getBtnOuterColor().getBackground());
 		circle.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
-		CommandAddCircle add = new CommandAddCircle(model, circle, logView);
+		CommandAddCircle add = new CommandAddCircle(model, circle);
 		add.execute();
 		model.getUndoStack().offerLast(add);
+		logView.getDlm().addElement("Add:" + circle.toString());
 		return true;
 	}
 	
@@ -103,9 +106,10 @@ public class DrawingController {
 		}
 		Rectangle rectangle = new Rectangle(upperLeftPoint, sides[0], sides[1], frame.getButtonView().getBtnOuterColor().getBackground());
 		rectangle.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
-		CommandAddRectangle add = new CommandAddRectangle(model, rectangle, logView);
+		CommandAddRectangle add = new CommandAddRectangle(model, rectangle);
 		add.execute();
 		model.getUndoStack().offerLast(add);
+		logView.getDlm().addElement("Add:" + rectangle.toString());
 		return true;
 	}
 	
@@ -121,9 +125,10 @@ public class DrawingController {
 		HexagonAdapter hexagonAdapter = new HexagonAdapter(hexagon);
 		hexagonAdapter.setColor(frame.getButtonView().getBtnOuterColor().getBackground());
 		hexagonAdapter.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
-		CommandAddHexagonAdapter add = new CommandAddHexagonAdapter(model, hexagonAdapter, logView);
+		CommandAddHexagonAdapter add = new CommandAddHexagonAdapter(model, hexagonAdapter);
 		add.execute();
 		model.getUndoStack().offerLast(add);
+		logView.getDlm().addElement("Add:" + hexagonAdapter.toString());
 		return true;
 	}
 	
@@ -136,9 +141,10 @@ public class DrawingController {
 			tmpLine.getEndPoint().setX(e.getX());
 			tmpLine.getEndPoint().setY(e.getY());
 			tmpLine.setColor(frame.getButtonView().getBtnOuterColor().getBackground());
-			CommandAddLine add = new CommandAddLine(model, tmpLine, logView);
+			CommandAddLine add = new CommandAddLine(model, tmpLine);
 			add.execute();
 			model.getUndoStack().offerLast(add);
+			logView.getDlm().addElement("Add:" + tmpLine.toString());
 			numberOfClicks = 0;
 		}
 		

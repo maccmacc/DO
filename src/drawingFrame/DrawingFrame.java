@@ -65,13 +65,11 @@ public class DrawingFrame extends JFrame {
         buttonController.onRedoButtonClicked();
       }
     });
-    buttonView.getTglbtnSelect().addMouseListener(new MouseAdapter() {
+    /*buttonView.getTglbtnSelect().addMouseListener(new MouseAdapter() {
       public void mousePressed(MouseEvent e) {
-        if (buttonView.getTglbtnSelect().isSelected()) {
           buttonController.unselectShapes();
-        }
       }
-    });
+    });*/
     
         buttonView.getBtnDelete().addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {

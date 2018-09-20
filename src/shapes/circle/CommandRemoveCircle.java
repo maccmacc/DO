@@ -8,23 +8,19 @@ public class CommandRemoveCircle implements Command{
 
 	private DrawingModel model;
 	private Circle circle;
-	private LogView logView;
 	
-	public CommandRemoveCircle(DrawingModel model, Circle circle,LogView logView) {
+	public CommandRemoveCircle(DrawingModel model, Circle circle) {
 		this.model = model;
 		this.circle = circle;
-		this.logView = logView;
 	}
 
 	@Override
 	public void execute() {
 		model.removeShape(circle);
-		logView.getDlm().addElement("Delete:" + circle.toString());
 	}
 
 	@Override
 	public void unexecute() {
 		model.addShape(circle);
-		logView.getDlm().addElement("Undo delete:" + circle.toString());
 	}
 }

@@ -1,4 +1,4 @@
-package utility;
+package strategy;
 
 import drawingFrame.DrawingFrame;
 import mvc.model.DrawingModel;
@@ -26,11 +26,11 @@ public class DecodeLog {
 
 	public static void decodePoint(Point point, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
 		if (parts[0].contains("Add")) {
-			CommandAddPoint add = new CommandAddPoint(model, point, logView);
+			CommandAddPoint add = new CommandAddPoint(model, point);
 			add.execute();
 			model.getUndoStack().offerLast(add);
 		} else if (parts[0].contains("Update")) {
-			CommandUpdatePoint updatePoint = new CommandUpdatePoint((Point)model.getSelectedShapeList().get(0), point, logView);
+			CommandUpdatePoint updatePoint = new CommandUpdatePoint((Point)model.getSelectedShapeList().get(0), point);
 			updatePoint.execute();
 			model.getUndoStack().offerLast(updatePoint);
 		} else if (parts[0].contains("Select")) {
@@ -45,11 +45,11 @@ public class DecodeLog {
 	
 	public static void decodeCircle(Circle circle, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
 		if (parts[0].contains("Add")) {
-			CommandAddCircle add = new CommandAddCircle(model, circle, logView);
+			CommandAddCircle add = new CommandAddCircle(model, circle);
 			add.execute();
 			model.getUndoStack().offerLast(add);
 		} else if (parts[0].contains("Update")) {
-			CommandUpdateCircle updateCircle = new CommandUpdateCircle((Circle)model.getSelectedShapeList().get(0), circle, logView);
+			CommandUpdateCircle updateCircle = new CommandUpdateCircle((Circle)model.getSelectedShapeList().get(0), circle);
 			updateCircle.execute();
 			model.getUndoStack().offerLast(updateCircle);
 		} else if (parts[0].contains("Select")) {
@@ -64,11 +64,11 @@ public class DecodeLog {
 
 	public static void decodeSquare(Square square, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
 		if (parts[0].contains("Add")) {
-			CommandAddSquare add = new CommandAddSquare(model, square, logView);
+			CommandAddSquare add = new CommandAddSquare(model, square);
 			add.execute();
 			model.getUndoStack().offerLast(add);
 		} else if (parts[0].contains("Update")) {
-			CommandUpdateSquare updateSquare = new CommandUpdateSquare((Square)model.getSelectedShapeList().get(0), square, logView);
+			CommandUpdateSquare updateSquare = new CommandUpdateSquare((Square)model.getSelectedShapeList().get(0), square);
 			updateSquare.execute();
 			model.getUndoStack().offerLast(updateSquare);
 		} else if (parts[0].contains("Select")) {
@@ -83,11 +83,11 @@ public class DecodeLog {
 	
 	public static void decodeLine(Line line, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
 		if (parts[0].contains("Add")) {
-			CommandAddLine add = new CommandAddLine(model, line, logView);
+			CommandAddLine add = new CommandAddLine(model, line);
 			add.execute();
 			model.getUndoStack().offerLast(add);
 		} else if (parts[0].contains("Update")) {
-			CommandUpdateLine updateLine = new CommandUpdateLine((Line)model.getSelectedShapeList().get(0), line, logView);
+			CommandUpdateLine updateLine = new CommandUpdateLine((Line)model.getSelectedShapeList().get(0), line);
 			updateLine.execute();
 			model.getUndoStack().offerLast(updateLine);
 		} else if (parts[0].contains("Select")) {
@@ -102,11 +102,11 @@ public class DecodeLog {
 	
 	public static void decodeRectangle(Rectangle rectangle, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
 		if (parts[0].contains("Add")) {
-			CommandAddRectangle add = new CommandAddRectangle(model, rectangle, logView);
+			CommandAddRectangle add = new CommandAddRectangle(model, rectangle);
 			add.execute();
 			model.getUndoStack().offerLast(add);
 		} else if (parts[0].contains("Update")) {
-			CommandUpdateRectangle updateRectangle = new CommandUpdateRectangle((Rectangle)model.getSelectedShapeList().get(0), rectangle, logView);
+			CommandUpdateRectangle updateRectangle = new CommandUpdateRectangle((Rectangle)model.getSelectedShapeList().get(0), rectangle);
 			updateRectangle.execute();
 			model.getUndoStack().offerLast(updateRectangle);
 		} else if (parts[0].contains("Select")) {
@@ -121,12 +121,12 @@ public class DecodeLog {
 	
 	public static void decodeHexagon(HexagonAdapter hexagonAdapter, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
 		if (parts[0].contains("Add")) {
-			CommandAddHexagonAdapter add = new CommandAddHexagonAdapter(model, hexagonAdapter, logView);
+			CommandAddHexagonAdapter add = new CommandAddHexagonAdapter(model, hexagonAdapter);
 			add.execute();
 			model.getUndoStack().offerLast(add);
 		} else if (parts[0].contains("Update")) {
 			CommandUpdateHexagonAdapter updateHexagonAdapter = 
-					new CommandUpdateHexagonAdapter((HexagonAdapter)model.getSelectedShapeList().get(0), hexagonAdapter, logView);
+					new CommandUpdateHexagonAdapter((HexagonAdapter)model.getSelectedShapeList().get(0), hexagonAdapter);
 			updateHexagonAdapter.execute();
 			model.getUndoStack().offerLast(updateHexagonAdapter);
 		} else if (parts[0].contains("Select")) {
@@ -141,12 +141,11 @@ public class DecodeLog {
 	
 	public static void checkOperation (String parts, DrawingFrame frame, DrawingModel model) {
 		if (parts.contains("Delete")) {
-			frame.getButtonController().deleteButtonClickedHandler();
+			frame.getButtonController().deleteShapes();
 		} else if (parts.contains("Unselect")) {
 			frame.getButtonController().unselectShapes();
 		} else if (parts.contains("Undo")) {
 			frame.getButtonController().onUndoButtonClicked();
-		}
+		} 
 	}
-	
 }
