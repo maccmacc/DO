@@ -6,6 +6,10 @@ import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import drawingFrame.DrawingFrame;
 import hexagon.Hexagon;
@@ -23,8 +27,7 @@ import shapes.rectangle.CommandAddRectangle;
 import shapes.rectangle.Rectangle;
 import shapes.square.CommandAddSquare;
 import shapes.square.Square;
-import utility.AddShapesDialogs;
-import utility.ModifyShapesDialogs;
+import utility.DialogMethods;
 
 
 public class DrawingController {
@@ -70,11 +73,28 @@ public class DrawingController {
 	
 	public boolean onSquareAdded(MouseEvent e) {
 		Point upperLeftPoint = new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground());
-		int sideLength = AddShapesDialogs.addSquareDialog();
-		if (sideLength <= 0) {
-			return false;
+		int side = 0;
+		JTextField sideLength = new JTextField();
+		final JComponent[] components = new JComponent[] { new JLabel("Enter length of square side"), sideLength};
+		if (JOptionPane.showConfirmDialog(null, components, "Add square",
+				JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
+			if (!sideLength.getText().isEmpty()) {
+				try {
+					int tmpSide = Integer.parseInt(sideLength.getText());
+					if (tmpSide > 0)
+						side = tmpSide;
+					else {
+						DialogMethods.showErrorMessage("Length of square side must be greater than 0!");
+					}
+				} catch (NumberFormatException ex) {
+					DialogMethods.showErrorMessage("Lenght of square side must be a number!");
+				}
+			} else {
+				DialogMethods.showErrorMessage("Length of square side must not be empty!");
+			}
 		}
-		Square square = new Square(upperLeftPoint, sideLength, frame.getButtonView().getBtnOuterColor().getBackground());
+		if (side <= 0) return false;
+		Square square = new Square(upperLeftPoint, side, frame.getButtonView().getBtnOuterColor().getBackground());
 		square.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
 		CommandAddSquare add = new CommandAddSquare(model, square);
 		add.execute();
@@ -85,11 +105,30 @@ public class DrawingController {
 	
 	public boolean onCircleAdded(MouseEvent e) {
 		Point center = new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground());
-		int r = AddShapesDialogs.addCircleDialog();
-		if (r <= 0) {
+		int perimeter = 0;
+		JTextField r = new JTextField();
+		final JComponent[] components = new JComponent[] { new JLabel("Enter length of circle perimeter"), r};
+		if (JOptionPane.showConfirmDialog(null, components, "Add circle",
+				JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
+			if (!r.getText().isEmpty()) {
+				try {
+					int tmpR = Integer.parseInt(r.getText());
+					if (tmpR > 0)
+						perimeter = tmpR;
+					else {
+						DialogMethods.showErrorMessage("Length of perimeter side must be greater than 0!");
+					}
+				} catch (NumberFormatException ex) {
+					DialogMethods.showErrorMessage("Lenght of perimeter must be a number!");
+				}
+			} else {
+				DialogMethods.showErrorMessage("Length of perimeter must not be empty!");
+			}
+		}
+		if (perimeter <= 0) {
 			return false;
 		}
-		Circle circle = new Circle(center, r, frame.getButtonView().getBtnOuterColor().getBackground());
+		Circle circle = new Circle(center, perimeter, frame.getButtonView().getBtnOuterColor().getBackground());
 		circle.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
 		CommandAddCircle add = new CommandAddCircle(model, circle);
 		add.execute();
@@ -100,11 +139,36 @@ public class DrawingController {
 	
 	public boolean onRectangleAdded(MouseEvent e) {
 		Point upperLeftPoint = new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground());
-		int[] sides = AddShapesDialogs.addRectangleDialog();
-		if (sides[0] <= 0 || sides[1] <= 0) {
+		int widthR = 0;
+		int heightR = 0;
+		JTextField width = new JTextField();
+		JTextField height = new JTextField();
+		final JComponent[] components = new JComponent[] { new JLabel("Enter rectangle width"), width, 
+				new JLabel("Enter rectangle height"), height};
+		if (JOptionPane.showConfirmDialog(null, components, "Add rectangle",
+				JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
+			if (!width.getText().isEmpty() || !height.getText().isEmpty()) {
+				try {
+					int tmpWidth = Integer.parseInt(width.getText());
+					int tmpHeight = Integer.parseInt(height.getText());
+					
+					if (tmpWidth > 0 && tmpHeight > 0) {
+						widthR = tmpWidth;
+						heightR = tmpHeight;
+					}
+					else
+						DialogMethods.showErrorMessage("Width and height must be greater than 0!");
+				} catch (NumberFormatException ex) {
+					DialogMethods.showErrorMessage("Width and height must be a number!");
+				}
+			} else {
+				DialogMethods.showErrorMessage("Width and height must not be empty!");
+			}
+		}
+		if (widthR <= 0 || heightR <= 0) {
 			return false;
 		}
-		Rectangle rectangle = new Rectangle(upperLeftPoint, sides[0], sides[1], frame.getButtonView().getBtnOuterColor().getBackground());
+		Rectangle rectangle = new Rectangle(upperLeftPoint, widthR, heightR, frame.getButtonView().getBtnOuterColor().getBackground());
 		rectangle.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());
 		CommandAddRectangle add = new CommandAddRectangle(model, rectangle);
 		add.execute();
@@ -115,11 +179,29 @@ public class DrawingController {
 	
 	public boolean onHexagonAdded(MouseEvent e) {
 		Point center = new Point(e.getX(), e.getY(), frame.getButtonView().getBtnOuterColor().getBackground());
-		int r = AddShapesDialogs.addHexagonDialog();
-		if (r <= 0) {
+		int perimeter = 0;
+		JTextField r = new JTextField();
+		final JComponent[] components = new JComponent[] { new JLabel("Enter perimeter"), r};
+		if (JOptionPane.showConfirmDialog(null, components, "Add hexagon",
+				JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
+			if (!r.getText().isEmpty()) {
+				try {
+					int tmpR = Integer.parseInt(r.getText());
+					if (tmpR > 0)
+						perimeter = tmpR;
+					else
+						DialogMethods.showErrorMessage("Length of perimeter must be greater than 0!");
+				} catch (NumberFormatException ex) {
+					DialogMethods.showErrorMessage("Lenght of perimeter side must be a number!");
+				}
+			} else {
+				DialogMethods.showErrorMessage("Length of perimeter side must not be empty!");
+			}
+		}
+		if (perimeter <= 0) {
 			return false;
 		}
-		Hexagon hexagon = new Hexagon(center.getX(), center.getY(), r);
+		Hexagon hexagon = new Hexagon(center.getX(), center.getY(), perimeter);
 		hexagon.setBorderColor(frame.getButtonView().getBtnOuterColor().getBackground());
 		hexagon.setAreaColor(frame.getButtonView().getBtnInnerColor().getBackground());
 		HexagonAdapter hexagonAdapter = new HexagonAdapter(hexagon);
