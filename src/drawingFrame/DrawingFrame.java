@@ -19,7 +19,6 @@ import mvc.view.ButtonViewLeft;
 import mvc.view.ButtonViewRight;
 import mvc.view.DrawingView;
 import mvc.view.LogView;
-import utility.ModifyShapesDialogs;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -65,11 +64,6 @@ public class DrawingFrame extends JFrame {
         buttonController.onRedoButtonClicked();
       }
     });
-    /*buttonView.getTglbtnSelect().addMouseListener(new MouseAdapter() {
-      public void mousePressed(MouseEvent e) {
-          buttonController.unselectShapes();
-      }
-    });*/
     
         buttonView.getBtnDelete().addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {

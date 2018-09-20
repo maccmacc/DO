@@ -27,7 +27,6 @@ import shapes.rectangle.CommandAddRectangle;
 import shapes.rectangle.Rectangle;
 import shapes.square.CommandAddSquare;
 import shapes.square.Square;
-import utility.DialogMethods;
 
 
 public class DrawingController {
@@ -84,13 +83,13 @@ public class DrawingController {
 					if (tmpSide > 0)
 						side = tmpSide;
 					else {
-						DialogMethods.showErrorMessage("Length of square side must be greater than 0!");
+						JOptionPane.showMessageDialog(null, "Length of square side must be greater than 0!", "Error!", JOptionPane.ERROR_MESSAGE);
 					}
 				} catch (NumberFormatException ex) {
-					DialogMethods.showErrorMessage("Lenght of square side must be a number!");
+					JOptionPane.showMessageDialog(null, "Lenght of square side must be a number!", "Error!", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				DialogMethods.showErrorMessage("Length of square side must not be empty!");
+				JOptionPane.showMessageDialog(null, "Length of square side must not be empty!", "Error!", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (side <= 0) return false;
@@ -116,13 +115,13 @@ public class DrawingController {
 					if (tmpR > 0)
 						perimeter = tmpR;
 					else {
-						DialogMethods.showErrorMessage("Length of perimeter side must be greater than 0!");
+						JOptionPane.showMessageDialog(null, "Length of perimeter side must be greater than 0!", "Error!", JOptionPane.ERROR_MESSAGE);
 					}
 				} catch (NumberFormatException ex) {
-					DialogMethods.showErrorMessage("Lenght of perimeter must be a number!");
+					JOptionPane.showMessageDialog(null, "Lenght of perimeter must be a number!", "Error!", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				DialogMethods.showErrorMessage("Length of perimeter must not be empty!");
+				JOptionPane.showMessageDialog(null, "Length of perimeter must not be empty!", "Error!", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (perimeter <= 0) {
@@ -157,12 +156,12 @@ public class DrawingController {
 						heightR = tmpHeight;
 					}
 					else
-						DialogMethods.showErrorMessage("Width and height must be greater than 0!");
+					JOptionPane.showMessageDialog(null, "Width and height must be greater than 0!", "Error!", JOptionPane.ERROR_MESSAGE);
 				} catch (NumberFormatException ex) {
-					DialogMethods.showErrorMessage("Width and height must be a number!");
+					JOptionPane.showMessageDialog(null, "Width and height must be a number!", "Error!", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				DialogMethods.showErrorMessage("Width and height must not be empty!");
+				JOptionPane.showMessageDialog(null, "Width and height must not be empty!", "Error!", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (widthR <= 0 || heightR <= 0) {
@@ -190,12 +189,12 @@ public class DrawingController {
 					if (tmpR > 0)
 						perimeter = tmpR;
 					else
-						DialogMethods.showErrorMessage("Length of perimeter must be greater than 0!");
+						JOptionPane.showMessageDialog(null, "Length of perimeter must be greater than 0!", "Error!", JOptionPane.ERROR_MESSAGE);
 				} catch (NumberFormatException ex) {
-					DialogMethods.showErrorMessage("Lenght of perimeter side must be a number!");
+					JOptionPane.showMessageDialog(null, "Lenght of perimeter side must be a number!", "Error!", JOptionPane.ERROR_MESSAGE);
 				}
 			} else {
-				DialogMethods.showErrorMessage("Length of perimeter side must not be empty!");
+				JOptionPane.showMessageDialog(null, "Length of perimeter side must not be empty!", "Error!", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (perimeter <= 0) {
