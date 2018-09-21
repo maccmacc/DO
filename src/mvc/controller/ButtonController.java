@@ -58,12 +58,14 @@ public class ButtonController {
 	private DrawingModel model;
 	private DrawingFrame frame;
 	private LogView logView;
+	private DecodeLog decodeLog;
 	private int countLogLine = 0;
 
-	public ButtonController(DrawingModel model, DrawingFrame frame, LogView logView) {
+	public ButtonController(DrawingModel model, DrawingFrame frame, LogView logView, DecodeLog decodeLog) {
 		this.model = model;
 		this.frame = frame;
 		this.logView = logView;
+		this.decodeLog = decodeLog;
 	}
 
 	public void onUndoButtonClicked() {
@@ -470,9 +472,10 @@ public class ButtonController {
 							int tmpR = Integer.parseInt(r.getText());
 							if (tmpX > 0 && tmpY > 0 && tmpR > 0) {
 								Hexagon hexagon = new Hexagon(tmpX, tmpY, tmpR);
-								hexagon.setBorderColor(btnNewColorOuter.getBackground());
-								hexagon.setAreaColor(btnNewColorInner.getBackground());
+
 								hexagonAdapter = new HexagonAdapter(hexagon);
+								hexagonAdapter.setColor(btnNewColorOuter.getBackground());
+								hexagonAdapter.setSurfaceColor(btnNewColorInner.getBackground());
 							} else
 								JOptionPane.showMessageDialog(null, "Coordinates and perimeter must be greater than 0!", "Error!", JOptionPane.ERROR_MESSAGE);
 						} catch (NumberFormatException e) {
@@ -597,39 +600,39 @@ public class ButtonController {
 			String[] color = parts[1].split("=");
 			Point point = new Point(x, y);
 			point.setColor(Color.decode(color[1]));
-			DecodeLog.decodePoint(point, parts, frame, model, logView);
+			decodeLog.decodePoint(point, parts, frame, model, logView);
 		} else if (logLine.contains("Circle")) {
 			String[] r = parts[1].split("=");
 			String[] outerColor = parts[2].split("=");
 			String[] innerColor = parts[3].split("=");
 			Circle circle = new Circle(new Point(x,y), Integer.parseInt(r[1]), Color.decode(outerColor[1]), Color.decode(innerColor[1]));
-			DecodeLog.decodeCircle(circle, parts, frame, model, logView);
+			decodeLog.decodeCircle(circle, parts, frame, model, logView);
 		} else if (logLine.contains("Square")) {
 			String[] outerColor = parts[2].split("=");
 			String[] innerColor = parts[3].split("=");
 			String[] side = parts[1].split("=");
 			Square square = new Square(new Point(x,y), Integer.parseInt(side[1]), Color.decode(outerColor[1]), Color.decode(innerColor[1]));
-			DecodeLog.decodeSquare(square, parts, frame, model, logView);
+			decodeLog.decodeSquare(square, parts, frame, model, logView);
 		} else if (logLine.contains("Rectangle")) {
 			String[] outerColor = parts[3].split("=");
 			String[] innerColor = parts[4].split("=");
 			String[] height = parts[1].split("=");
 			String[] width = parts[2].split("=");
 			Rectangle rectangle = new Rectangle(new Point(x,y), Integer.parseInt(height[1]), Integer.parseInt(width[1]), Color.decode(outerColor[1]), Color.decode(innerColor[1]));
-			DecodeLog.decodeRectangle(rectangle, parts, frame, model, logView);
+			decodeLog.decodeRectangle(rectangle, parts, frame, model, logView);
 		} else if (logLine.contains("Hexagon")) {
 			String[] outerColor = parts[2].split("=");
 			String[] innerColor = parts[3].split("=");
 			String[] r = parts[1].split("=");
 			Hexagon hexagon = new Hexagon(x, y, Integer.parseInt(r[1]));
 			HexagonAdapter hexagonAdapter = new HexagonAdapter(hexagon, Color.decode(outerColor[1]), Color.decode(innerColor[1]));
-			DecodeLog.decodeHexagon(hexagonAdapter, parts, frame, model, logView);
+			decodeLog.decodeHexagon(hexagonAdapter, parts, frame, model, logView);
 		} else if (logLine.contains("Line")) {
 			int endPointX = Integer.parseInt(parts[1].substring(parts[1].indexOf("(")+1, parts[1].indexOf(",")));
 			int endPointY = Integer.parseInt(parts[1].substring(parts[1].indexOf(",")+1, parts[1].indexOf(")")));
 			String[] color = parts[2].split("=");
 			Line line = new Line(new Point(x, y), new Point(endPointX, endPointY), Color.decode(color[1]));
-			DecodeLog.decodeLine(line, parts, frame, model, logView);
+			decodeLog.decodeLine(line, parts, frame, model, logView);
 		}
 	}
 	

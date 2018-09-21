@@ -201,8 +201,6 @@ public class DrawingController {
 			return false;
 		}
 		Hexagon hexagon = new Hexagon(center.getX(), center.getY(), perimeter);
-		hexagon.setBorderColor(frame.getButtonView().getBtnOuterColor().getBackground());
-		hexagon.setAreaColor(frame.getButtonView().getBtnInnerColor().getBackground());
 		HexagonAdapter hexagonAdapter = new HexagonAdapter(hexagon);
 		hexagonAdapter.setColor(frame.getButtonView().getBtnOuterColor().getBackground());
 		hexagonAdapter.setSurfaceColor(frame.getButtonView().getBtnInnerColor().getBackground());

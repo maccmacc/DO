@@ -16,7 +16,7 @@ public class CommandUpdateCircle implements Command{
 	
 	@Override
 	public void execute() {
-		tmp = new Circle(original.getCenter(), original.getR(), original.getColor());
+		tmp = new Circle(original.getCenter(), original.getR(), original.getColor(), original.getSurfaceColor());
 		original.setCenter(newState.getCenter());
 		original.setR(newState.getR());
 		original.setColor(newState.getColor());
@@ -28,7 +28,7 @@ public class CommandUpdateCircle implements Command{
 		original.setCenter(tmp.getCenter());
 		original.setR(tmp.getR());
 		original.setColor(tmp.getColor());
-		original.setSurfaceColor(newState.getSurfaceColor());
+		original.setSurfaceColor(tmp.getSurfaceColor());
 	}
 
 }

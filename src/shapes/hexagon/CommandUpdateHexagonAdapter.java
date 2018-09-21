@@ -15,12 +15,12 @@ public class CommandUpdateHexagonAdapter implements Command {
 	
 	@Override
 	public void execute() {
-		tmp = new HexagonAdapter(original.getHexagon(), original.getHexagon().getBorderColor(), original.getHexagon().getAreaColor());
+		tmp = new HexagonAdapter(original.getHexagon(), original.getColor(), original.getSurfaceColor());
 		original.getHexagon().setX(newState.getHexagon().getX());
 		original.getHexagon().setY(newState.getHexagon().getY());
 		original.getHexagon().setR(newState.getHexagon().getR());
-		original.getHexagon().setBorderColor(newState.getHexagon().getBorderColor());
-		original.getHexagon().setAreaColor(newState.getHexagon().getAreaColor());
+		original.setColor(newState.getColor());
+		original.setSurfaceColor(newState.getSurfaceColor());
 	}
 
 	@Override
@@ -28,8 +28,8 @@ public class CommandUpdateHexagonAdapter implements Command {
 		original.getHexagon().setX(tmp.getHexagon().getX());
 		original.getHexagon().setY(tmp.getHexagon().getY());
 		original.getHexagon().setR(tmp.getHexagon().getR());
-		original.getHexagon().setBorderColor(tmp.getHexagon().getBorderColor());
-		original.getHexagon().setAreaColor(tmp.getHexagon().getAreaColor());
+		original.setColor(tmp.getColor());
+		original.setSurfaceColor(tmp.getSurfaceColor());
 	}
 
 

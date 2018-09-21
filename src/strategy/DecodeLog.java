@@ -24,7 +24,7 @@ import shapes.square.Square;
 
 public class DecodeLog {
 
-	public static void decodePoint(Point point, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
+	public void decodePoint(Point point, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
 		if (parts[0].contains("Add")) {
 			CommandAddPoint add = new CommandAddPoint(model, point);
 			add.execute();
@@ -43,7 +43,7 @@ public class DecodeLog {
 		}
 	}
 	
-	public static void decodeCircle(Circle circle, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
+	public void decodeCircle(Circle circle, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
 		if (parts[0].contains("Add")) {
 			CommandAddCircle add = new CommandAddCircle(model, circle);
 			add.execute();
@@ -62,7 +62,7 @@ public class DecodeLog {
 		}
 	}
 
-	public static void decodeSquare(Square square, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
+	public void decodeSquare(Square square, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
 		if (parts[0].contains("Add")) {
 			CommandAddSquare add = new CommandAddSquare(model, square);
 			add.execute();
@@ -81,7 +81,7 @@ public class DecodeLog {
 		}
 	}
 	
-	public static void decodeLine(Line line, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
+	public void decodeLine(Line line, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
 		if (parts[0].contains("Add")) {
 			CommandAddLine add = new CommandAddLine(model, line);
 			add.execute();
@@ -100,7 +100,7 @@ public class DecodeLog {
 		}
 	}
 	
-	public static void decodeRectangle(Rectangle rectangle, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
+	public void decodeRectangle(Rectangle rectangle, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
 		if (parts[0].contains("Add")) {
 			CommandAddRectangle add = new CommandAddRectangle(model, rectangle);
 			add.execute();
@@ -119,7 +119,7 @@ public class DecodeLog {
 		}
 	}
 	
-	public static void decodeHexagon(HexagonAdapter hexagonAdapter, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
+	public void decodeHexagon(HexagonAdapter hexagonAdapter, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
 		if (parts[0].contains("Add")) {
 			CommandAddHexagonAdapter add = new CommandAddHexagonAdapter(model, hexagonAdapter);
 			add.execute();
@@ -139,7 +139,7 @@ public class DecodeLog {
 		}
 	}
 	
-	public static void checkOperation (String parts, DrawingFrame frame, DrawingModel model) {
+	public void checkOperation (String parts, DrawingFrame frame, DrawingModel model) {
 		if (parts.contains("Delete")) {
 			frame.getButtonController().deleteShapes();
 		} else if (parts.contains("Unselect")) {
