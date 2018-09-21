@@ -201,7 +201,7 @@ public class ButtonController {
 				btnNewColor.setBackground(point.getColor());
 				btnNewColor.addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
-						btnNewColor.setBackground(JColorChooser.showDialog(null, "Choose color", btnNewColor.getBackground()));
+						btnNewColor.setBackground(openColorChooser(btnNewColor.getBackground()));
 					}
 				});
 				final JComponent[] components = new JComponent[] { new JLabel("Enter new x coordinate:"), xCoordinate,
@@ -243,13 +243,13 @@ public class ButtonController {
 				btnNewColorOuter.setBackground(circle.getColor());
 				btnNewColorOuter.addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
-						btnNewColorOuter.setBackground(JColorChooser.showDialog(null, "Choose color", btnNewColorOuter.getBackground()));
+						btnNewColorOuter.setBackground(openColorChooser(btnNewColorOuter.getBackground()));
 					}
 				});
 				btnNewColorInner.setBackground(circle.getSurfaceColor());
 				btnNewColorInner.addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
-						btnNewColorInner.setBackground(JColorChooser.showDialog(null, "Choose color", btnNewColorInner.getBackground()));
+						btnNewColorInner.setBackground(openColorChooser(btnNewColorInner.getBackground()));
 					}
 				});
 				final JComponent[] components = new JComponent[] { new JLabel("Enter new x coordinate:"), xCoordinateCenter,
@@ -295,13 +295,13 @@ public class ButtonController {
 				btnNewColorOuter.setBackground(rectangle.getColor());
 				btnNewColorOuter.addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
-						btnNewColorOuter.setBackground(JColorChooser.showDialog(null, "Choose color", btnNewColorOuter.getBackground()));
+						btnNewColorOuter.setBackground(openColorChooser(btnNewColorOuter.getBackground()));
 					}
 				});
 				btnNewColorInner.setBackground(rectangle.getSurfaceColor());
 				btnNewColorInner.addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
-						btnNewColorInner.setBackground(JColorChooser.showDialog(null, "Choose color", btnNewColorInner.getBackground()));
+						btnNewColorInner.setBackground(openColorChooser(btnNewColorInner.getBackground()));
 					}
 				});
 				final JComponent[] components = new JComponent[] { new JLabel("Enter new x coordinate:"), xCoordinateUpperLeft,
@@ -348,13 +348,13 @@ public class ButtonController {
 				btnNewColorOuter.setBackground(square.getColor());
 				btnNewColorOuter.addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
-						btnNewColorOuter.setBackground(JColorChooser.showDialog(null, "Choose color", btnNewColorOuter.getBackground()));
+						btnNewColorOuter.setBackground(openColorChooser(btnNewColorOuter.getBackground()));
 					}
 				});
 				btnNewColorInner.setBackground(square.getSurfaceColor());
 				btnNewColorInner.addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
-						btnNewColorInner.setBackground(JColorChooser.showDialog(null, "Choose color", btnNewColorInner.getBackground()));
+						btnNewColorInner.setBackground(openColorChooser(btnNewColorInner.getBackground()));
 					}
 				});
 				final JComponent[] components = new JComponent[] { new JLabel("Enter new x coordinate:"), xCoordinateUpperLeft,
@@ -395,7 +395,7 @@ public class ButtonController {
 				btnNewColor.setBackground(line.getColor());
 				btnNewColor.addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
-						btnNewColor.setBackground(JColorChooser.showDialog(null, "Choose color", btnNewColor.getBackground()));
+						btnNewColor.setBackground(openColorChooser(btnNewColor.getBackground()));
 					}
 				});
 				xCoordinateStartPoint.setText(Integer.toString(line.getStartPoint().getX()));
@@ -448,13 +448,13 @@ public class ButtonController {
 				btnNewColorOuter.setBackground(hexagonAdapter.getHexagon().getBorderColor());
 				btnNewColorOuter.addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
-						btnNewColorOuter.setBackground(JColorChooser.showDialog(null, "Choose color", btnNewColorOuter.getBackground()));
+						btnNewColorOuter.setBackground(openColorChooser(btnNewColorOuter.getBackground()));
 					}
 				});
 				btnNewColorInner.setBackground(hexagonAdapter.getHexagon().getAreaColor());
 				btnNewColorInner.addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
-						btnNewColorInner.setBackground(JColorChooser.showDialog(null, "Choose color", btnNewColorInner.getBackground()));
+						btnNewColorInner.setBackground(openColorChooser(btnNewColorInner.getBackground()));
 					}
 				});
 				final JComponent[] components = new JComponent[] { new JLabel("Enter new x coordinate:"), xCoordinateCenter,
@@ -702,6 +702,16 @@ public class ButtonController {
 		if (tmpColor != null) {
 			frame.getButtonView().getBtnInnerColor().setBackground(tmpColor);
 		}
+	}
+	
+	public Color openColorChooser(Color previousColor) {
+		Color tmpColor = JColorChooser.showDialog(null, "Choose color", previousColor);
+		
+		if (tmpColor != null) {
+			return tmpColor;
+		}
+		
+		return previousColor;
 	}
 	
 
