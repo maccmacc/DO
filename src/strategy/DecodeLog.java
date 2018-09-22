@@ -148,6 +148,14 @@ public class DecodeLog {
 			frame.getButtonController().onUndoButtonClicked();
 		} else if (parts.contains("Redo")) {
 			frame.getButtonController().onRedoButtonClicked();
+		} else if (parts.contains("BringToFront")) {
+			frame.getButtonController().bringToFront();
+		} else if (parts.contains("BringToBack")) {
+			frame.getButtonController().bringToBack();
+		} else if (parts.contains("ToBack")) {
+			frame.getButtonController().toBack();
+		} else if (parts.contains("ToFront")) {
+			frame.getButtonController().toFront();
 		}
 	}
 }

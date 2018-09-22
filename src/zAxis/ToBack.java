@@ -11,6 +11,7 @@ public class ToBack implements Command{
 	private Shape shape;
 	private DrawingFrame frame;
 	private int currentIndex;
+	private int newIndex;
 
 	public ToBack(DrawingModel model, DrawingFrame frame, Shape shape) {
 		this.model = model;
@@ -24,6 +25,7 @@ public class ToBack implements Command{
 		model.getShapeList().remove(shape);
 		model.getShapeList().add(currentIndex-1, shape);
 		frame.repaint();
+		newIndex = model.getShapeList().indexOf(shape);
 	}
 
 	@Override
@@ -31,6 +33,11 @@ public class ToBack implements Command{
 		model.getShapeList().remove(shape);
 		model.getShapeList().add(currentIndex, shape);
 		frame.repaint();
+	}
+	
+	@Override
+	public String toString() {
+		return ("ToBack:" + shape.toString() + ";currentIndex:" + currentIndex + ";newIndex:" + newIndex);
 	}
 
 }

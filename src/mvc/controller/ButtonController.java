@@ -644,6 +644,7 @@ public class ButtonController {
 		BringToFront bringToFront = new BringToFront(model, frame, selectedShape);
 		model.getUndoStack().offerLast(bringToFront);
 		bringToFront.execute();
+		logView.getDlm().addElement(bringToFront.toString());
 	}
 	
 	public void bringToBack() {
@@ -654,6 +655,7 @@ public class ButtonController {
 		BringToBack bringToBack = new BringToBack(model, frame, selectedShape);
 		model.getUndoStack().offerLast(bringToBack);
 		bringToBack.execute();
+		logView.getDlm().addElement(bringToBack.toString());
 	}
 	
 	public void toFront() {
@@ -669,6 +671,7 @@ public class ButtonController {
 		ToFront toFront= new ToFront(model, frame, selectedShape);
 		model.getUndoStack().offerLast(toFront);
 		toFront.execute();
+		logView.getDlm().addElement(toFront.toString());
 	}
 	
 	public void toBack() {
@@ -682,6 +685,7 @@ public class ButtonController {
 		ToBack toBack = new ToBack(model, frame, selectedShape);
 		model.getUndoStack().offerLast(toBack);
 		toBack.execute();
+		logView.getDlm().addElement(toBack.toString());
 	}
 	
 	public void makeNewDrawing() {
@@ -709,14 +713,11 @@ public class ButtonController {
 	
 	public Color openColorChooser(Color previousColor) {
 		Color tmpColor = JColorChooser.showDialog(null, "Choose color", previousColor);
-		
 		if (tmpColor != null) {
 			return tmpColor;
 		}
-		
 		return previousColor;
 	}
-	
 
 	public LogView getLogView() {
 		return logView;

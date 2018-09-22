@@ -11,6 +11,7 @@ public class BringToBack implements Command{
 	private Shape shape;
 	private DrawingFrame frame;
 	private int currentIndex;
+	private int newIndex;
 	
 	public BringToBack(DrawingModel model, DrawingFrame frame, Shape shape) {
 		this.model = model;
@@ -25,6 +26,7 @@ public class BringToBack implements Command{
 		model.getShapeList().remove(shape);
 		model.getShapeList().add(0, shape);
 		frame.repaint();
+		newIndex = model.getShapeList().indexOf(shape);
 	}
 
 	@Override
@@ -34,4 +36,8 @@ public class BringToBack implements Command{
 		frame.repaint();
 	}
 
+	@Override
+	public String toString() {
+		return ("BringToBack:" + shape.toString() + ";currentIndex:" + currentIndex + ";newIndex:" + newIndex);
+	}
 }
