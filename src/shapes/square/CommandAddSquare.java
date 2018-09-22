@@ -23,5 +23,10 @@ public class CommandAddSquare implements Command{
 	public void unexecute() {
 		model.removeShape(square);
 	}
+	
+	@Override
+	public String toString() {
+		return square.toString();
+	}
 
 }

@@ -32,4 +32,8 @@ public class CommandUpdateRectangle implements Command{
 		original.setSurfaceColor(tmp.getSurfaceColor());
 	}
 
+	@Override
+	public String toString() {
+		return newState.toString();
+	}
 }

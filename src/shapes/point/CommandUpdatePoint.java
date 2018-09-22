@@ -27,5 +27,10 @@ public class CommandUpdatePoint implements Command {
 		original.setY(tmp.getY());
 		original.setColor(tmp.getColor());
 	}
+	
+	@Override
+	public String toString() {
+		return newState.toString();
+	}
 
 }

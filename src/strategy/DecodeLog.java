@@ -146,6 +146,8 @@ public class DecodeLog {
 			frame.getButtonController().unselectShapes();
 		} else if (parts.contains("Undo")) {
 			frame.getButtonController().onUndoButtonClicked();
-		} 
+		} else if (parts.contains("Redo")) {
+			frame.getButtonController().onRedoButtonClicked();
+		}
 	}
 }

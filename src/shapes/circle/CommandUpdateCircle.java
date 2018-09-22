@@ -31,4 +31,8 @@ public class CommandUpdateCircle implements Command{
 		original.setSurfaceColor(tmp.getSurfaceColor());
 	}
 
+	@Override
+	public String toString() {
+		return newState.toString();
+	}
 }

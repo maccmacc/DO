@@ -75,6 +75,7 @@ public class ButtonController {
 			model.getRedoStack().offerLast(previous);
 			previous.unexecute();
 			model.notifyAllObservers();
+			logView.getDlm().addElement("Undo:" + previous.toString());
 		}
 	}
 
@@ -84,6 +85,7 @@ public class ButtonController {
 			model.getUndoStack().offerLast(previous);
 			previous.execute();
 			model.notifyAllObservers();
+			logView.getDlm().addElement("Redo:" + previous.toString());
 		}
 	}
 

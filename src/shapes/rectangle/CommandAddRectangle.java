@@ -24,4 +24,8 @@ public class CommandAddRectangle implements Command{
 		model.removeShape(rectangle);
 	}
 
+	@Override
+	public String toString() {
+		return rectangle.toString();
+	}
 }

@@ -22,4 +22,8 @@ public class CommandAddCircle implements Command {
 		model.removeShape(circle);
 	}
 
+	@Override
+	public String toString() {
+		return circle.toString();
+	}
 }

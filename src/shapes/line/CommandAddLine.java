@@ -22,5 +22,10 @@ public class CommandAddLine implements Command{
 	public void unexecute() {
 		model.removeShape(line);
 	}
+	
+	@Override
+	public String toString() {
+		return line.toString();
+	}
 
 }

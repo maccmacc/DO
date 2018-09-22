@@ -28,4 +28,8 @@ public class CommandUpdateLine implements Command {
 		original.setColor(tmp.getColor());
 	}
 
+	@Override
+	public String toString() {
+		return newState.toString();
+	}
 }

@@ -23,5 +23,10 @@ public class CommandRemovePoint implements Command {
 	public void unexecute() {
 		model.addShape(point);
 	}
+	
+	@Override
+	public String toString() {
+		return point.toString();
+	}
 
 }

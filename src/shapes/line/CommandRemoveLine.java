@@ -23,4 +23,9 @@ public class CommandRemoveLine implements Command{
 	public void unexecute() {
 		model.addShape(line);
 	}
+	
+	@Override
+	public String toString() {
+		return line.toString();
+	}
 }

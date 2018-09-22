@@ -22,5 +22,10 @@ public class CommandRemoveHexagonAdapter implements Command{
 	public void unexecute() {
 		model.addShape(hexagonAdapter);
 	}
+	
+	@Override
+	public String toString() {
+		return hexagonAdapter.toString();
+	}
 
 }
