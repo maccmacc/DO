@@ -74,8 +74,7 @@ public class ButtonController {
 			Command previous = model.getUndoStack().pollLast();
 			model.getRedoStack().offerLast(previous);
 			previous.unexecute();
-		} else {
-			frame.getButtonView().getBtnUndo().setEnabled(false);
+			model.notifyAllObservers();
 		}
 	}
 
@@ -84,8 +83,7 @@ public class ButtonController {
 			Command previous = model.getRedoStack().pollLast();
 			model.getUndoStack().offerLast(previous);
 			previous.execute();
-		} else {
-			frame.getButtonView().getBtnRedo().setEnabled(false);
+			model.notifyAllObservers();
 		}
 	}
 

@@ -44,7 +44,7 @@ public class DrawingModel implements Subject, Serializable {
 	@Override
 	public void notifyAllObservers() {
 		for (Observer observer : observerList) {
-			observer.update(this.selectedShapeList.size());
+			observer.update(this.selectedShapeList.size(), undoStack.size(), redoStack.size());
 		}
 	}
 
