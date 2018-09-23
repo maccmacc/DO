@@ -15,11 +15,16 @@ public class CommandAddHexagonAdapter implements Command{
 	@Override
 	public void execute() {
 		model.addShape(hexagonAdapter);
+		
+		if (hexagonAdapter.isSelected() && !model.getSelectedShapeList().contains(hexagonAdapter)) {
+			model.getSelectedShapeList().add(hexagonAdapter);
+		}
 	}
 
 	@Override
 	public void unexecute() {
 		model.removeShape(hexagonAdapter);
+		model.getSelectedShapeList().remove(hexagonAdapter);
 	}
 	
 	@Override

@@ -17,11 +17,16 @@ public class CommandAddRectangle implements Command{
 	@Override
 	public void execute() {
 		model.addShape(rectangle);
+		
+		if (rectangle.isSelected() && !model.getSelectedShapeList().contains(rectangle)) {
+			model.getSelectedShapeList().add(rectangle);
+		}
 	}
 
 	@Override
 	public void unexecute() {
 		model.removeShape(rectangle);
+		model.getSelectedShapeList().remove(rectangle);
 	}
 
 	@Override

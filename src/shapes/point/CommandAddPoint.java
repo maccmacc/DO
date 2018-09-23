@@ -17,11 +17,16 @@ public class CommandAddPoint implements Command {
 	@Override
 	public void execute() {
 		model.addShape(point);
+		
+		if (point.isSelected() && !model.getSelectedShapeList().contains(point)) {
+			model.getSelectedShapeList().add(point);
+		}
 	}
 
 	@Override
 	public void unexecute() {
 		model.removeShape(point);
+		model.getSelectedShapeList().remove(point);
 	}
 	
 	@Override

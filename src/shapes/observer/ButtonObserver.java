@@ -14,7 +14,7 @@ public class ButtonObserver implements Observer {
 	}
 	
 	@Override
-	public void update(int numberOfSelectedShapes, int numberOfShapesInUndo, int numberOfShapesInRedo) {
+	public void update(int numberOfSelectedShapes, int numberOfShapesInUndo, int numberOfShapesInRedo){
 		
 		view.getBtnUndo().setEnabled(numberOfShapesInUndo != 0);
 		view.getBtnRedo().setEnabled(numberOfShapesInRedo != 0);
@@ -42,5 +42,6 @@ public class ButtonObserver implements Observer {
 			buttonViewRight.getBtnToFront().setEnabled(false);
 			buttonViewRight.getBtnToBack().setEnabled(false);
 		}
+		
 	}
 }

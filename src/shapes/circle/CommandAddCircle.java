@@ -15,11 +15,15 @@ public class CommandAddCircle implements Command {
 	@Override
 	public void execute() {
 		model.addShape(circle);
+		if (circle.isSelected() && !model.getSelectedShapeList().contains(circle)) {
+			model.getSelectedShapeList().add(circle);
+		}
 	}
 
 	@Override
 	public void unexecute() {
 		model.removeShape(circle);
+		model.getSelectedShapeList().remove(circle);
 	}
 
 	@Override

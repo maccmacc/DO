@@ -16,11 +16,16 @@ public class CommandAddLine implements Command{
 	@Override
 	public void execute() {
 		model.addShape(line);
+		
+		if (line.isSelected() && !model.getSelectedShapeList().contains(line)) {
+			model.getSelectedShapeList().add(line);
+		}
 	}
 
 	@Override
 	public void unexecute() {
 		model.removeShape(line);
+		model.getSelectedShapeList().remove(line);
 	}
 	
 	@Override
