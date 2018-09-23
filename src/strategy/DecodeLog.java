@@ -29,10 +29,12 @@ public class DecodeLog {
 			CommandAddPoint add = new CommandAddPoint(model, point);
 			add.execute();
 			model.getUndoStack().offerLast(add);
+			logView.getDlm().addElement("Add:" + add.toString());
 		} else if (parts[0].contains("Update")) {
 			CommandUpdatePoint updatePoint = new CommandUpdatePoint((Point)model.getSelectedShapeList().get(0), point);
 			updatePoint.execute();
 			model.getUndoStack().offerLast(updatePoint);
+			logView.getDlm().addElement("Update:" + updatePoint.toString());
 		} else if (parts[0].contains("Select")) {
 			String[] selectedCoordinates = parts[2].split("=");
 			int sX = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf("(")+1, selectedCoordinates[1].indexOf(",")));
@@ -48,10 +50,12 @@ public class DecodeLog {
 			CommandAddCircle add = new CommandAddCircle(model, circle);
 			add.execute();
 			model.getUndoStack().offerLast(add);
+			logView.getDlm().addElement("Add:" + add.toString());
 		} else if (parts[0].contains("Update")) {
 			CommandUpdateCircle updateCircle = new CommandUpdateCircle((Circle)model.getSelectedShapeList().get(0), circle);
 			updateCircle.execute();
 			model.getUndoStack().offerLast(updateCircle);
+			logView.getDlm().addElement("Update:" + updateCircle.toString());
 		} else if (parts[0].contains("Select")) {
 			String[] selectedCoordinates = parts[4].split("=");
 			int sX = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf("(")+1, selectedCoordinates[1].indexOf(",")));
@@ -67,10 +71,12 @@ public class DecodeLog {
 			CommandAddSquare add = new CommandAddSquare(model, square);
 			add.execute();
 			model.getUndoStack().offerLast(add);
+			logView.getDlm().addElement("Add:" + add.toString());
 		} else if (parts[0].contains("Update")) {
 			CommandUpdateSquare updateSquare = new CommandUpdateSquare((Square)model.getSelectedShapeList().get(0), square);
 			updateSquare.execute();
 			model.getUndoStack().offerLast(updateSquare);
+			logView.getDlm().addElement("Update:" + updateSquare.toString());
 		} else if (parts[0].contains("Select")) {
 			String[] selectedCoordinates = parts[4].split("=");
 			int sX = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf("(")+1, selectedCoordinates[1].indexOf(",")));
@@ -86,10 +92,12 @@ public class DecodeLog {
 			CommandAddLine add = new CommandAddLine(model, line);
 			add.execute();
 			model.getUndoStack().offerLast(add);
+			logView.getDlm().addElement("Add:" + add.toString());
 		} else if (parts[0].contains("Update")) {
 			CommandUpdateLine updateLine = new CommandUpdateLine((Line)model.getSelectedShapeList().get(0), line);
 			updateLine.execute();
 			model.getUndoStack().offerLast(updateLine);
+			logView.getDlm().addElement("Update:" + updateLine.toString());
 		} else if (parts[0].contains("Select")) {
 			String[] selectedCoordinates = parts[3].split("=");
 			int sX = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf("(")+1, selectedCoordinates[1].indexOf(",")));
@@ -105,10 +113,12 @@ public class DecodeLog {
 			CommandAddRectangle add = new CommandAddRectangle(model, rectangle);
 			add.execute();
 			model.getUndoStack().offerLast(add);
+			logView.getDlm().addElement("Add:" + add.toString());
 		} else if (parts[0].contains("Update")) {
 			CommandUpdateRectangle updateRectangle = new CommandUpdateRectangle((Rectangle)model.getSelectedShapeList().get(0), rectangle);
 			updateRectangle.execute();
 			model.getUndoStack().offerLast(updateRectangle);
+			logView.getDlm().addElement("Update:" + updateRectangle.toString());
 		} else if (parts[0].contains("Select")) {
 			String[] selectedCoordinates = parts[5].split("=");
 			int sX = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf("(")+1, selectedCoordinates[1].indexOf(",")));
@@ -124,11 +134,13 @@ public class DecodeLog {
 			CommandAddHexagonAdapter add = new CommandAddHexagonAdapter(model, hexagonAdapter);
 			add.execute();
 			model.getUndoStack().offerLast(add);
+			logView.getDlm().addElement("Add:" + add.toString());
 		} else if (parts[0].contains("Update")) {
 			CommandUpdateHexagonAdapter updateHexagonAdapter = 
 					new CommandUpdateHexagonAdapter((HexagonAdapter)model.getSelectedShapeList().get(0), hexagonAdapter);
 			updateHexagonAdapter.execute();
 			model.getUndoStack().offerLast(updateHexagonAdapter);
+			logView.getDlm().addElement("Update:" + updateHexagonAdapter.toString());
 		} else if (parts[0].contains("Select")) {
 			String[] selectedCoordinates = parts[4].split("=");
 			int sX = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf("(")+1, selectedCoordinates[1].indexOf(",")));
