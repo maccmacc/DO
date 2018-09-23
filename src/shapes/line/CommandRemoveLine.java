@@ -22,6 +22,10 @@ public class CommandRemoveLine implements Command{
 	@Override
 	public void unexecute() {
 		model.addShape(line);
+		
+		if (line.isSelected() && !model.getSelectedShapeList().contains(line)) {
+			model.getSelectedShapeList().add(line);
+		}
 	}
 	
 	@Override

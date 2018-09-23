@@ -22,6 +22,10 @@ public class CommandRemoveCircle implements Command{
 	@Override
 	public void unexecute() {
 		model.addShape(circle);
+		
+		if (circle.isSelected() && !model.getSelectedShapeList().contains(circle)) {
+			model.getSelectedShapeList().add(circle);
+		}
 	}
 	
 	@Override

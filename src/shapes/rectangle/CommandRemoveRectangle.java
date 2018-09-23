@@ -22,6 +22,10 @@ public class CommandRemoveRectangle implements Command{
 	@Override
 	public void unexecute() {
 		model.addShape(rectangle);
+		
+		if (rectangle.isSelected() && !model.getSelectedShapeList().contains(rectangle)) {
+			model.getSelectedShapeList().add(rectangle);
+		}
 	}
 	
 	@Override

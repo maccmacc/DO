@@ -21,6 +21,10 @@ public class CommandRemoveSquare implements Command{
 	@Override
 	public void unexecute() {
 		model.addShape(square);
+		
+		if (square.isSelected() && !model.getSelectedShapeList().contains(square)) {
+			model.getSelectedShapeList().add(square);
+		}
 	}
 	
 	@Override
