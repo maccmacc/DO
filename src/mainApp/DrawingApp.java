@@ -1,5 +1,7 @@
 package mainApp;
 
+import java.awt.BorderLayout;
+
 import drawingFrame.DrawingFrame;
 import mvc.controller.ButtonController;
 import mvc.controller.DrawingController;

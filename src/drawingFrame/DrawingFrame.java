@@ -40,7 +40,7 @@ public class DrawingFrame extends JFrame {
   private LogView logView;
 
   public DrawingFrame() {
-    setSize(640, 480);
+    setSize(800, 600);
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setVisible(true);
     getContentPane().setLayout(new BorderLayout(0, 0));
