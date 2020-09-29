@@ -40,7 +40,9 @@ import shapes.line.CommandUpdateLine;
 import shapes.line.Line;
 import shapes.point.CommandRemovePoint;
 import shapes.point.CommandUpdatePoint;
+import shapes.point.DeselectPoint;
 import shapes.point.Point;
+import shapes.point.SelectPoint;
 import shapes.rectangle.CommandRemoveRectangle;
 import shapes.rectangle.CommandUpdateRectangle;
 import shapes.rectangle.Rectangle;
@@ -100,9 +102,9 @@ public class ButtonController {
 	public void unselectShapes() {
 		countSelectedShapes();
 		for (Shape shape : model.getSelectedShapeList()) {
-			DeselectCircle sc=new DeselectCircle(model,(Circle)shape);
-			shape.setSelected(false);
-			model.getUndoStack().offerLast(sc);
+			
+			
+			this.makeDeselectedShape(shape);
 			
 			logView.getDlm().addElement("Unselect:" + shape.toString());
 		}
@@ -113,19 +115,18 @@ public class ButtonController {
 	public boolean goThroughShapesList(int x, int y) {
 		for (int i = model.getShapeList().size() - 1; i >= 0; i--) {
 			if (model.getShapeList().get(i).contains(x, y) && !model.getShapeList().get(i).isSelected()) {
-				//model.getShapeList().get(i).setSelected(true);
 				
-				SelectCircle sc=new SelectCircle(model,(Circle)model.getShapeList().get(i));
-				model.getShapeList().get(i).setSelected(true);
-				model.getUndoStack().offerLast(sc);
+				//ovu metodu pozivamo dole
+				this.makeSelectedShape(model.getShapeList().get(i));
+				
 				countSelectedShapes();
 				model.notifyAllObservers();
 				logView.getDlm().addElement("Select:" + model.getShapeList().get(i).toString() + ";click=(" + x + "," + y + ")");
 				return true;
 			} else if (model.getShapeList().get(i).contains(x, y) && model.getShapeList().get(i).isSelected()) {
-				DeselectCircle sc=new DeselectCircle(model,(Circle)model.getShapeList().get(i));
-				model.getShapeList().get(i).setSelected(false);
-				model.getUndoStack().offerLast(sc);
+				
+				this.makeDeselectedShape(model.getShapeList().get(i));
+				
 				countSelectedShapes();
 				model.notifyAllObservers();
 				logView.getDlm().addElement("Unselect:" + model.getShapeList().get(i).toString());
@@ -134,6 +135,48 @@ public class ButtonController {
 		}
 		unselectShapes();
 		return false;
+	}
+	
+	public void makeSelectedShape(Shape shape) {
+		if(shape instanceof Circle) {
+			SelectCircle sc=new SelectCircle(model,(Circle)shape);
+			shape.setSelected(true);
+			model.getUndoStack().offerLast(sc);
+			} else if(shape instanceof Point) {
+
+				SelectPoint point=new SelectPoint(model,(Point)shape);
+				shape.setSelected(true);
+				model.getUndoStack().offerLast(point);
+			} else if(shape instanceof Line) {
+				
+			} else if(shape instanceof HexagonAdapter) {
+				
+			} else if(shape instanceof Rectangle) {
+				
+			} else {
+				//slucaj za square
+			}
+	}
+	
+	public void makeDeselectedShape(Shape shape) {
+		if(shape instanceof Circle) {
+			DeselectCircle sc=new DeselectCircle(model,(Circle)shape);
+			shape.setSelected(false);
+			model.getUndoStack().offerLast(sc);
+			} else if(shape instanceof Point) {
+
+				DeselectPoint point=new DeselectPoint(model,(Point)shape);
+				shape.setSelected(false);
+				model.getUndoStack().offerLast(point);
+			} else if(shape instanceof Line) {
+				
+			} else if(shape instanceof HexagonAdapter) {
+				
+			} else if(shape instanceof Rectangle) {
+				
+			} else {
+				//slucaj za square
+			}
 	}
 
 	public int countSelectedShapes() {
