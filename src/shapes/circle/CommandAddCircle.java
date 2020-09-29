@@ -7,6 +7,7 @@ import shapes.Command;
 public class CommandAddCircle implements Command {
 	private DrawingModel model;
 	private Circle circle;
+	
 	public CommandAddCircle(DrawingModel model, Circle circle) {
 		this.model = model;
 		this.circle = circle;

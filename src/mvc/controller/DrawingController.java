@@ -59,6 +59,7 @@ public class DrawingController {
 			done = onHexagonAdded(e);
 		
 		if (done) frame.getButtonView().getBtnUndo().setEnabled(true);
+		if(done) frame.getButtonView().getBtnRedo().setEnabled(false);
 	}
 	public boolean onPointAdded(MouseEvent e) {
 		Point point = new Point(e.getX(), e.getY(), 

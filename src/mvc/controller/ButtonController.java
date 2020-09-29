@@ -533,8 +533,8 @@ public class ButtonController {
 				String fileName = file.getPath(); 
 				
 				try {
-			         FileInputStream fileIn = new FileInputStream(fileName);
-			         ObjectInputStream in = new ObjectInputStream(fileIn);
+			         FileInputStream fileIn = new FileInputStream(fileName);//izvlaci iz fajla
+			         ObjectInputStream in = new ObjectInputStream(fileIn); //deseralizuje
 			         model.getShapeList().addAll((ArrayList<Shape>)in.readObject());
 			         frame.getView().repaint();
 			         in.close();
