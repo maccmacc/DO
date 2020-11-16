@@ -159,62 +159,11 @@ public class ButtonController {
 			} else if(shape instanceof Rectangle) {
 				
 			} else {
-				//slucaj za square
 			}
 	}
 	
-	public void makeDeselectedShape(Shape shape) {
-		if(shape instanceof Circle) {
-			DeselectCircle sc=new DeselectCircle(model,(Circle)shape);
-			shape.setSelected(false);
-			model.getUndoStack().offerLast(sc);
-			} else if(shape instanceof Point) {
 
-				DeselectPoint point=new DeselectPoint(model,(Point)shape);
-				shape.setSelected(false);
-				model.getUndoStack().offerLast(point);
-			} else if(shape instanceof Line) {
-				
-			} else if(shape instanceof HexagonAdapter) {
-				
-			} else if(shape instanceof Rectangle) {
-				
-			} else {
-				//slucaj za square
-			}
-	}
 
-	public void makeSelectedShape(Shape shape) {
-		if(shape instanceof Circle) {
-			SelectCircle sc=new SelectCircle(model,(Circle)shape);
-			shape.setSelected(true);
-			model.getUndoStack().offerLast(sc);
-			} else if(shape instanceof Point) {
-
-				SelectPoint point=new SelectPoint(model,(Point)shape);
-				shape.setSelected(true);
-				model.getUndoStack().offerLast(point);
-			} else if(shape instanceof Line) {
-
-				SelectLine line= new SelectLine(model, (Line)shape);
-				shape.setSelected(true);
-				model.getUndoStack().offerLast(line);
-			} else if(shape instanceof HexagonAdapter) {
-				SelectHexagon hexagon = new SelectHexagon(model, (HexagonAdapter)shape);
-				shape.setSelected(true);
-				model.getUndoStack().offerLast(hexagon);
-			} else if(shape instanceof Rectangle) {
-
-				SelectRectangle rectangle = new SelectRectangle(model, (Rectangle)shape);
-				shape.setSelected(true);
-				model.getUndoStack().offerLast(rectangle);
-			} else {
-				SelectSquare square = new SelectSquare(model, (Square)shape);
-				shape.setSelected(true);
-				model.getUndoStack().offerLast(square);
-			}
-	}
-	
 	
 	public void makeDeselectedShape(Shape shape) {
 		if(shape instanceof Circle) {
