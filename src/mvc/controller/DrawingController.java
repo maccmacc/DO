@@ -35,7 +35,7 @@ public class DrawingController {
 	private LogView logView;
 	private Line tmpLine;
 	private int numberOfClicks;
-	
+	 
 	public DrawingController (DrawingModel model, DrawingFrame frame, LogView logView) {
 		this.model = model;
 		this.frame = frame;

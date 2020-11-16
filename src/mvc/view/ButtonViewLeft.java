@@ -14,7 +14,7 @@ public class ButtonViewLeft extends JPanel{
 	private JButton btnOpenDrawing;
 	private JButton btnOpenLog;
 	private JButton btnDrawFromLog;
-
+ 
 	public ButtonViewLeft() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{344};

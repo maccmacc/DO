@@ -9,7 +9,7 @@ public abstract class Shape implements Comparable, Serializable{
 	private boolean selected;
 	
 	public Shape() {
-		
+		 
 	}
 	public Shape(Color color){
 		this.color = color;

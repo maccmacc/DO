@@ -21,7 +21,7 @@ public class DeselectSquare implements Command{
 		// TODO Auto-generated method stub
 		square.setSelected(false);
 	}
- 
+  
 	@Override
 	public void unexecute() {
 		// TODO Auto-generated method stub

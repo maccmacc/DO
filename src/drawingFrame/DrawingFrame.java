@@ -104,7 +104,7 @@ public class DrawingFrame extends JFrame {
           public void mousePressed(MouseEvent e) {
             buttonController.toBack();
           }
-        });
+        }); 
     drawingView.addMouseListener(new MouseAdapter() {
       public void mousePressed(MouseEvent e) {
         if (!buttonView.getTglbtnSelect().isSelected())

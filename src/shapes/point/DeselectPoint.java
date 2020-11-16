@@ -21,7 +21,7 @@ public class DeselectPoint implements Command{
 		// TODO Auto-generated method stub
 		point.setSelected(false);
 	}
-
+ 
 	@Override
 	public void unexecute() {
 		// TODO Auto-generated method stub

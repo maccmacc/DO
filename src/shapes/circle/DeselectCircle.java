@@ -22,7 +22,7 @@ public class DeselectCircle implements Command{
 	@Override
 	public void unexecute() {
 		circle.setSelected(true);
-
+ 
 	}
 	
 	@Override

@@ -21,7 +21,7 @@ public class SelectPoint implements Command{
 		// TODO Auto-generated method stub
 		point.setSelected(true);
 	}
-
+ 
 	@Override
 	public void unexecute() {
 		// TODO Auto-generated method stub

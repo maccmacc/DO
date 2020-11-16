@@ -22,7 +22,7 @@ public class Line extends Shape{
 		super(color);
 		this.startPoint = startPoint;
 		this.endPoint = endPoint;
-
+ 
 	}
 	public Point middlePointOfLine(){
 		int middleX = (startPoint.getX() + endPoint.getX()) / 2;

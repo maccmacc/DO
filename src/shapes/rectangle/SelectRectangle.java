@@ -22,7 +22,7 @@ public class SelectRectangle implements Command{
 		// TODO Auto-generated method stub
 		rectangle.setSelected(true);
 	}
-
+ 
 	@Override
 	public void unexecute() {
 		// TODO Auto-generated method stub

@@ -21,7 +21,7 @@ public class CommandAddRectangle implements Command{
 		if (rectangle.isSelected() && !model.getSelectedShapeList().contains(rectangle)) {
 			model.getSelectedShapeList().add(rectangle);
 		}
-	}
+	} 
 
 	@Override
 	public void unexecute() {

@@ -22,7 +22,7 @@ public class DeselectHexagon implements Command{
 		hexagon.setSelected(false);
 
 	}
-
+ 
 	@Override
 	public void unexecute() {
 		// TODO Auto-generated method stub

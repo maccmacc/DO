@@ -20,7 +20,7 @@ public class CommandUpdateLine implements Command {
 		original.setEndPoint(newState.getEndPoint());
 		original.setColor(newState.getColor());
 	}
-
+ 
 	@Override
 	public void unexecute() {
 		original.setStartPoint(tmp.getStartPoint());

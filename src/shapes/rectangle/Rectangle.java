@@ -26,7 +26,7 @@ public class Rectangle extends Square{
 	public Rectangle(Point upperLeftPoint, int height, int width, Color colorOuter, Color colorInner){
 		this(upperLeftPoint, height, width, colorOuter);
 		setSurfaceColor(colorInner);
-	}
+	} 
 	public Line diagonal(){
 		return new Line(upperLeftPoint, new Point(upperLeftPoint.getX() + getSideLength(),upperLeftPoint.getY() + width));
 	}

@@ -40,7 +40,7 @@ public class DrawingModel implements Subject, Serializable {
 	public void deleteObserver(Observer ob) {
 		observerList.remove(ob);
 	}
-
+ 
 	@Override
 	public void notifyAllObservers() {
 		for (Observer observer : observerList) {

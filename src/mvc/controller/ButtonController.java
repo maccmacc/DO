@@ -118,7 +118,7 @@ public class ButtonController {
 		countSelectedShapes();
 		model.notifyAllObservers();
 	}
-
+ 
 	public boolean goThroughShapesList(int x, int y) {
 		for (int i = model.getShapeList().size() - 1; i >= 0; i--) {
 			if (model.getShapeList().get(i).contains(x, y) && !model.getShapeList().get(i).isSelected()) {

@@ -10,7 +10,7 @@ public abstract class SurfaceShape extends Shape{
 
 	public Color getSurfaceColor() {
 		return surfaceColor;
-	}
+	} 
 
 	public void setSurfaceColor(Color surfaceColor) {
 		this.surfaceColor = surfaceColor;
