@@ -34,18 +34,28 @@ import shapes.circle.DeselectCircle;
 import shapes.circle.SelectCircle;
 import shapes.hexagon.CommandRemoveHexagonAdapter;
 import shapes.hexagon.CommandUpdateHexagonAdapter;
+import shapes.hexagon.DeselectHexagon;
 import shapes.hexagon.HexagonAdapter;
+import shapes.hexagon.SelectHexagon;
 import shapes.line.CommandRemoveLine;
 import shapes.line.CommandUpdateLine;
+import shapes.line.DeselectLine;
 import shapes.line.Line;
+import shapes.line.SelectLine;
 import shapes.point.CommandRemovePoint;
 import shapes.point.CommandUpdatePoint;
+import shapes.point.DeselectPoint;
 import shapes.point.Point;
+import shapes.point.SelectPoint;
 import shapes.rectangle.CommandRemoveRectangle;
 import shapes.rectangle.CommandUpdateRectangle;
+import shapes.rectangle.DeselectRectangle;
 import shapes.rectangle.Rectangle;
+import shapes.rectangle.SelectRectangle;
 import shapes.square.CommandRemoveSquare;
 import shapes.square.CommandUpdateSquare;
+import shapes.square.DeselectSquare;
+import shapes.square.SelectSquare;
 import shapes.square.Square;
 import strategy.DecodeLog;
 import strategy.SaveDrawing;
@@ -94,15 +104,14 @@ public class ButtonController {
 	public void onSelectButtonClicked(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
-		goThroughShapesList(x, y);
+			goThroughShapesList(x, y);
 	}
 
 	public void unselectShapes() {
 		countSelectedShapes();
 		for (Shape shape : model.getSelectedShapeList()) {
-			DeselectCircle sc=new DeselectCircle(model,(Circle)shape);
-			shape.setSelected(false);
-			model.getUndoStack().offerLast(sc);
+			
+		this.makeDeselectedShape(shape);
 			
 			logView.getDlm().addElement("Unselect:" + shape.toString());
 		}
@@ -115,17 +124,16 @@ public class ButtonController {
 			if (model.getShapeList().get(i).contains(x, y) && !model.getShapeList().get(i).isSelected()) {
 				//model.getShapeList().get(i).setSelected(true);
 				
-				SelectCircle sc=new SelectCircle(model,(Circle)model.getShapeList().get(i));
-				model.getShapeList().get(i).setSelected(true);
-				model.getUndoStack().offerLast(sc);
+			this.makeSelectedShape(model.getShapeList().get(i));
+
 				countSelectedShapes();
 				model.notifyAllObservers();
 				logView.getDlm().addElement("Select:" + model.getShapeList().get(i).toString() + ";click=(" + x + "," + y + ")");
 				return true;
 			} else if (model.getShapeList().get(i).contains(x, y) && model.getShapeList().get(i).isSelected()) {
-				DeselectCircle sc=new DeselectCircle(model,(Circle)model.getShapeList().get(i));
-				model.getShapeList().get(i).setSelected(false);
-				model.getUndoStack().offerLast(sc);
+				
+				this.makeDeselectedShape(model.getShapeList().get(i));
+
 				countSelectedShapes();
 				model.notifyAllObservers();
 				logView.getDlm().addElement("Unselect:" + model.getShapeList().get(i).toString());
@@ -136,6 +144,72 @@ public class ButtonController {
 		return false;
 	}
 
+	public void makeSelectedShape(Shape shape) {
+		if(shape instanceof Circle) {
+			SelectCircle sc=new SelectCircle(model,(Circle)shape);
+			shape.setSelected(true);
+			model.getUndoStack().offerLast(sc);
+			} else if(shape instanceof Point) {
+
+				SelectPoint point=new SelectPoint(model,(Point)shape);
+				shape.setSelected(true);
+				model.getUndoStack().offerLast(point);
+			} else if(shape instanceof Line) {
+
+				SelectLine line= new SelectLine(model, (Line)shape);
+				shape.setSelected(true);
+				model.getUndoStack().offerLast(line);
+			} else if(shape instanceof HexagonAdapter) {
+				SelectHexagon hexagon = new SelectHexagon(model, (HexagonAdapter)shape);
+				shape.setSelected(true);
+				model.getUndoStack().offerLast(hexagon);
+			} else if(shape instanceof Rectangle) {
+
+				SelectRectangle rectangle = new SelectRectangle(model, (Rectangle)shape);
+				shape.setSelected(true);
+				model.getUndoStack().offerLast(rectangle);
+			} else {
+				SelectSquare square = new SelectSquare(model, (Square)shape);
+				shape.setSelected(true);
+				model.getUndoStack().offerLast(square);
+			}
+	}
+	
+	
+	public void makeDeselectedShape(Shape shape) {
+		if(shape instanceof Circle) {
+			DeselectCircle sc=new DeselectCircle(model,(Circle)shape);
+			shape.setSelected(false);
+			model.getUndoStack().offerLast(sc);
+			} else if(shape instanceof Point) {
+
+				DeselectPoint point=new DeselectPoint(model,(Point)shape);
+				shape.setSelected(false);
+				model.getUndoStack().offerLast(point);
+			} else if(shape instanceof Line) {
+
+				DeselectLine line= new DeselectLine(model, (Line)shape);
+				shape.setSelected(false);
+				model.getUndoStack().offerLast(line);
+			} else if(shape instanceof HexagonAdapter) {
+				DeselectHexagon hexagon = new DeselectHexagon(model, (HexagonAdapter)shape);
+				shape.setSelected(false);
+				model.getUndoStack().offerLast(hexagon);
+			} else if(shape instanceof Rectangle) {
+
+				DeselectRectangle rectangle = new DeselectRectangle(model, (Rectangle)shape);
+				shape.setSelected(false);
+				model.getUndoStack().offerLast(rectangle);
+			} else {
+				DeselectSquare square = new DeselectSquare(model, (Square)shape);
+				shape.setSelected(false);
+				model.getUndoStack().offerLast(square);
+			}
+	}
+	
+	
+	
+	
 	public int countSelectedShapes() {
 		model.getSelectedShapeList().clear();
 		for (Shape shape : model.getShapeList()) {
@@ -531,6 +605,7 @@ public class ButtonController {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void openDrawing() throws ClassNotFoundException {
 		if (JOptionPane.showConfirmDialog(null, "Are you sure that you want do load a drawing? Your current drawing will be lost.", "Confirm", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE) == 0){
@@ -544,8 +619,8 @@ public class ButtonController {
 				String fileName = file.getPath(); 
 				
 				try {
-			         FileInputStream fileIn = new FileInputStream(fileName);//izvlaci iz fajla
-			         ObjectInputStream in = new ObjectInputStream(fileIn); //deseralizuje
+			         FileInputStream fileIn = new FileInputStream(fileName);
+			         ObjectInputStream in = new ObjectInputStream(fileIn); 
 			         model.getShapeList().addAll((ArrayList<Shape>)in.readObject());
 			         frame.getView().repaint();
 			         in.close();
