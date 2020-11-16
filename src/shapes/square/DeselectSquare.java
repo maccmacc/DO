@@ -15,13 +15,13 @@ public class DeselectSquare implements Command{
 
 	}
 	
-	
+	 
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub
 		square.setSelected(false);
 	}
-
+ 
 	@Override
 	public void unexecute() {
 		// TODO Auto-generated method stub

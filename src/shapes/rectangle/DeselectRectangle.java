@@ -17,7 +17,7 @@ public class DeselectRectangle implements Command{
 	
 	
 	@Override
-	public void execute() {
+	public void execute()  {
 		// TODO Auto-generated method stub
 		rectangle.setSelected(false);
 	}
