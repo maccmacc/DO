@@ -14,20 +14,17 @@ public class DeselectPoint implements Command{
 		this.point = point;
 
 	}
-	
-	
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
 		point.setSelected(false);
 	}
 
 	@Override
 	public void unexecute() {
-		// TODO Auto-generated method stub
 		point.setSelected(true);
-	}
 
+	}
+	
 	@Override
 	public String toString() {
 		return "Deselect: " + point.toString();

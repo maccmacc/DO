@@ -122,7 +122,6 @@ public class ButtonController {
 	public boolean goThroughShapesList(int x, int y) {
 		for (int i = model.getShapeList().size() - 1; i >= 0; i--) {
 			if (model.getShapeList().get(i).contains(x, y) && !model.getShapeList().get(i).isSelected()) {
-				//model.getShapeList().get(i).setSelected(true);
 				
 			this.makeSelectedShape(model.getShapeList().get(i));
 
@@ -133,7 +132,6 @@ public class ButtonController {
 			} else if (model.getShapeList().get(i).contains(x, y) && model.getShapeList().get(i).isSelected()) {
 				
 				this.makeDeselectedShape(model.getShapeList().get(i));
-
 				countSelectedShapes();
 				model.notifyAllObservers();
 				logView.getDlm().addElement("Unselect:" + model.getShapeList().get(i).toString());
@@ -142,6 +140,48 @@ public class ButtonController {
 		}
 		unselectShapes();
 		return false;
+	}
+	
+	public void makeSelectedShape(Shape shape) {
+		if(shape instanceof Circle) {
+			SelectCircle sc=new SelectCircle(model,(Circle)shape);
+			shape.setSelected(true);
+			model.getUndoStack().offerLast(sc);
+			} else if(shape instanceof Point) {
+
+				SelectPoint point=new SelectPoint(model,(Point)shape);
+				shape.setSelected(true);
+				model.getUndoStack().offerLast(point);
+			} else if(shape instanceof Line) {
+				
+			} else if(shape instanceof HexagonAdapter) {
+				
+			} else if(shape instanceof Rectangle) {
+				
+			} else {
+				//slucaj za square
+			}
+	}
+	
+	public void makeDeselectedShape(Shape shape) {
+		if(shape instanceof Circle) {
+			DeselectCircle sc=new DeselectCircle(model,(Circle)shape);
+			shape.setSelected(false);
+			model.getUndoStack().offerLast(sc);
+			} else if(shape instanceof Point) {
+
+				DeselectPoint point=new DeselectPoint(model,(Point)shape);
+				shape.setSelected(false);
+				model.getUndoStack().offerLast(point);
+			} else if(shape instanceof Line) {
+				
+			} else if(shape instanceof HexagonAdapter) {
+				
+			} else if(shape instanceof Rectangle) {
+				
+			} else {
+				//slucaj za square
+			}
 	}
 
 	public void makeSelectedShape(Shape shape) {
