@@ -22,7 +22,7 @@ public class CommandUpdateHexagonAdapter implements Command {
 		original.setColor(newState.getColor());
 		original.setSurfaceColor(newState.getSurfaceColor());
 	}
-
+ 
 	@Override
 	public void unexecute() {
 		original.getHexagon().setX(tmp.getHexagon().getX());

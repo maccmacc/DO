@@ -22,7 +22,7 @@ public class LogView extends JPanel {
 		scrollPane.setViewportView(logList);
 		logList.setModel(dlm);
 	}
-
+ 
 	public DefaultListModel<String> getDlm() {
 		return dlm;
 	}

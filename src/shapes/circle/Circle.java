@@ -19,7 +19,7 @@ public class Circle extends SurfaceShape implements Moveable{
 	public Circle(Point center, int r){
 		this.center = center;
 		this.r = r;
-	}
+	} 
 	public Circle(Point center, int r, Color color){
 		this(center, r);
 		setColor(color);

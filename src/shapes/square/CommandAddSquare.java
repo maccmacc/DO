@@ -22,7 +22,7 @@ public class CommandAddSquare implements Command{
 			model.getSelectedShapeList().add(square);
 		}
 	}
-
+ 
 	@Override
 	public void unexecute() {
 		model.removeShape(square);

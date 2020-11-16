@@ -22,7 +22,7 @@ public class DeselectLine implements Command{
 		// TODO Auto-generated method stub
 		line.setSelected(false);
 	}
-
+ 
 	@Override
 	public void unexecute() {
 		// TODO Auto-generated method stub

@@ -10,7 +10,7 @@ import mvc.view.LogView;
 import shapes.observer.ButtonObserver;
 import strategy.DecodeLog;
 
-public class DrawingApp {
+public class DrawingApp { 
 
   public static void main(String[] args) {
     DrawingModel model = new DrawingModel();

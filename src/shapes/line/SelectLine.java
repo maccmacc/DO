@@ -22,7 +22,7 @@ public class SelectLine implements Command{
 		// TODO Auto-generated method stub
 		line.setSelected(true);
 	}
-
+ 
 	@Override
 	public void unexecute() {
 		// TODO Auto-generated method stub

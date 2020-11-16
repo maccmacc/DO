@@ -21,7 +21,7 @@ public class CommandAddLine implements Command{
 			model.getSelectedShapeList().add(line);
 		}
 	}
-
+ 
 	@Override
 	public void unexecute() {
 		model.removeShape(line);

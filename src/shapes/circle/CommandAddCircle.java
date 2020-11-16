@@ -19,7 +19,7 @@ public class CommandAddCircle implements Command {
 		if (circle.isSelected() && !model.getSelectedShapeList().contains(circle)) {
 			model.getSelectedShapeList().add(circle);
 		}
-	}
+	} 
 
 	@Override
 	public void unexecute() {

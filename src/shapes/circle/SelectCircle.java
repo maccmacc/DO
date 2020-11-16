@@ -27,7 +27,7 @@ public class SelectCircle implements Command{
 	@Override
 	public void unexecute() {
 		circle.setSelected(false);
-
+ 
 	}
 	
 	@Override

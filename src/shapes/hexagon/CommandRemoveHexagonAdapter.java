@@ -25,7 +25,7 @@ public class CommandRemoveHexagonAdapter implements Command{
 		if (hexagonAdapter.isSelected() && !model.getSelectedShapeList().contains(hexagonAdapter)) {
 			model.getSelectedShapeList().add(hexagonAdapter);
 		}
-	}
+	} 
 	
 	@Override
 	public String toString() {

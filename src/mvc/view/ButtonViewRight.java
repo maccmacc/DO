@@ -13,7 +13,7 @@ public class ButtonViewRight extends JPanel{
 	private JButton btnToBack = new JButton("To back");
 	private JButton btnBringToFront = new JButton("Bring to front");
 	private JButton btnBringToBack = new JButton("Bring to back");
-
+ 
 	public ButtonViewRight() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0};

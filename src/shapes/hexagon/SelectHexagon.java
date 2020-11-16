@@ -23,7 +23,7 @@ public class SelectHexagon implements Command{
 		hexagon.setSelected(true);
 	}
 
-
+ 
 	@Override
 	public void unexecute() {
 		// TODO Auto-generated method stub

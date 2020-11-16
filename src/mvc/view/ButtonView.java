@@ -84,7 +84,7 @@ public class ButtonView extends JPanel{
 		add(btnUpdate, gbc_btnUpdate);
 		btnUpdate.setEnabled(false);
 		
-		
+		 
 		
 		btnOuterColor = new JButton("Outer color");
 		GridBagConstraints gbc_btnOuterColor = new GridBagConstraints();

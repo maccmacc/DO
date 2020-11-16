@@ -29,7 +29,7 @@ public class HexagonAdapter extends SurfaceShape implements Moveable{
 		return "Hexagon:(" + hexagon.getX() + "," + hexagon.getY() + ");r=" + hexagon.getR() + ";outer color=" + this.hexagon.getBorderColor().getRGB() 
 				+ ";inner color=" + this.hexagon.getAreaColor().getRGB();
 	}
-
+ 
 	public boolean equals(Object obj) {
 		if (obj instanceof HexagonAdapter) {
 			HexagonAdapter temp = ((HexagonAdapter) obj);
