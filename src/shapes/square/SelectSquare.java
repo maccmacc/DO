@@ -8,7 +8,7 @@ public class SelectSquare implements Command{
 
 	private DrawingModel model;
 	private Square square;
-
+ 
 	
 	public SelectSquare(DrawingModel model, Square square) {
 		this.model = model;

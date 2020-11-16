@@ -24,7 +24,7 @@ public class Square extends SurfaceShape implements Moveable{
 
 	public Square(Point upperLeftPoint, int sideLength, Color color) {
 		this(upperLeftPoint, sideLength);
-		setColor(color);
+		setColor(color); 
 	}
 	
 	public Square(Point upperLeftPoint, int sideLength, Color colorOuter, Color colorInner) {

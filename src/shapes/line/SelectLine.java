@@ -18,7 +18,7 @@ public class SelectLine implements Command{
 	
 	
 	@Override
-	public void execute() {
+	public void execute()  {
 		// TODO Auto-generated method stub
 		line.setSelected(true);
 	}
