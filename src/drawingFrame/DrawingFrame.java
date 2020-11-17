@@ -42,8 +42,10 @@ public class DrawingFrame extends JFrame {
   public DrawingFrame() {
     setSize(800, 600);
     setDefaultCloseOperation(EXIT_ON_CLOSE);
-    setVisible(true);
+
     getContentPane().setLayout(new BorderLayout(0, 0));
+    buttonView.getBtnOuterColor().setForeground(Color.BLACK);
+    buttonView.getBtnInnerColor().setForeground(Color.BLACK);
     buttonView.setAlignmentY(0.0f);
     getContentPane().add(buttonView, BorderLayout.NORTH);
     GridBagLayout gridBagLayout = (GridBagLayout) buttonViewLeft.getLayout();
@@ -142,6 +144,7 @@ public class DrawingFrame extends JFrame {
         buttonController.drawFromLog();
       }
     });
+    setVisible(true);
   }
 
   public DrawingView getView() {

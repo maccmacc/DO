@@ -83,8 +83,10 @@ public class ButtonController {
 	public void onUndoButtonClicked() {
 		if (!model.getUndoStack().isEmpty()) {
 			frame.getButtonView().getBtnRedo().setEnabled(true);
+			System.out.println(model.getUndoStack().peekLast());
 			Command previous = model.getUndoStack().pollLast();
 			model.getRedoStack().offerLast(previous);
+			
 			previous.unexecute();
 			model.notifyAllObservers();
 			logView.getDlm().addElement("Undo:" + previous.toString());
@@ -93,6 +95,7 @@ public class ButtonController {
 
 	public void onRedoButtonClicked() {
 		if (!model.getRedoStack().isEmpty()) {
+			System.out.println(model.getRedoStack().peekLast());
 			Command previous = model.getRedoStack().pollLast();
 			model.getUndoStack().offerLast(previous);
 			previous.execute();
@@ -120,10 +123,12 @@ public class ButtonController {
 	}
  
 	public boolean goThroughShapesList(int x, int y) {
+		System.out.println("OVDJE");
 		for (int i = model.getShapeList().size() - 1; i >= 0; i--) {
+			System.out.println(model.getShapeList().get(i));
 			if (model.getShapeList().get(i).contains(x, y) && !model.getShapeList().get(i).isSelected()) {
-				//model.getShapeList().get(i).setSelected(true);
-				
+				model.getShapeList().get(i).setSelected(true);
+				System.out.println("PRVI" +model.getShapeList().get(i));
 			this.makeSelectedShape(model.getShapeList().get(i));
 
 				countSelectedShapes();
@@ -133,7 +138,7 @@ public class ButtonController {
 			} else if (model.getShapeList().get(i).contains(x, y) && model.getShapeList().get(i).isSelected()) {
 				
 				this.makeDeselectedShape(model.getShapeList().get(i));
-
+				System.out.println("DRUGI "+model.getShapeList().get(i));
 				countSelectedShapes();
 				model.notifyAllObservers();
 				logView.getDlm().addElement("Unselect:" + model.getShapeList().get(i).toString());
@@ -265,8 +270,8 @@ public class ButtonController {
 					remove.execute();
 					model.getUndoStack().offerLast(remove);
 					logView.getDlm().addElement("Delete:" + model.getSelectedShapeList().get(i).toString());
-				} else if (model.getSelectedShapeList().get(0) instanceof HexagonAdapter) {
-					Command remove = new CommandRemoveHexagonAdapter(model, (HexagonAdapter) model.getSelectedShapeList().get(0));
+				} else if (model.getSelectedShapeList().get(i) instanceof HexagonAdapter) {
+					Command remove = new CommandRemoveHexagonAdapter(model, (HexagonAdapter) model.getSelectedShapeList().get(i));
 					remove.execute();
 					model.getUndoStack().offerLast(remove);
 					logView.getDlm().addElement("Delete:" + model.getSelectedShapeList().get(i).toString());
@@ -557,10 +562,7 @@ public class ButtonController {
 							int tmpR = Integer.parseInt(r.getText());
 							if (tmpX > 0 && tmpY > 0 && tmpR > 0) {
 								Hexagon hexagon = new Hexagon(tmpX, tmpY, tmpR);
-
-								hexagonAdapter = new HexagonAdapter(hexagon);
-								hexagonAdapter.setColor(btnNewColorOuter.getBackground());
-								hexagonAdapter.setSurfaceColor(btnNewColorInner.getBackground());
+								hexagonAdapter = new HexagonAdapter(hexagon,btnNewColorOuter.getBackground(),btnNewColorInner.getBackground() );
 							} else
 								JOptionPane.showMessageDialog(null, "Coordinates and perimeter must be greater than 0!", "Error!", JOptionPane.ERROR_MESSAGE);
 						} catch (NumberFormatException e) {

@@ -94,6 +94,7 @@ public class HexagonAdapter extends SurfaceShape implements Moveable{
 	}
 	public void setSelected(boolean selected) {
 		hexagon.setSelected(selected); 
+		super.setSelected(selected);
 	}
 	
 	@Override

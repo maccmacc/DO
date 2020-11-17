@@ -35,7 +35,7 @@ public class DecodeLog {
 			updatePoint.execute();
 			model.getUndoStack().offerLast(updatePoint);
 			logView.getDlm().addElement("Update:" + updatePoint.toString());
-		} else if (parts[0].contains("Select")) {
+		} else if (parts[0].contains("Select") && !parts[0].contains("Undo") && !parts[0].contains("Redo")) {
 			String[] selectedCoordinates = parts[2].split("=");
 			int sX = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf("(")+1, selectedCoordinates[1].indexOf(",")));
 			int sY = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf(",")+1, selectedCoordinates[1].indexOf(")")));
@@ -56,7 +56,7 @@ public class DecodeLog {
 			updateCircle.execute();
 			model.getUndoStack().offerLast(updateCircle);
 			logView.getDlm().addElement("Update:" + updateCircle.toString());
-		} else if (parts[0].contains("Select")) {
+		} else if (parts[0].contains("Select") && !parts[0].contains("Undo") && !parts[0].contains("Redo")) {
 			String[] selectedCoordinates = parts[4].split("=");
 			int sX = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf("(")+1, selectedCoordinates[1].indexOf(",")));
 			int sY = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf(",")+1, selectedCoordinates[1].indexOf(")")));
@@ -77,29 +77,8 @@ public class DecodeLog {
 			updateSquare.execute();
 			model.getUndoStack().offerLast(updateSquare);
 			logView.getDlm().addElement("Update:" + updateSquare.toString());
-		} else if (parts[0].contains("Select")) {
+		} else if (parts[0].contains("Select") && !parts[0].contains("Undo") && !parts[0].contains("Redo")) {
 			String[] selectedCoordinates = parts[4].split("=");
-			int sX = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf("(")+1, selectedCoordinates[1].indexOf(",")));
-			int sY = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf(",")+1, selectedCoordinates[1].indexOf(")")));
-			frame.getButtonController().goThroughShapesList(sX, sY);
-		} else {
-			checkOperation(parts[0], frame, model);
-		}
-	}
-	
-	public void decodeLine(Line line, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
-		if (parts[0].contains("Add")) {
-			CommandAddLine add = new CommandAddLine(model, line);
-			add.execute();
-			model.getUndoStack().offerLast(add);
-			logView.getDlm().addElement("Add:" + add.toString());
-		} else if (parts[0].contains("Update")) {
-			CommandUpdateLine updateLine = new CommandUpdateLine((Line)model.getSelectedShapeList().get(0), line);
-			updateLine.execute();
-			model.getUndoStack().offerLast(updateLine);
-			logView.getDlm().addElement("Update:" + updateLine.toString());
-		} else if (parts[0].contains("Select")) {
-			String[] selectedCoordinates = parts[3].split("=");
 			int sX = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf("(")+1, selectedCoordinates[1].indexOf(",")));
 			int sY = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf(",")+1, selectedCoordinates[1].indexOf(")")));
 			frame.getButtonController().goThroughShapesList(sX, sY);
@@ -119,8 +98,31 @@ public class DecodeLog {
 			updateRectangle.execute();
 			model.getUndoStack().offerLast(updateRectangle);
 			logView.getDlm().addElement("Update:" + updateRectangle.toString());
-		} else if (parts[0].contains("Select")) {
+		} else if (parts[0].contains("Select") && !parts[0].contains("Undo") && !parts[0].contains("Redo")) {
 			String[] selectedCoordinates = parts[5].split("=");
+			int sX = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf("(")+1, selectedCoordinates[1].indexOf(",")));
+			int sY = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf(",")+1, selectedCoordinates[1].indexOf(")")));
+			System.out.println("usaooo" + sX + sY);
+			frame.getButtonController().goThroughShapesList(sX, sY);
+			
+		} else {
+			checkOperation(parts[0], frame, model);
+		}
+	}
+	
+	public void decodeLine(Line line, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
+		if (parts[0].contains("Add")) {
+			CommandAddLine add = new CommandAddLine(model, line);
+			add.execute();
+			model.getUndoStack().offerLast(add);
+			logView.getDlm().addElement("Add:" + add.toString());
+		} else if (parts[0].contains("Update")) {
+			CommandUpdateLine updateLine = new CommandUpdateLine((Line)model.getSelectedShapeList().get(0), line);
+			updateLine.execute();
+			model.getUndoStack().offerLast(updateLine);
+			logView.getDlm().addElement("Update:" + updateLine.toString());
+		} else if (parts[0].contains("Select") && !parts[0].contains("Undo") && !parts[0].contains("Redo")) {
+			String[] selectedCoordinates = parts[3].split("=");
 			int sX = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf("(")+1, selectedCoordinates[1].indexOf(",")));
 			int sY = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf(",")+1, selectedCoordinates[1].indexOf(")")));
 			frame.getButtonController().goThroughShapesList(sX, sY);
@@ -128,6 +130,8 @@ public class DecodeLog {
 			checkOperation(parts[0], frame, model);
 		}
 	}
+	
+
 	
 	public void decodeHexagon(HexagonAdapter hexagonAdapter, String[] parts, DrawingFrame frame, DrawingModel model, LogView logView) {
 		if (parts[0].contains("Add")) {
@@ -141,7 +145,7 @@ public class DecodeLog {
 			updateHexagonAdapter.execute();
 			model.getUndoStack().offerLast(updateHexagonAdapter);
 			logView.getDlm().addElement("Update:" + updateHexagonAdapter.toString());
-		} else if (parts[0].contains("Select")) {
+		} else if (parts[0].contains("Select") && !parts[0].contains("Undo") && !parts[0].contains("Redo") ) {
 			String[] selectedCoordinates = parts[4].split("=");
 			int sX = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf("(")+1, selectedCoordinates[1].indexOf(",")));
 			int sY = Integer.parseInt(selectedCoordinates[1].substring(selectedCoordinates[1].indexOf(",")+1, selectedCoordinates[1].indexOf(")")));

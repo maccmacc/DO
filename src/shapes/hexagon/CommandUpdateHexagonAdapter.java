@@ -1,5 +1,6 @@
 package shapes.hexagon;
 
+import hexagon.Hexagon;
 import mvc.view.LogView;
 import shapes.Command;
 
@@ -15,7 +16,9 @@ public class CommandUpdateHexagonAdapter implements Command {
 	
 	@Override
 	public void execute() {
-		tmp = new HexagonAdapter(original.getHexagon(), original.getColor(), original.getSurfaceColor());
+		tmp = new HexagonAdapter(new Hexagon(original.getHexagon().getX(), original.getHexagon().getY(), original.getHexagon().getR()));
+		tmp.setColor(original.getColor());
+		tmp.setSurfaceColor(original.getSurfaceColor());
 		original.getHexagon().setX(newState.getHexagon().getX());
 		original.getHexagon().setY(newState.getHexagon().getY());
 		original.getHexagon().setR(newState.getHexagon().getR());
